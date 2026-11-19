@@ -8,6 +8,9 @@ import {
   CheckCircle2,
   AlertTriangle,
   X,
+  ChevronDown,
+  ChevronUp,
+  Check,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { ScreenTeam, ScreenStudent, ScreenQuizQuestion } from '../types';
@@ -96,10 +99,19 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
 }) => {
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [podiumStep, setPodiumStep] = useState<number>(0);
+  // 风琴式全员错题复盘折叠状态（默认全部收起：只显示简介条）
+  const [expandedStudentIds, setExpandedStudentIds] = useState<Record<string, boolean>>({});
+
+  const toggleStudentAccordion = (stuId: string) => {
+    setExpandedStudentIds((prev) => ({
+      ...prev,
+      [stuId]: !prev[stuId],
+    }));
+  };
 
   const totalQuestions = settlementData?.totalQuestions || questions.length || 5;
 
-  // 1. 优先采用母体结算广播的权威排行榜 (settlementData.leaderboard)，保证大屏与学生手机 100% 同步
+  // 1. 优先采用母体结算广播的权威排行榜 (settlementData.leaderboard，按对最多题 + 回答最快排序)
   const serverLeaderboard: Array<{
     rank: number;
     id: string;
@@ -108,6 +120,15 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
     teamId: 'blue' | 'red' | 'yellow' | 'green';
     score: number;
     correctCount: number;
+    totalTimeMs: number;
+    wrongQuestions: Array<{
+      questionNumber: number;
+      questionText: string;
+      isTimeout: boolean;
+      studentSelectedText: string | null;
+      correctAnswerText: string;
+      explanation?: string;
+    }>;
   }> =
     settlementData && Array.isArray(settlementData.leaderboard)
       ? settlementData.leaderboard.map((item: any, idx: number) => ({
@@ -119,18 +140,58 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
           score: item.score ?? 0,
           correctCount:
             item.correctCount ?? Math.max(0, Math.round((item.score || 0) / 100)),
+          totalTimeMs: item.totalTimeMs ?? 0,
+          wrongQuestions: Array.isArray(item.wrongQuestions)
+            ? item.wrongQuestions.map((wq: any, wIdx: number) => {
+                const isTimeout = Boolean(wq.isTimeout || !wq.studentSelected);
+                return {
+                  questionNumber: wq.questionNumber || wIdx + 1,
+                  questionText: wq.questionText || `第 ${wIdx + 1} 题`,
+                  isTimeout,
+                  studentSelectedText: isTimeout
+                    ? null
+                    : (wq.studentSelectedText || wq.studentSelected || null),
+                  correctAnswerText: wq.correctAnswerText || wq.correctAnswer || '',
+                  explanation: wq.explanation,
+                };
+              })
+            : [],
         }))
       : [...students]
-          .sort((a, b) => b.score - a.score)
-          .map((s, idx) => ({
-            rank: idx + 1,
-            id: s.id,
-            name: s.name,
-            avatar: s.avatar || './assets/games/char_b.png',
-            teamId: s.teamId,
-            score: s.score ?? 0,
-            correctCount: Math.min(totalQuestions, Math.round((s.score || 0) / 100)),
-          }));
+          .sort((a, b) => {
+            if (b.score !== a.score) return b.score - a.score;
+            return (a.submitTimeSec || 99) - (b.submitTimeSec || 99);
+          })
+          .map((s, idx) => {
+            const cCount = Math.min(totalQuestions, Math.round((s.score || 0) / 100));
+            const missedCount = Math.max(0, totalQuestions - cCount);
+            const fallbackWrongs = questions.slice(0, missedCount).map((q, qIdx) => {
+              const cKey = ['A', 'B', 'C', 'D'][q.correctOptionIndex] || 'C';
+              const cText = q.options[q.correctOptionIndex]?.text || '';
+              const wIdx = (q.correctOptionIndex + 1) % 4;
+              const wKey = ['A', 'B', 'C', 'D'][wIdx] || 'A';
+              const wText = q.options[wIdx]?.text || '';
+              return {
+                questionNumber: q.number || qIdx + 1,
+                questionText: q.prompt,
+                isTimeout: false,
+                studentSelectedText: `${wKey} (${wText})`,
+                correctAnswerText: `${cKey} (${cText})`,
+                explanation: q.explanation,
+              };
+            });
+            return {
+              rank: idx + 1,
+              id: s.id,
+              name: s.name,
+              avatar: s.avatar || './assets/games/char_b.png',
+              teamId: s.teamId,
+              score: s.score ?? 0,
+              correctCount: cCount,
+              totalTimeMs: Math.round((s.submitTimeSec || 5) * 1000),
+              wrongQuestions: fallbackWrongs,
+            };
+          });
 
   const hasRealParticipants = serverLeaderboard.length > 0;
   const rank1 = serverLeaderboard[0];
@@ -540,25 +601,30 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
 
       {/* 
         ========================================================================
-        4. 教师专属教学复盘洞察弹层 (Teaching Insights Modal)
+        4. 教师专属全班学情与风琴式（Accordion）全员错题复盘弹层
         ========================================================================
       */}
       {showReviewModal && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn"
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-fadeIn"
           onClick={() => setShowReviewModal(false)}
         >
           <div
-            className="bg-slate-900 border border-indigo-500/40 rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl text-left relative animate-scaleUp"
+            className="bg-slate-900 border border-indigo-500/40 rounded-3xl p-5 sm:p-7 max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl text-left relative animate-scaleUp"
             onClick={(e) => e.stopPropagation()}
           >
             {/* 头部 */}
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-              <div className="flex items-center gap-2.5 text-indigo-300 font-black text-lg">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 flex-shrink-0">
+              <div className="flex items-center gap-2.5 text-indigo-300 font-black text-base sm:text-lg">
                 <div className="p-2 rounded-xl bg-indigo-500/20 border border-indigo-500/30 text-indigo-400">
                   <BookOpen className="w-5 h-5" />
                 </div>
-                <span>本场互动教学学情洞察 · 错题精讲复盘</span>
+                <div>
+                  <div>全班参赛学生成绩与错题复盘看板</div>
+                  <p className="text-xs text-slate-400 font-normal mt-0.5">
+                    按单人成绩第 1 名（答对最多题且回答最快）依次排列 · 点击任意学生展开查看错题明细
+                  </p>
+                </div>
               </div>
               <button
                 onClick={() => setShowReviewModal(false)}
@@ -569,60 +635,196 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
             </div>
 
             {/* 学情速览数据条 */}
-            <div className="grid grid-cols-3 gap-3 mb-5">
-              <div className="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
-                <span className="text-[11px] text-slate-400 font-bold block mb-0.5">全班正答率</span>
-                <span className="text-xl sm:text-2xl font-black font-mono text-emerald-400">
+            <div className="grid grid-cols-3 gap-3 mb-4 flex-shrink-0">
+              <div className="p-2.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
+                <span className="text-[11px] text-slate-400 font-bold block">全班正答率</span>
+                <span className="text-lg sm:text-xl font-black font-mono text-emerald-400">
                   {averageAccuracy}%
                 </span>
               </div>
-              <div className="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
-                <span className="text-[11px] text-slate-400 font-bold block mb-0.5">总挑战题数</span>
-                <span className="text-xl sm:text-2xl font-black font-mono text-white">
-                  {questions.length} 题
+              <div className="p-2.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
+                <span className="text-[11px] text-slate-400 font-bold block">总挑战题数</span>
+                <span className="text-lg sm:text-xl font-black font-mono text-white">
+                  {totalQuestions} 题
                 </span>
               </div>
-              <div className="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
-                <span className="text-[11px] text-slate-400 font-bold block mb-0.5">参战小达人</span>
-                <span className="text-xl sm:text-2xl font-black font-mono text-indigo-400">
-                  {students.length} 人
+              <div className="p-2.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
+                <span className="text-[11px] text-slate-400 font-bold block">参与学生人数</span>
+                <span className="text-lg sm:text-xl font-black font-mono text-indigo-400">
+                  {serverLeaderboard.length} 人
                 </span>
               </div>
             </div>
 
-            {/* 班级最难错题 TOP 1 卡片 */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-rose-500/10 border border-rose-500/30 mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-xs font-black border border-rose-500/30 flex items-center gap-1">
-                  <AlertTriangle className="w-3.5 h-3.5" />
-                  班级易错难关 TOP 1 (正确率仅 25%)
-                </span>
-                <span className="text-xs text-slate-400">题目 Q{hardestQuestion.number}</span>
-              </div>
+            {/* 风琴式（Accordion）全班学生成绩与错题折叠列表 */}
+            <div className="flex-1 overflow-y-auto custom-lobby-scrollbar space-y-2.5 pr-1 min-h-0">
+              {serverLeaderboard.length === 0 ? (
+                <div className="py-12 text-center text-slate-400 text-sm font-bold">
+                  当前暂无参赛学生答题记录
+                </div>
+              ) : (
+                serverLeaderboard.map((stu, idx) => {
+                  const isExpanded = Boolean(expandedStudentIds[stu.id]);
+                  const teamObj = teams[stu.teamId] || teams.blue;
+                  const teamBadgeStyle =
+                    stu.teamId === 'blue'
+                      ? 'bg-blue-500/20 text-blue-300 border-blue-500/40'
+                      : stu.teamId === 'red'
+                      ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
+                      : stu.teamId === 'yellow'
+                      ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                      : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
 
-              <h3 className="text-base sm:text-lg font-black text-white mb-2 leading-snug">
-                {hardestQuestion.prompt}
-              </h3>
+                  return (
+                    <div
+                      key={stu.id}
+                      className="rounded-2xl bg-slate-950/90 border border-slate-800 overflow-hidden transition-all"
+                    >
+                      {/* 风琴简介画面（默认收起态）：左边 [名次 + 队伍 + 玩家头像 + 名字] | 右边 [对多少题 + 多少分数] */}
+                      <button
+                        type="button"
+                        onClick={() => toggleStudentAccordion(stu.id)}
+                        className="w-full px-4 py-3 flex items-center justify-between gap-3 hover:bg-slate-800/60 transition-colors cursor-pointer text-left"
+                      >
+                        {/* 左边：名次 + 队伍 + 玩家头像 + 名字 */}
+                        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                          <span
+                            className={`w-7 h-7 rounded-lg font-mono font-black text-xs flex items-center justify-center flex-shrink-0 ${
+                              idx === 0
+                                ? 'bg-amber-400 text-slate-950 shadow-sm'
+                                : idx === 1
+                                ? 'bg-slate-300 text-slate-900'
+                                : idx === 2
+                                ? 'bg-amber-700 text-white'
+                                : 'bg-slate-800 text-slate-400 border border-slate-700'
+                            }`}
+                          >
+                            {idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `#${stu.rank}`}
+                          </span>
 
-              <div className="flex items-center gap-2 mb-3 text-xs sm:text-sm">
-                <span className="text-slate-400 font-bold">正确答案：</span>
-                <span className="font-black text-emerald-400 flex items-center gap-1">
-                  <CheckCircle2 className="w-4 h-4" />
-                  {['A', 'B', 'C', 'D'][hardestQuestion.correctOptionIndex]}.{' '}
-                  {hardestQuestion.options[hardestQuestion.correctOptionIndex]?.text}
-                </span>
-              </div>
+                          {/* 队伍徽标 */}
+                          <span
+                            className={`px-2.5 py-0.5 rounded-lg text-xs font-black border flex-shrink-0 ${teamBadgeStyle}`}
+                          >
+                            {teamObj.name}
+                          </span>
 
-              {/* 官方解析要点 */}
-              <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-                <strong className="text-amber-300 block mb-1">💡 教师官方讲解要点：</strong>
-                {hardestQuestion.explanation}
-              </div>
+                          {/* 玩家头像 */}
+                          <div className="w-9 h-9 rounded-full p-0.5 bg-slate-800 border border-white/20 overflow-hidden flex-shrink-0">
+                            <img
+                              src={stu.avatar}
+                              alt={stu.name}
+                              className="w-full h-full object-cover rounded-full"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                              }}
+                            />
+                          </div>
+
+                          {/* 玩家名字 */}
+                          <span className="text-sm sm:text-base font-black text-white truncate">
+                            {stu.name}
+                          </span>
+                        </div>
+
+                        {/* 右边：对多少题 + 多少分数 + 风琴箭头 */}
+                        <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+                          <div className="flex items-center gap-1.5">
+                            <span className="px-2.5 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-black">
+                              答对 {stu.correctCount}/{totalQuestions} 题
+                            </span>
+                            {stu.wrongQuestions.length > 0 ? (
+                              <span className="hidden sm:inline-block px-2 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 text-[11px] font-bold">
+                                错 {stu.wrongQuestions.length} 题
+                              </span>
+                            ) : (
+                              <span className="hidden sm:inline-block px-2 py-0.5 rounded-lg bg-amber-500/20 text-amber-300 text-[11px] font-bold">
+                                全对
+                              </span>
+                            )}
+                          </div>
+
+                          <span className="text-sm sm:text-base font-black font-mono text-amber-300 min-w-[60px] text-right">
+                            {stu.score} 分
+                          </span>
+
+                          <div className="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400">
+                            {isExpanded ? (
+                              <ChevronUp className="w-4 h-4 text-indigo-400" />
+                            ) : (
+                              <ChevronDown className="w-4 h-4" />
+                            )}
+                          </div>
+                        </div>
+                      </button>
+
+                      {/* 风琴展开内容区：该学生的错题明细（含错选与超时未答） */}
+                      {isExpanded && (
+                        <div className="px-4 pb-4 pt-2 border-t border-slate-800/80 bg-slate-900/60 space-y-2.5 animate-fadeIn">
+                          {stu.wrongQuestions.length === 0 ? (
+                            <div className="py-4 px-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-black flex items-center gap-2">
+                              <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                              <span>🎉 太棒了！{stu.name} 本场全部题目均回答正确，零错题！</span>
+                            </div>
+                          ) : (
+                            stu.wrongQuestions.map((wq, wIdx) => (
+                              <div
+                                key={wIdx}
+                                className="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 space-y-2"
+                              >
+                                <div className="flex items-center justify-between gap-2">
+                                  <span className="text-xs font-black text-indigo-300 bg-indigo-500/20 px-2.5 py-0.5 rounded-lg">
+                                    第 {wq.questionNumber < 10 ? `0${wq.questionNumber}` : wq.questionNumber} 题
+                                  </span>
+                                  {wq.isTimeout ? (
+                                    <span className="text-[11px] font-black text-amber-300 bg-amber-500/20 border border-amber-500/30 px-2.5 py-0.5 rounded-full">
+                                      ⏰ 未及时回答 (超时未选)
+                                    </span>
+                                  ) : (
+                                    <span className="text-[11px] font-black text-rose-300 bg-rose-500/20 border border-rose-500/30 px-2.5 py-0.5 rounded-full">
+                                      ❌ 选项答错
+                                    </span>
+                                  )}
+                                </div>
+
+                                <div className="text-sm font-black text-white leading-snug">
+                                  {wq.questionText}
+                                </div>
+
+                                {/* 若未及时回答：仅显示正确答案；若有选择但答错：显示错误选择 + 正确答案 */}
+                                {wq.isTimeout || !wq.studentSelectedText ? (
+                                  <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs flex items-center gap-2 text-emerald-300 font-bold">
+                                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0 stroke-[3]" />
+                                    <span>标准正确答案：{wq.correctAnswerText}</span>
+                                  </div>
+                                ) : (
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                    <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center gap-2 text-rose-300 font-bold">
+                                      <X className="w-4 h-4 text-rose-400 flex-shrink-0 stroke-[3]" />
+                                      <span>学生错误选择：{wq.studentSelectedText}</span>
+                                    </div>
+                                    <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-2 text-emerald-300 font-bold">
+                                      <Check className="w-4 h-4 text-emerald-400 flex-shrink-0 stroke-[3]" />
+                                      <span>标准正确答案：{wq.correctAnswerText}</span>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            ))
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              )}
             </div>
 
             {/* 底部按钮 */}
-            <div className="flex items-center justify-between pt-2">
-              <span className="text-xs text-slate-400">可作为课后巩固与复习重点向全班讲解</span>
+            <div className="flex items-center justify-between pt-4 border-t border-slate-800 mt-3 flex-shrink-0">
+              <span className="text-xs text-slate-400">
+                点击任意学生行可展开或收起其个人错题详情
+              </span>
               <button
                 onClick={() => setShowReviewModal(false)}
                 className="px-6 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-black text-xs sm:text-sm hover:scale-105 active:scale-95 transition-all shadow-md cursor-pointer"

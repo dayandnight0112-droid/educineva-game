@@ -1,1 +1,0 @@
-import{R as t,j as e,f as r}from"./index-BWqEyvj7.js";import{T as o}from"./TeacherScreenApp-DcMLKYmZ.js";t.createRoot(document.getElementById("root")).render(e.jsx(r.StrictMode,{children:e.jsx(o,{})}));

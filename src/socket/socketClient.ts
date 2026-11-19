@@ -115,7 +115,56 @@ function getRoomRosterLocal(room: any) {
   };
 }
 
+function recordTimeoutForQuestionIndexLocal(room: any, qIndex: number) {
+  if (!room || !Array.isArray(room.questions) || qIndex < 0 || qIndex >= room.questions.length) {
+    return;
+  }
+  const rawQ = room.questions[qIndex];
+  if (!rawQ) return;
+  const qId = rawQ.id || rawQ.questionId || `q_${qIndex + 1}`;
+  const qText = rawQ.questionText || rawQ.title || rawQ.question || `第 ${qIndex + 1} 题`;
+  const correctAnswer = String(rawQ.correctAnswer || rawQ.answer || 'C').trim();
+  const maxTimeMs = (rawQ.timeLimit || room.config?.timePerQuestion || 15) * 1000;
+
+  (room.students || []).forEach((student: any) => {
+    student.answerLogs = Array.isArray(student.answerLogs) ? student.answerLogs : [];
+    student.answeredQuestionIds = Array.isArray(student.answeredQuestionIds)
+      ? student.answeredQuestionIds
+      : [];
+    const hasLog = student.answerLogs.some((l: any) => l.questionId === qId);
+    if (!hasLog && !student.answeredQuestionIds.includes(qId)) {
+      const timeoutEntry = {
+        questionId: qId,
+        questionNumber: qIndex + 1,
+        questionText: qText,
+        options: rawQ.options,
+        studentSelected: null,
+        isTimeout: true,
+        correctAnswer,
+        isCorrect: false,
+        pointsEarned: 0,
+        timeSpentMs: maxTimeMs,
+        submittedAt: Date.now(),
+      };
+      student.answerLogs.push(timeoutEntry);
+      student.answeredQuestionIds.push(qId);
+      student.wrongCount = (student.wrongCount || 0) + 1;
+      student.streak = 0;
+      student.totalTimeMs = (student.totalTimeMs || 0) + maxTimeMs;
+    }
+  });
+}
+
 function getDesensitizedQuestionLocal(room: any, questionIndex: number) {
+  if (
+    room.sandboxState &&
+    typeof room.sandboxState.currentQuestionIndex === 'number' &&
+    room.sandboxState.currentQuestionIndex >= 0 &&
+    room.sandboxState.currentQuestionIndex !== questionIndex
+  ) {
+    recordTimeoutForQuestionIndexLocal(room, room.sandboxState.currentQuestionIndex);
+  }
+
   const idx = Math.max(0, Math.min(questionIndex, (room.questions || []).length - 1));
   const rawQuestion = room.questions[idx] || {};
   const questionId = rawQuestion.id || rawQuestion.questionId || `q_${idx + 1}`;
@@ -124,6 +173,7 @@ function getDesensitizedQuestionLocal(room: any, questionIndex: number) {
   room.sandboxState = room.sandboxState || {};
   room.sandboxState.currentQuestionIndex = idx;
   room.sandboxState.activeQuestionId = questionId;
+  room.sandboxState.questionStartTime = Date.now();
 
   return {
     questionId,
@@ -189,10 +239,20 @@ function getScoreboardLocal(room: any) {
 
 function settleGameLocal(room: any) {
   room.status = 'finished';
+
+  // 将本场题库中所有学生超时未选的题目全部补记入 answerLogs
+  for (let i = 0; i < (room.questions || []).length; i++) {
+    recordTimeoutForQuestionIndexLocal(room, i);
+  }
+
   const studentsList = [...(room.students || [])];
 
+  // 排序：1. 答对题数/总分最高优先 -> 2. 同分按答题总耗时最短（回答最快）优先 -> 3. 错题少者优先 -> 4. 进房早者优先
   studentsList.sort((a: any, b: any) => {
     if ((b.score || 0) !== (a.score || 0)) return (b.score || 0) - (a.score || 0);
+    const aTime = a.totalTimeMs ?? Infinity;
+    const bTime = b.totalTimeMs ?? Infinity;
+    if (aTime !== bTime) return aTime - bTime;
     if ((a.wrongCount || 0) !== (b.wrongCount || 0)) return (a.wrongCount || 0) - (b.wrongCount || 0);
     return (a.joinedAt || 0) - (b.joinedAt || 0);
   });
@@ -202,14 +262,16 @@ function settleGameLocal(room: any) {
       (t: any) => normalizeTeamId(t.id) === normalizeTeamId(student.teamId)
     );
     const logs = Array.isArray(student.answerLogs) ? student.answerLogs : [];
+    const sortedLogs = [...logs].sort((a: any, b: any) => (a.questionNumber || 0) - (b.questionNumber || 0));
 
-    const wrongQuestions = logs
+    const wrongQuestions = sortedLogs
       .filter((log: any) => !log.isCorrect)
       .map((log: any) => {
-        let studentSelectedText = String(log.studentSelected);
+        const isTimeout = Boolean(log.isTimeout || !log.studentSelected);
+        let studentSelectedText = isTimeout ? null : String(log.studentSelected);
         let correctAnswerText = String(log.correctAnswer);
         if (log.options && typeof log.options === 'object' && !Array.isArray(log.options)) {
-          if (log.options[log.studentSelected] !== undefined) {
+          if (!isTimeout && log.options[log.studentSelected] !== undefined) {
             studentSelectedText = `${log.studentSelected} (${log.options[log.studentSelected]})`;
           }
           if (log.options[log.correctAnswer] !== undefined) {
@@ -222,16 +284,19 @@ function settleGameLocal(room: any) {
         const rawQ = qIndex >= 0 ? room.questions[qIndex] : null;
         return {
           questionId: log.questionId,
-          questionNumber: qIndex >= 0 ? qIndex + 1 : 1,
+          questionNumber: log.questionNumber || (qIndex >= 0 ? qIndex + 1 : 1),
           questionText: log.questionText,
           options: log.options,
-          studentSelected: log.studentSelected,
+          isTimeout,
+          studentSelected: isTimeout ? null : log.studentSelected,
           studentSelectedText,
           correctAnswer: log.correctAnswer,
           correctAnswerText,
           explanation: rawQ?.explanation || `标准正确答案是 ${correctAnswerText}。`,
         };
       });
+
+    const correctCount = sortedLogs.filter((l: any) => l.isCorrect).length;
 
     return {
       rank: index + 1,
@@ -243,9 +308,10 @@ function settleGameLocal(room: any) {
       teamColor: team ? team.color : '#6B7280',
       score: student.score || 0,
       streak: student.streak || 0,
-      wrongCount: student.wrongCount || 0,
-      correctCount: Math.max(0, logs.length - (student.wrongCount || 0)),
-      totalAnswered: logs.length,
+      totalTimeMs: student.totalTimeMs || 0,
+      wrongCount: wrongQuestions.length,
+      correctCount,
+      totalAnswered: sortedLogs.length,
       isPerfect: wrongQuestions.length === 0,
       wrongQuestions,
     };
@@ -651,6 +717,16 @@ export function createSocketConnection(): Socket {
       room.sandboxState = room.sandboxState || {};
       room.sandboxState.activeStage = data.state;
 
+      if (data.state === 'question-options') {
+        room.sandboxState.questionStartTime = Date.now();
+      } else if (
+        (data.state === 'result-stats' || data.state === 'scoreboard') &&
+        typeof room.sandboxState.currentQuestionIndex === 'number' &&
+        room.sandboxState.currentQuestionIndex >= 0
+      ) {
+        recordTimeoutForQuestionIndexLocal(room, room.sandboxState.currentQuestionIndex);
+      }
+
       if (data.state === 'lobby') {
         room.status = 'waiting';
         room.settlementData = null;
@@ -661,6 +737,7 @@ export function createSocketConnection(): Socket {
           s.score = 0;
           s.streak = 0;
           s.wrongCount = 0;
+          s.totalTimeMs = 0;
           s.lastQuestionId = null;
           s.lastAnswerIndex = null;
           s.lastIsCorrect = null;
@@ -703,17 +780,23 @@ export function createSocketConnection(): Socket {
         return callback?.({ success: false, error: '已提交过该题' });
       }
 
-      const rawQuestion =
-        (room.questions || []).find((q: any) => q.id === questionId || q.questionId === questionId) ||
-        (room.questions || [])[room.sandboxState?.currentQuestionIndex ?? 0];
+      const qIndex = (room.questions || []).findIndex(
+        (q: any) => q.id === questionId || q.questionId === questionId
+      );
+      const effectiveIdx = qIndex >= 0 ? qIndex : (room.sandboxState?.currentQuestionIndex ?? 0);
+      const rawQuestion = (room.questions || [])[effectiveIdx];
       if (!rawQuestion) return callback?.({ success: false, error: '未找到题目' });
 
       const correctAnswer = String(rawQuestion.correctAnswer || rawQuestion.answer || 'C').trim();
       const formattedSelected = String(selectedOption ?? '').trim();
       const isCorrect = formattedSelected.toUpperCase() === correctAnswer.toUpperCase();
       const pointsEarned = isCorrect ? 100 : 0;
+      const now = Date.now();
+      const qStart = room.sandboxState?.questionStartTime || now;
+      const timeSpentMs = Math.max(50, now - qStart);
 
       student.score = (student.score || 0) + pointsEarned;
+      student.totalTimeMs = (student.totalTimeMs || 0) + timeSpentMs;
       if (isCorrect) {
         student.streak = (student.streak || 0) + 1;
       } else {
@@ -729,13 +812,16 @@ export function createSocketConnection(): Socket {
       student.answerLogs = Array.isArray(student.answerLogs) ? student.answerLogs : [];
       student.answerLogs.push({
         questionId,
+        questionNumber: effectiveIdx + 1,
         questionText: rawQuestion.questionText || rawQuestion.title || rawQuestion.question,
         options: rawQuestion.options,
         studentSelected: formattedSelected,
+        isTimeout: false,
         correctAnswer,
         isCorrect,
         pointsEarned,
-        submittedAt: Date.now(),
+        timeSpentMs,
+        submittedAt: now,
       });
 
       const scoreboard = getScoreboardLocal(room);

@@ -460,6 +460,15 @@ export function initSocketServer(io, roomManager) {
         const room = roomManager.getRoom(roomId);
         if (room && room.sandboxState) {
           room.sandboxState.activeStage = data.state;
+          if (data.state === 'question-options') {
+            room.sandboxState.questionStartTime = Date.now();
+          } else if (
+            (data.state === 'result-stats' || data.state === 'scoreboard') &&
+            typeof room.sandboxState.currentQuestionIndex === 'number' &&
+            room.sandboxState.currentQuestionIndex >= 0
+          ) {
+            roomManager.recordTimeoutForQuestionIndex(room, room.sandboxState.currentQuestionIndex);
+          }
         }
 
         // 若老师大屏点击「再来一局」返回等待大厅，自动清零本局积分与答题流水

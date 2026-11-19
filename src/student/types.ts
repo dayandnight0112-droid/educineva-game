@@ -82,6 +82,7 @@ export interface StudentMistakeItem {
   prompt: string;
   studentAnswer: string;
   correctAnswer: string;
+  isTimeout?: boolean;
   explanation?: string;
 }
 
@@ -102,6 +103,4 @@ export interface StudentSettlementResult {
     members?: string[];
   }[];
   mistakes: StudentMistakeItem[];
-}
-  }[];
 }

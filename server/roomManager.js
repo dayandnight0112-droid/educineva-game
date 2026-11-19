@@ -327,6 +327,48 @@ export class RoomManager {
   }
 
   /**
+   * 辅助：将指定题目上未及时作答（超时未选）的学生自动补记一条错题进 answerLogs
+   */
+  recordTimeoutForQuestionIndex(room, qIndex) {
+    if (!room || !Array.isArray(room.questions) || qIndex < 0 || qIndex >= room.questions.length) {
+      return;
+    }
+    const rawQ = room.questions[qIndex];
+    if (!rawQ) return;
+    const qId = rawQ.id || rawQ.questionId || `q_${qIndex}`;
+    const qText = rawQ.questionText || rawQ.title || rawQ.question || `第 ${qIndex + 1} 题`;
+    const correctAnswer = String(rawQ.correctAnswer || rawQ.answer || 'C').trim();
+    const maxTimeMs = (rawQ.timeLimit || room.config?.timePerQuestion || 15) * 1000;
+
+    for (const student of room.students.values()) {
+      const hasLog = (student.answerLogs || []).some(l => l.questionId === qId);
+      if (!hasLog && !(student.answeredQuestionIds && student.answeredQuestionIds.has(qId))) {
+        const timeoutEntry = {
+          questionId: qId,
+          questionNumber: qIndex + 1,
+          questionText: qText,
+          options: deepClone(rawQ.options),
+          studentSelected: null,
+          isTimeout: true,
+          correctAnswer,
+          isCorrect: false,
+          pointsEarned: 0,
+          timeSpentMs: maxTimeMs,
+          submittedAt: Date.now()
+        };
+        student.answerLogs = student.answerLogs || [];
+        student.answerLogs.push(timeoutEntry);
+        if (student.answeredQuestionIds) {
+          student.answeredQuestionIds.add(qId);
+        }
+        student.wrongCount = (student.wrongCount || 0) + 1;
+        student.streak = 0;
+        student.totalTimeMs = (student.totalTimeMs || 0) + maxTimeMs;
+      }
+    }
+  }
+
+  /**
    * 题目安全物理脱敏分发
    */
   getDesensitizedQuestion(roomId, questionIndex) {
@@ -337,12 +379,23 @@ export class RoomManager {
       throw new Error(`题目索引超出范围: [${questionIndex}]，题库总数: ${room.questions.length}`);
     }
 
+    // 若切换下一题时上一题仍有超时未选的学生，先将上一题补记入 answerLogs
+    if (
+      room.sandboxState &&
+      typeof room.sandboxState.currentQuestionIndex === 'number' &&
+      room.sandboxState.currentQuestionIndex >= 0 &&
+      room.sandboxState.currentQuestionIndex !== questionIndex
+    ) {
+      this.recordTimeoutForQuestionIndex(room, room.sandboxState.currentQuestionIndex);
+    }
+
     const rawQuestion = room.questions[questionIndex];
     const questionId = rawQuestion.id || rawQuestion.questionId || `q_${questionIndex}`;
     const questionText = rawQuestion.questionText || rawQuestion.title || rawQuestion.question || '';
 
     room.sandboxState.currentQuestionIndex = questionIndex;
     room.sandboxState.activeQuestionId = questionId;
+    room.sandboxState.questionStartTime = Date.now();
 
     return {
       questionId,
@@ -368,9 +421,10 @@ export class RoomManager {
       throw new Error('该题目您已提交作答，无法重复提交');
     }
 
-    const rawQuestion = room.questions.find(
+    const qIndex = room.questions.findIndex(
       q => (q.id === questionId || q.questionId === questionId)
     );
+    const rawQuestion = qIndex >= 0 ? room.questions[qIndex] : null;
     if (!rawQuestion) {
       throw new Error(`未找到题目: ${questionId}`);
     }
@@ -389,8 +443,12 @@ export class RoomManager {
     );
 
     const pointsEarned = isCorrect ? 100 : 0;
+    const now = Date.now();
+    const qStart = room.sandboxState?.questionStartTime || now;
+    const timeSpentMs = Math.max(50, now - qStart);
 
     student.score += pointsEarned;
+    student.totalTimeMs = (student.totalTimeMs || 0) + timeSpentMs;
     if (isCorrect) {
       student.streak = (student.streak || 0) + 1;
     } else {
@@ -406,13 +464,16 @@ export class RoomManager {
     const questionText = rawQuestion.questionText || rawQuestion.title || rawQuestion.question;
     const logEntry = {
       questionId,
+      questionNumber: qIndex + 1,
       questionText,
       options: deepClone(rawQuestion.options),
       studentSelected: formattedSelected,
+      isTimeout: false,
       correctAnswer: formattedCorrect,
       isCorrect,
       pointsEarned,
-      submittedAt: Date.now()
+      timeSpentMs,
+      submittedAt: now
     };
     student.answerLogs.push(logEntry);
 
@@ -423,7 +484,7 @@ export class RoomManager {
       }
     }
 
-    console.log(`[RoomManager] 答题判定: 学生 "${student.name}" 作答 [${questionId}] -> 选: ${formattedSelected}, 标答: ${formattedCorrect}, 判定: ${isCorrect ? '✔正确(+100)' : '✘错误'}, 个人总分: ${student.score}`);
+    console.log(`[RoomManager] 答题判定: 学生 "${student.name}" 作答 [${questionId}] -> 选: ${formattedSelected}, 标答: ${formattedCorrect}, 判定: ${isCorrect ? '✔正确(+100)' : '✘错误'}, 耗时: ${timeSpentMs}ms, 个人总分: ${student.score}`);
 
     return {
       isCorrect,
@@ -450,30 +511,43 @@ export class RoomManager {
     // 状态变更为结算已完成
     room.status = 'finished';
 
+    // 将本场所有已下发或题库中的题目里学生超时未选的题目全部补记入 answerLogs
+    for (let i = 0; i < (room.questions || []).length; i++) {
+      this.recordTimeoutForQuestionIndex(room, i);
+    }
+
     // 1. 全员得分排名与学情错题聚合
     const studentsList = Array.from(room.students.values());
 
-    // 排序逻辑：积分降序，平分按错题数少者靠前，再平分按进房早者靠前
+    // 排序逻辑：1. 答对最多题/总分最高优先 -> 2. 同分按答题总耗时最短（回答最快）优先 -> 3. 错题数少者优先 -> 4. 进房早者优先
     studentsList.sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
+      const aTime = a.totalTimeMs ?? Infinity;
+      const bTime = b.totalTimeMs ?? Infinity;
+      if (aTime !== bTime) return aTime - bTime;
       if (a.wrongCount !== b.wrongCount) return a.wrongCount - b.wrongCount;
       return a.joinedAt - b.joinedAt;
     });
 
-    // 映射构建完整学情复盘看板数据（含错题对照）
+    // 映射构建完整学情复盘看板数据（含错题与超时未答题对照）
     const leaderboard = studentsList.map((student, index) => {
       const team = room.teams.find(t => t.id === student.teamId);
 
-      // 从答题流水账本中提取全部错题
-      const wrongQuestions = (student.answerLogs || [])
+      const sortedLogs = [...(student.answerLogs || [])].sort(
+        (a, b) => (a.questionNumber || 0) - (b.questionNumber || 0)
+      );
+
+      // 从答题流水账本中提取全部错题（含选错题 + 超时未选题）
+      const wrongQuestions = sortedLogs
         .filter(log => !log.isCorrect)
         .map(log => {
-          let studentSelectedText = String(log.studentSelected);
+          const isTimeout = Boolean(log.isTimeout || !log.studentSelected);
+          let studentSelectedText = isTimeout ? null : String(log.studentSelected);
           let correctAnswerText = String(log.correctAnswer);
 
           // 如果题目选项为字典对象结构（如 { A: "5", B: "6" }），提取文字标签
           if (log.options && typeof log.options === 'object' && !Array.isArray(log.options)) {
-            if (log.options[log.studentSelected] !== undefined) {
+            if (!isTimeout && log.options[log.studentSelected] !== undefined) {
               studentSelectedText = `${log.studentSelected} (${log.options[log.studentSelected]})`;
             }
             if (log.options[log.correctAnswer] !== undefined) {
@@ -488,16 +562,19 @@ export class RoomManager {
 
           return {
             questionId: log.questionId,
-            questionNumber: qIndex >= 0 ? qIndex + 1 : 1,
+            questionNumber: log.questionNumber || (qIndex >= 0 ? qIndex + 1 : 1),
             questionText: log.questionText,
             options: log.options,
-            studentSelected: log.studentSelected,
+            isTimeout,
+            studentSelected: isTimeout ? null : log.studentSelected,
             studentSelectedText,
             correctAnswer: log.correctAnswer,
             correctAnswerText,
             explanation: rawQ?.explanation || `标准正确答案是 ${correctAnswerText}。`
           };
         });
+
+      const correctCount = sortedLogs.filter(l => l.isCorrect).length;
 
       return {
         rank: index + 1,
@@ -509,9 +586,10 @@ export class RoomManager {
         teamColor: team ? team.color : '#6B7280',
         score: student.score || 0,
         streak: student.streak || 0,
-        wrongCount: student.wrongCount || 0,
-        correctCount: Math.max(0, (student.answerLogs || []).length - (student.wrongCount || 0)),
-        totalAnswered: (student.answerLogs || []).length,
+        totalTimeMs: student.totalTimeMs || 0,
+        wrongCount: wrongQuestions.length,
+        correctCount,
+        totalAnswered: sortedLogs.length,
         isPerfect: wrongQuestions.length === 0,
         wrongQuestions
       };

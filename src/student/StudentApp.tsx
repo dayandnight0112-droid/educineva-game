@@ -196,13 +196,17 @@ export const StudentApp: React.FC<StudentAppProps> = ({ onBackToTeacherAdmin }) 
 
       if (myRecord) {
         const mappedMistakes: StudentMistakeItem[] = (myRecord.wrongQuestions || []).map(
-          (wq: any, idx: number) => ({
-            questionNumber: wq.questionNumber || idx + 1,
-            prompt: wq.questionText,
-            studentAnswer: wq.studentSelectedText || wq.studentSelected,
-            correctAnswer: wq.correctAnswerText || wq.correctAnswer,
-            explanation: wq.explanation || '请结合课堂老师讲解复习巩固本题知识点。',
-          })
+          (wq: any, idx: number) => {
+            const isTimeout = Boolean(wq.isTimeout || !wq.studentSelected);
+            return {
+              questionNumber: wq.questionNumber || idx + 1,
+              prompt: wq.questionText,
+              studentAnswer: isTimeout ? '' : (wq.studentSelectedText || wq.studentSelected || ''),
+              correctAnswer: wq.correctAnswerText || wq.correctAnswer,
+              isTimeout,
+              explanation: wq.explanation || '请结合课堂老师讲解复习巩固本题知识点。',
+            };
+          }
         );
 
         setStudentSession((prev) => ({

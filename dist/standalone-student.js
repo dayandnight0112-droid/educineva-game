@@ -13336,7 +13336,46 @@
       }))
     };
   }
+  function recordTimeoutForQuestionIndexLocal(room, qIndex) {
+    if (!room || !Array.isArray(room.questions) || qIndex < 0 || qIndex >= room.questions.length) {
+      return;
+    }
+    const rawQ = room.questions[qIndex];
+    if (!rawQ) return;
+    const qId = rawQ.id || rawQ.questionId || `q_${qIndex + 1}`;
+    const qText = rawQ.questionText || rawQ.title || rawQ.question || `\u7B2C ${qIndex + 1} \u9898`;
+    const correctAnswer = String(rawQ.correctAnswer || rawQ.answer || "C").trim();
+    const maxTimeMs = (rawQ.timeLimit || room.config?.timePerQuestion || 15) * 1e3;
+    (room.students || []).forEach((student) => {
+      student.answerLogs = Array.isArray(student.answerLogs) ? student.answerLogs : [];
+      student.answeredQuestionIds = Array.isArray(student.answeredQuestionIds) ? student.answeredQuestionIds : [];
+      const hasLog = student.answerLogs.some((l) => l.questionId === qId);
+      if (!hasLog && !student.answeredQuestionIds.includes(qId)) {
+        const timeoutEntry = {
+          questionId: qId,
+          questionNumber: qIndex + 1,
+          questionText: qText,
+          options: rawQ.options,
+          studentSelected: null,
+          isTimeout: true,
+          correctAnswer,
+          isCorrect: false,
+          pointsEarned: 0,
+          timeSpentMs: maxTimeMs,
+          submittedAt: Date.now()
+        };
+        student.answerLogs.push(timeoutEntry);
+        student.answeredQuestionIds.push(qId);
+        student.wrongCount = (student.wrongCount || 0) + 1;
+        student.streak = 0;
+        student.totalTimeMs = (student.totalTimeMs || 0) + maxTimeMs;
+      }
+    });
+  }
   function getDesensitizedQuestionLocal(room, questionIndex) {
+    if (room.sandboxState && typeof room.sandboxState.currentQuestionIndex === "number" && room.sandboxState.currentQuestionIndex >= 0 && room.sandboxState.currentQuestionIndex !== questionIndex) {
+      recordTimeoutForQuestionIndexLocal(room, room.sandboxState.currentQuestionIndex);
+    }
     const idx = Math.max(0, Math.min(questionIndex, (room.questions || []).length - 1));
     const rawQuestion = room.questions[idx] || {};
     const questionId = rawQuestion.id || rawQuestion.questionId || `q_${idx + 1}`;
@@ -13344,6 +13383,7 @@
     room.sandboxState = room.sandboxState || {};
     room.sandboxState.currentQuestionIndex = idx;
     room.sandboxState.activeQuestionId = questionId;
+    room.sandboxState.questionStartTime = Date.now();
     return {
       questionId,
       index: idx,
@@ -13399,9 +13439,15 @@
   }
   function settleGameLocal(room) {
     room.status = "finished";
+    for (let i = 0; i < (room.questions || []).length; i++) {
+      recordTimeoutForQuestionIndexLocal(room, i);
+    }
     const studentsList = [...room.students || []];
     studentsList.sort((a, b) => {
       if ((b.score || 0) !== (a.score || 0)) return (b.score || 0) - (a.score || 0);
+      const aTime = a.totalTimeMs ?? Infinity;
+      const bTime = b.totalTimeMs ?? Infinity;
+      if (aTime !== bTime) return aTime - bTime;
       if ((a.wrongCount || 0) !== (b.wrongCount || 0)) return (a.wrongCount || 0) - (b.wrongCount || 0);
       return (a.joinedAt || 0) - (b.joinedAt || 0);
     });
@@ -13410,11 +13456,13 @@
         (t) => normalizeTeamId(t.id) === normalizeTeamId(student.teamId)
       );
       const logs = Array.isArray(student.answerLogs) ? student.answerLogs : [];
-      const wrongQuestions = logs.filter((log) => !log.isCorrect).map((log) => {
-        let studentSelectedText = String(log.studentSelected);
+      const sortedLogs = [...logs].sort((a, b) => (a.questionNumber || 0) - (b.questionNumber || 0));
+      const wrongQuestions = sortedLogs.filter((log) => !log.isCorrect).map((log) => {
+        const isTimeout = Boolean(log.isTimeout || !log.studentSelected);
+        let studentSelectedText = isTimeout ? null : String(log.studentSelected);
         let correctAnswerText = String(log.correctAnswer);
         if (log.options && typeof log.options === "object" && !Array.isArray(log.options)) {
-          if (log.options[log.studentSelected] !== void 0) {
+          if (!isTimeout && log.options[log.studentSelected] !== void 0) {
             studentSelectedText = `${log.studentSelected} (${log.options[log.studentSelected]})`;
           }
           if (log.options[log.correctAnswer] !== void 0) {
@@ -13427,16 +13475,18 @@
         const rawQ = qIndex >= 0 ? room.questions[qIndex] : null;
         return {
           questionId: log.questionId,
-          questionNumber: qIndex >= 0 ? qIndex + 1 : 1,
+          questionNumber: log.questionNumber || (qIndex >= 0 ? qIndex + 1 : 1),
           questionText: log.questionText,
           options: log.options,
-          studentSelected: log.studentSelected,
+          isTimeout,
+          studentSelected: isTimeout ? null : log.studentSelected,
           studentSelectedText,
           correctAnswer: log.correctAnswer,
           correctAnswerText,
           explanation: rawQ?.explanation || `\u6807\u51C6\u6B63\u786E\u7B54\u6848\u662F ${correctAnswerText}\u3002`
         };
       });
+      const correctCount = sortedLogs.filter((l) => l.isCorrect).length;
       return {
         rank: index + 1,
         studentId: student.studentId,
@@ -13447,9 +13497,10 @@
         teamColor: team ? team.color : "#6B7280",
         score: student.score || 0,
         streak: student.streak || 0,
-        wrongCount: student.wrongCount || 0,
-        correctCount: Math.max(0, logs.length - (student.wrongCount || 0)),
-        totalAnswered: logs.length,
+        totalTimeMs: student.totalTimeMs || 0,
+        wrongCount: wrongQuestions.length,
+        correctCount,
+        totalAnswered: sortedLogs.length,
         isPerfect: wrongQuestions.length === 0,
         wrongQuestions
       };
@@ -13791,6 +13842,11 @@
         if (!room) return callback?.({ success: false });
         room.sandboxState = room.sandboxState || {};
         room.sandboxState.activeStage = data.state;
+        if (data.state === "question-options") {
+          room.sandboxState.questionStartTime = Date.now();
+        } else if ((data.state === "result-stats" || data.state === "scoreboard") && typeof room.sandboxState.currentQuestionIndex === "number" && room.sandboxState.currentQuestionIndex >= 0) {
+          recordTimeoutForQuestionIndexLocal(room, room.sandboxState.currentQuestionIndex);
+        }
         if (data.state === "lobby") {
           room.status = "waiting";
           room.settlementData = null;
@@ -13801,6 +13857,7 @@
             s.score = 0;
             s.streak = 0;
             s.wrongCount = 0;
+            s.totalTimeMs = 0;
             s.lastQuestionId = null;
             s.lastAnswerIndex = null;
             s.lastIsCorrect = null;
@@ -13836,13 +13893,21 @@
         if (student.answeredQuestionIds.includes(questionId)) {
           return callback?.({ success: false, error: "\u5DF2\u63D0\u4EA4\u8FC7\u8BE5\u9898" });
         }
-        const rawQuestion = (room.questions || []).find((q) => q.id === questionId || q.questionId === questionId) || (room.questions || [])[room.sandboxState?.currentQuestionIndex ?? 0];
+        const qIndex = (room.questions || []).findIndex(
+          (q) => q.id === questionId || q.questionId === questionId
+        );
+        const effectiveIdx = qIndex >= 0 ? qIndex : room.sandboxState?.currentQuestionIndex ?? 0;
+        const rawQuestion = (room.questions || [])[effectiveIdx];
         if (!rawQuestion) return callback?.({ success: false, error: "\u672A\u627E\u5230\u9898\u76EE" });
         const correctAnswer = String(rawQuestion.correctAnswer || rawQuestion.answer || "C").trim();
         const formattedSelected = String(selectedOption ?? "").trim();
         const isCorrect = formattedSelected.toUpperCase() === correctAnswer.toUpperCase();
         const pointsEarned = isCorrect ? 100 : 0;
+        const now = Date.now();
+        const qStart = room.sandboxState?.questionStartTime || now;
+        const timeSpentMs = Math.max(50, now - qStart);
         student.score = (student.score || 0) + pointsEarned;
+        student.totalTimeMs = (student.totalTimeMs || 0) + timeSpentMs;
         if (isCorrect) {
           student.streak = (student.streak || 0) + 1;
         } else {
@@ -13857,13 +13922,16 @@
         student.answerLogs = Array.isArray(student.answerLogs) ? student.answerLogs : [];
         student.answerLogs.push({
           questionId,
+          questionNumber: effectiveIdx + 1,
           questionText: rawQuestion.questionText || rawQuestion.title || rawQuestion.question,
           options: rawQuestion.options,
           studentSelected: formattedSelected,
+          isTimeout: false,
           correctAnswer,
           isCorrect,
           pointsEarned,
-          submittedAt: Date.now()
+          timeSpentMs,
+          submittedAt: now
         });
         const scoreboard = getScoreboardLocal(room);
         saveLocalStore(store);
@@ -14022,7 +14090,17 @@
     const actualWrong = myLiveRecord?.wrongCount ?? (wrongCount !== void 0 ? wrongCount : MOCK_SETTLEMENT_DATA.wrongCount);
     const totalQuestions = liveSettlement?.totalQuestions || actualCorrect + actualWrong || 5;
     const accuracy = Math.round(actualCorrect / Math.max(1, totalQuestions) * 100);
-    const actualMistakes = mistakes !== void 0 ? mistakes : MOCK_SETTLEMENT_DATA.mistakes;
+    const actualMistakes = myLiveRecord && Array.isArray(myLiveRecord.wrongQuestions) ? myLiveRecord.wrongQuestions.map((wq, idx) => {
+      const isTimeout = Boolean(wq.isTimeout || !wq.studentSelected);
+      return {
+        questionNumber: wq.questionNumber || idx + 1,
+        prompt: wq.questionText,
+        studentAnswer: isTimeout ? "" : wq.studentSelectedText || wq.studentSelected || "",
+        correctAnswer: wq.correctAnswerText || wq.correctAnswer,
+        isTimeout,
+        explanation: wq.explanation || "\u8BF7\u7ED3\u5408\u8BFE\u5802\u8001\u5E08\u8BB2\u89E3\u590D\u4E60\u5DE9\u56FA\u672C\u9898\u77E5\u8BC6\u70B9\u3002"
+      };
+    }) : mistakes !== void 0 ? mistakes : MOCK_SETTLEMENT_DATA.mistakes;
     const offlinePlayers = [
       {
         studentId: "me_offline",
@@ -14419,41 +14497,53 @@
               /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "text-6xl animate-bounce", children: "\u{1F389}" }),
               /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h4", { className: "text-xl font-black text-gray-800", children: "\u592A\u5389\u5BB3\u4E86\uFF01\u672C\u5C40\u5168\u90E8\u7B54\u5BF9\uFF0C\u96F6\u9519\u9898\uFF01" }),
               /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "text-xs font-bold text-gray-500", children: "\u4F60\u5DF2\u7ECF\u638C\u63E1\u4E86\u5168\u90E8\u9898\u76EE\u77E5\u8BC6\u70B9\uFF0C\u7EE7\u7EED\u4FDD\u6301\uFF01" })
-            ] }) : actualMistakes.map((mistake, idx) => /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
-              "div",
-              {
-                className: "p-5 rounded-2xl bg-slate-50 border-2 border-slate-200 space-y-3",
-                children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "flex items-center gap-2 text-xs font-black text-purple-700 bg-purple-100 px-3 py-1 rounded-xl w-fit", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { children: [
-                    "\u7B2C 0",
-                    mistake.questionNumber,
-                    " \u9898 \xB7 \u9519\u9898\u590D\u4E60"
-                  ] }) }),
-                  /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h4", { className: "text-base font-black text-gray-900 leading-snug", children: mistake.prompt }),
-                  /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "p-3 rounded-xl bg-rose-50 border-2 border-rose-200 text-xs space-y-1", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-1.5 font-black text-rose-700", children: [
-                        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(X, { className: "w-4 h-4 text-rose-600 stroke-[3]" }),
-                        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u6211\u7684\u5F53\u65F6\u9009\u62E9 (\u5931\u8BEF)" })
-                      ] }),
-                      /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "font-bold text-rose-900 text-sm pl-5", children: mistake.studentAnswer })
+            ] }) : actualMistakes.map((mistake, idx) => {
+              const isTimeoutItem = Boolean(mistake.isTimeout || !mistake.studentAnswer);
+              return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+                "div",
+                {
+                  className: "p-5 rounded-2xl bg-slate-50 border-2 border-slate-200 space-y-3",
+                  children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center justify-between gap-2 flex-wrap", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "flex items-center gap-2 text-xs font-black text-purple-700 bg-purple-100 px-3 py-1 rounded-xl w-fit", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { children: [
+                        "\u7B2C ",
+                        mistake.questionNumber < 10 ? `0${mistake.questionNumber}` : mistake.questionNumber,
+                        " \u9898 \xB7 \u9519\u9898\u590D\u4E60"
+                      ] }) }),
+                      isTimeoutItem ? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-xs font-black text-amber-700 bg-amber-100 border border-amber-300 px-2.5 py-0.5 rounded-full", children: "\u23F0 \u672A\u53CA\u65F6\u56DE\u7B54 (\u8D85\u65F6\u672A\u9009)" }) : /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-xs font-black text-rose-700 bg-rose-100 border border-rose-200 px-2.5 py-0.5 rounded-full", children: "\u274C \u9009\u9879\u7B54\u9519" })
                     ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "p-3 rounded-xl bg-emerald-50 border-2 border-emerald-200 text-xs space-y-1", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h4", { className: "text-base font-black text-gray-900 leading-snug", children: mistake.prompt }),
+                    isTimeoutItem ? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "pt-1", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "p-3.5 rounded-xl bg-emerald-50 border-2 border-emerald-200 text-xs space-y-1", children: [
                       /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-1.5 font-black text-emerald-700", children: [
                         /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Check, { className: "w-4 h-4 text-emerald-600 stroke-[3]" }),
                         /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u6807\u51C6\u6B63\u786E\u7B54\u6848 (\u6B63\u89E3)" })
                       ] }),
                       /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "font-bold text-emerald-900 text-sm pl-5", children: mistake.correctAnswer })
+                    ] }) }) : /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "p-3 rounded-xl bg-rose-50 border-2 border-rose-200 text-xs space-y-1", children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-1.5 font-black text-rose-700", children: [
+                          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(X, { className: "w-4 h-4 text-rose-600 stroke-[3]" }),
+                          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u6211\u7684\u5F53\u65F6\u9009\u62E9 (\u5931\u8BEF)" })
+                        ] }),
+                        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "font-bold text-rose-900 text-sm pl-5", children: mistake.studentAnswer })
+                      ] }),
+                      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "p-3 rounded-xl bg-emerald-50 border-2 border-emerald-200 text-xs space-y-1", children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-1.5 font-black text-emerald-700", children: [
+                          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Check, { className: "w-4 h-4 text-emerald-600 stroke-[3]" }),
+                          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u6807\u51C6\u6B63\u786E\u7B54\u6848 (\u6B63\u89E3)" })
+                        ] }),
+                        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "font-bold text-emerald-900 text-sm pl-5", children: mistake.correctAnswer })
+                      ] })
+                    ] }),
+                    mistake.explanation && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs font-medium text-amber-900 leading-relaxed", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "font-black text-amber-800", children: "\u{1F4A1} \u77E5\u8BC6\u9526\u56CA\u89E3\u6790\uFF1A" }),
+                      mistake.explanation
                     ] })
-                  ] }),
-                  mistake.explanation && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs font-medium text-amber-900 leading-relaxed", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "font-black text-amber-800", children: "\u{1F4A1} \u77E5\u8BC6\u9526\u56CA\u89E3\u6790\uFF1A" }),
-                    mistake.explanation
-                  ] })
-                ]
-              },
-              idx
-            )) }),
+                  ]
+                },
+                idx
+              );
+            }) }),
             /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "p-4 bg-gray-50 border-t border-gray-100 flex justify-end shrink-0", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
               "button",
               {
@@ -14706,13 +14796,17 @@
         const myRecord = settlementData.leaderboard.find((item) => item.studentId === myId) || settlementData.leaderboard.find((item) => item.name === sessionRef.current.nickname);
         if (myRecord) {
           const mappedMistakes = (myRecord.wrongQuestions || []).map(
-            (wq, idx) => ({
-              questionNumber: wq.questionNumber || idx + 1,
-              prompt: wq.questionText,
-              studentAnswer: wq.studentSelectedText || wq.studentSelected,
-              correctAnswer: wq.correctAnswerText || wq.correctAnswer,
-              explanation: wq.explanation || "\u8BF7\u7ED3\u5408\u8BFE\u5802\u8001\u5E08\u8BB2\u89E3\u590D\u4E60\u5DE9\u56FA\u672C\u9898\u77E5\u8BC6\u70B9\u3002"
-            })
+            (wq, idx) => {
+              const isTimeout = Boolean(wq.isTimeout || !wq.studentSelected);
+              return {
+                questionNumber: wq.questionNumber || idx + 1,
+                prompt: wq.questionText,
+                studentAnswer: isTimeout ? "" : wq.studentSelectedText || wq.studentSelected || "",
+                correctAnswer: wq.correctAnswerText || wq.correctAnswer,
+                isTimeout,
+                explanation: wq.explanation || "\u8BF7\u7ED3\u5408\u8BFE\u5802\u8001\u5E08\u8BB2\u89E3\u590D\u4E60\u5DE9\u56FA\u672C\u9898\u77E5\u8BC6\u70B9\u3002"
+              };
+            }
           );
           setStudentSession((prev) => ({
             ...prev,

@@ -65,8 +65,23 @@ export const SettlementView: React.FC<SettlementViewProps> = ({
   const totalQuestions = liveSettlement?.totalQuestions || actualCorrect + actualWrong || 5;
   const accuracy = Math.round((actualCorrect / Math.max(1, totalQuestions)) * 100);
 
-  // 2. 真实个人错题清单：根据玩家实际答题失误动态呈现
-  const actualMistakes = mistakes !== undefined ? mistakes : MOCK_SETTLEMENT_DATA.mistakes;
+  // 2. 真实个人错题清单（含选错题 + 超时未及时回答的题目）：优先直接从母体 myLiveRecord.wrongQuestions 提取
+  const actualMistakes: StudentMistakeItem[] =
+    myLiveRecord && Array.isArray(myLiveRecord.wrongQuestions)
+      ? myLiveRecord.wrongQuestions.map((wq: any, idx: number) => {
+          const isTimeout = Boolean(wq.isTimeout || !wq.studentSelected);
+          return {
+            questionNumber: wq.questionNumber || idx + 1,
+            prompt: wq.questionText,
+            studentAnswer: isTimeout ? '' : (wq.studentSelectedText || wq.studentSelected || ''),
+            correctAnswer: wq.correctAnswerText || wq.correctAnswer,
+            isTimeout,
+            explanation: wq.explanation || '请结合课堂老师讲解复习巩固本题知识点。',
+          };
+        })
+      : mistakes !== undefined
+      ? mistakes
+      : MOCK_SETTLEMENT_DATA.mistakes;
 
   // 3. 个人冠亚季军领奖台 (第 1 名、第 2 名、第 3 名与老师大屏 PodiumView 100% 同步！)
   const offlinePlayers = [
@@ -575,53 +590,84 @@ export const SettlementView: React.FC<SettlementViewProps> = ({
                   </p>
                 </div>
               ) : (
-                actualMistakes.map((mistake, idx) => (
-                  <div
-                    key={idx}
-                    className="p-5 rounded-2xl bg-slate-50 border-2 border-slate-200 space-y-3"
-                  >
-                    <div className="flex items-center gap-2 text-xs font-black text-purple-700 bg-purple-100 px-3 py-1 rounded-xl w-fit">
-                      <span>第 0{mistake.questionNumber} 题 · 错题复习</span>
-                    </div>
-
-                    <h4 className="text-base font-black text-gray-900 leading-snug">
-                      {mistake.prompt}
-                    </h4>
-
-                    {/* 错项与正解对照 */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                      {/* 我的选择（标红） */}
-                      <div className="p-3 rounded-xl bg-rose-50 border-2 border-rose-200 text-xs space-y-1">
-                        <div className="flex items-center gap-1.5 font-black text-rose-700">
-                          <X className="w-4 h-4 text-rose-600 stroke-[3]" />
-                          <span>我的当时选择 (失误)</span>
+                actualMistakes.map((mistake, idx) => {
+                  const isTimeoutItem = Boolean(mistake.isTimeout || !mistake.studentAnswer);
+                  return (
+                    <div
+                      key={idx}
+                      className="p-5 rounded-2xl bg-slate-50 border-2 border-slate-200 space-y-3"
+                    >
+                      <div className="flex items-center justify-between gap-2 flex-wrap">
+                        <div className="flex items-center gap-2 text-xs font-black text-purple-700 bg-purple-100 px-3 py-1 rounded-xl w-fit">
+                          <span>
+                            第 {mistake.questionNumber < 10 ? `0${mistake.questionNumber}` : mistake.questionNumber} 题 · 错题复习
+                          </span>
                         </div>
-                        <p className="font-bold text-rose-900 text-sm pl-5">
-                          {mistake.studentAnswer}
-                        </p>
+                        {isTimeoutItem ? (
+                          <span className="text-xs font-black text-amber-700 bg-amber-100 border border-amber-300 px-2.5 py-0.5 rounded-full">
+                            ⏰ 未及时回答 (超时未选)
+                          </span>
+                        ) : (
+                          <span className="text-xs font-black text-rose-700 bg-rose-100 border border-rose-200 px-2.5 py-0.5 rounded-full">
+                            ❌ 选项答错
+                          </span>
+                        )}
                       </div>
 
-                      {/* 正确答案（标绿） */}
-                      <div className="p-3 rounded-xl bg-emerald-50 border-2 border-emerald-200 text-xs space-y-1">
-                        <div className="flex items-center gap-1.5 font-black text-emerald-700">
-                          <Check className="w-4 h-4 text-emerald-600 stroke-[3]" />
-                          <span>标准正确答案 (正解)</span>
+                      <h4 className="text-base font-black text-gray-900 leading-snug">
+                        {mistake.prompt}
+                      </h4>
+
+                      {/* 错项与正解对照：有选择但答错的显示错误选择+正确答案；未及时回答的只显示正确答案 */}
+                      {isTimeoutItem ? (
+                        <div className="pt-1">
+                          {/* 未及时回答：仅显示标准正确答案（标绿） */}
+                          <div className="p-3.5 rounded-xl bg-emerald-50 border-2 border-emerald-200 text-xs space-y-1">
+                            <div className="flex items-center gap-1.5 font-black text-emerald-700">
+                              <Check className="w-4 h-4 text-emerald-600 stroke-[3]" />
+                              <span>标准正确答案 (正解)</span>
+                            </div>
+                            <p className="font-bold text-emerald-900 text-sm pl-5">
+                              {mistake.correctAnswer}
+                            </p>
+                          </div>
                         </div>
-                        <p className="font-bold text-emerald-900 text-sm pl-5">
-                          {mistake.correctAnswer}
-                        </p>
-                      </div>
-                    </div>
+                      ) : (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                          {/* 我的选择（标红） */}
+                          <div className="p-3 rounded-xl bg-rose-50 border-2 border-rose-200 text-xs space-y-1">
+                            <div className="flex items-center gap-1.5 font-black text-rose-700">
+                              <X className="w-4 h-4 text-rose-600 stroke-[3]" />
+                              <span>我的当时选择 (失误)</span>
+                            </div>
+                            <p className="font-bold text-rose-900 text-sm pl-5">
+                              {mistake.studentAnswer}
+                            </p>
+                          </div>
 
-                    {/* 锦囊解析 */}
-                    {mistake.explanation && (
-                      <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs font-medium text-amber-900 leading-relaxed">
-                        <span className="font-black text-amber-800">💡 知识锦囊解析：</span>
-                        {mistake.explanation}
-                      </div>
-                    )}
-                  </div>
-                ))
+                          {/* 正确答案（标绿） */}
+                          <div className="p-3 rounded-xl bg-emerald-50 border-2 border-emerald-200 text-xs space-y-1">
+                            <div className="flex items-center gap-1.5 font-black text-emerald-700">
+                              <Check className="w-4 h-4 text-emerald-600 stroke-[3]" />
+                              <span>标准正确答案 (正解)</span>
+                            </div>
+                            <p className="font-bold text-emerald-900 text-sm pl-5">
+                              {mistake.correctAnswer}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* 锦囊解析 */}
+                      {mistake.explanation && (
+                        <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs font-medium text-amber-900 leading-relaxed">
+                          <span className="font-black text-amber-800">💡 知识锦囊解析：</span>
+                          {mistake.explanation}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
               )}
             </div>
 
