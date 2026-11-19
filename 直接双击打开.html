@@ -13331,24 +13331,23 @@
       }
     };
     const serverUrl = getSocketServerUrl();
-    const isFileOrStatic = typeof window !== "undefined" && (window.location.protocol === "file:" || window.location.hostname.endsWith("github.io"));
-    if (isFileOrStatic) {
-      const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
-      const timeoutId = setTimeout(() => controller?.abort(), 600);
-      fetch(`${serverUrl}/health`, { signal: controller?.signal }).then((res) => {
-        clearTimeout(timeoutId);
-        if (res.ok) {
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timeoutId = setTimeout(() => controller?.abort(), 600);
+    fetch(`${serverUrl}/health`, { signal: controller?.signal }).then(async (res) => {
+      clearTimeout(timeoutId);
+      const contentType = res.headers.get("content-type") || "";
+      if (res.ok && contentType.includes("application/json")) {
+        const data = await res.json().catch(() => null);
+        if (data && data.status === "ok") {
           connectRealSocket(serverUrl);
-        } else {
-          activateLocalSandbox();
+          return;
         }
-      }).catch(() => {
-        clearTimeout(timeoutId);
-        activateLocalSandbox();
-      });
-    } else {
-      connectRealSocket(serverUrl);
-    }
+      }
+      activateLocalSandbox();
+    }).catch(() => {
+      clearTimeout(timeoutId);
+      activateLocalSandbox();
+    });
     function connectRealSocket(url2) {
       realSocket = lookup2(url2, {
         transports: ["websocket", "polling"],

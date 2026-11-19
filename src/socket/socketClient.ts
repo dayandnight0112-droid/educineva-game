@@ -847,31 +847,27 @@ export function createSocketConnection(): Socket {
     },
   };
 
-  // 先用极速 HTTP 探针检测后端母体服务是否在线，避免浏览器控制台报 WebSocket ERR_CONNECTION_REFUSED
+  // 先用极速 HTTP 探针检测后端母体服务是否在线（兼容 file://、Vercel、GitHub Pages 与本地/云端 Node 服务），避免浏览器控制台报 WebSocket 错误
   const serverUrl = getSocketServerUrl();
-  const isFileOrStatic =
-    typeof window !== 'undefined' &&
-    (window.location.protocol === 'file:' || window.location.hostname.endsWith('github.io'));
-
-  if (isFileOrStatic) {
-    const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    const timeoutId = setTimeout(() => controller?.abort(), 600);
-    fetch(`${serverUrl}/health`, { signal: controller?.signal })
-      .then((res) => {
-        clearTimeout(timeoutId);
-        if (res.ok) {
+  const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const timeoutId = setTimeout(() => controller?.abort(), 600);
+  fetch(`${serverUrl}/health`, { signal: controller?.signal })
+    .then(async (res) => {
+      clearTimeout(timeoutId);
+      const contentType = res.headers.get('content-type') || '';
+      if (res.ok && contentType.includes('application/json')) {
+        const data = await res.json().catch(() => null);
+        if (data && data.status === 'ok') {
           connectRealSocket(serverUrl);
-        } else {
-          activateLocalSandbox();
+          return;
         }
-      })
-      .catch(() => {
-        clearTimeout(timeoutId);
-        activateLocalSandbox();
-      });
-  } else {
-    connectRealSocket(serverUrl);
-  }
+      }
+      activateLocalSandbox();
+    })
+    .catch(() => {
+      clearTimeout(timeoutId);
+      activateLocalSandbox();
+    });
 
   function connectRealSocket(url: string) {
     realSocket = io(url, {
