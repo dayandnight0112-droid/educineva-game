@@ -1,0 +1,1 @@
+import{R as t,j as e,f as r}from"./index-TcsMufvd.js";import{T as o}from"./TeacherScreenApp-BsPpBsU8.js";t.createRoot(document.getElementById("root")).render(e.jsx(r.StrictMode,{children:e.jsx(o,{})}));

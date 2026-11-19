@@ -105,7 +105,7 @@ ${jsStudentContent}
 ${cssContent}
   </style>
 </head>
-<body class="bg-slate-950 text-white antialiased overflow-hidden select-none">
+<body class="bg-[#f8fafc] text-slate-800 antialiased overflow-hidden select-none">
   <div id="root"></div>
   <script>
 ${jsScreenContent}

@@ -751,7 +751,7 @@ export const TeacherScreenApp: React.FC<TeacherScreenAppProps> = ({
   };
 
   return (
-    <div className="w-screen h-screen overflow-hidden flex flex-col bg-radial from-slate-900 via-indigo-950 to-slate-950 text-white font-sans select-none relative">
+    <div className="w-screen h-screen overflow-hidden flex flex-col bg-gradient-to-br from-[#f8fafc] via-white to-pink-50/40 text-slate-800 font-sans select-none relative">
       {/* 顶部常驻大屏信息与状态栏 */}
       <ScreenHeader
         currentState={currentState}
@@ -772,7 +772,7 @@ export const TeacherScreenApp: React.FC<TeacherScreenAppProps> = ({
       <main className="flex-1 w-full max-w-[1920px] mx-auto p-1 sm:p-2 lg:p-2.5 flex flex-col justify-center items-center relative overflow-hidden">
         {/* 画面一：等待大厅与投屏扫码 */}
         {currentState === 'lobby' && (
-          <div className="w-full h-full flex flex-col justify-between items-center bg-slate-900/40 rounded-3xl border border-slate-800/80 backdrop-blur-md shadow-2xl relative overflow-hidden animate-fadeIn">
+          <div className="w-full h-full flex flex-col justify-between items-center bg-white rounded-3xl border border-gray-200/90 shadow-xl relative overflow-hidden animate-fadeIn">
             <LobbyView
               settings={settings}
               teams={teams}
@@ -788,7 +788,7 @@ export const TeacherScreenApp: React.FC<TeacherScreenAppProps> = ({
 
         {/* 画面二：题目展示与倒计时大屏 (含 2A 题干审题思考 + 2B 四色选项展开抢答) */}
         {(currentState === 'question-prompt' || currentState === 'question-options') && (
-          <div className="w-full h-full flex flex-col justify-between items-center bg-slate-900/40 rounded-3xl border border-slate-800/80 backdrop-blur-md shadow-2xl relative overflow-hidden animate-fadeIn">
+          <div className="w-full h-full flex flex-col justify-between items-center bg-white rounded-3xl border border-gray-200/90 shadow-xl relative overflow-hidden animate-fadeIn">
             <QuestionLiveView
               currentState={currentState}
               question={currentQ}
@@ -808,7 +808,7 @@ export const TeacherScreenApp: React.FC<TeacherScreenAppProps> = ({
 
         {/* 画面三：条形统计分布图与答案揭晓 */}
         {currentState === 'result-stats' && (
-          <div className="w-full h-full flex flex-col justify-between items-center bg-slate-900/40 rounded-3xl border border-slate-800/80 backdrop-blur-md shadow-2xl relative overflow-hidden animate-fadeIn">
+          <div className="w-full h-full flex flex-col justify-between items-center bg-white rounded-3xl border border-gray-200/90 shadow-xl relative overflow-hidden animate-fadeIn">
             <ResultStatsView
               question={currentQ}
               students={students}
@@ -819,7 +819,7 @@ export const TeacherScreenApp: React.FC<TeacherScreenAppProps> = ({
 
         {/* 画面四：局间积分榜与战队态势 */}
         {currentState === 'scoreboard' && (
-          <div className="w-full h-full flex flex-col justify-between items-center bg-slate-900/40 rounded-3xl border border-slate-800/80 backdrop-blur-md shadow-2xl relative overflow-hidden animate-fadeIn">
+          <div className="w-full h-full flex flex-col justify-between items-center bg-white rounded-3xl border border-gray-200/90 shadow-xl relative overflow-hidden animate-fadeIn">
             <ScoreboardView
               teams={teams}
               students={students}
@@ -833,7 +833,7 @@ export const TeacherScreenApp: React.FC<TeacherScreenAppProps> = ({
 
         {/* 画面五：终局颁奖典礼与教学洞察 */}
         {currentState === 'podium' && (
-          <div className="w-full h-full flex flex-col justify-between items-center bg-slate-900/40 rounded-3xl border border-slate-800/80 backdrop-blur-md shadow-2xl relative overflow-hidden animate-fadeIn">
+          <div className="w-full h-full flex flex-col justify-between items-center bg-white rounded-3xl border border-gray-200/90 shadow-xl relative overflow-hidden animate-fadeIn">
             <PodiumView
               roomName={settings.roomName}
               teams={teams}

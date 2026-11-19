@@ -126,7 +126,7 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
   );
 
   return (
-    <div className="w-full h-full flex flex-col justify-between p-2 sm:p-4 select-none relative overflow-hidden bg-gradient-to-b from-slate-950 via-[#0b0e24] to-slate-950 text-white">
+    <div className="w-full h-full flex flex-col justify-between p-2 sm:p-4 select-none relative overflow-hidden bg-gradient-to-b from-white via-slate-50/70 to-white text-slate-800">
       {/* 
         ========================================================================
         1. 顶部正中上方：纯正 Kahoot 原生悬浮白色长条 (Join at + PIN + QR Code)
@@ -134,9 +134,9 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
       */}
       <div className="w-full flex items-center justify-between gap-4 px-2 sm:px-6 pt-1 flex-shrink-0 z-30">
         {/* 左侧：阵营模式自由切换 (2队 / 3队 / 4队) */}
-        <div className="hidden lg:flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-2xl border border-slate-800 shadow-md">
-          <span className="text-[11px] font-bold text-slate-400 px-2 flex items-center gap-1">
-            <Zap className="w-3 h-3 text-amber-400" />
+        <div className="hidden lg:flex items-center gap-1.5 bg-slate-100 p-1 rounded-2xl border border-gray-200 shadow-xs">
+          <span className="text-[11px] font-bold text-slate-500 px-2 flex items-center gap-1">
+            <Zap className="w-3 h-3 text-amber-500" />
             <span>阵营模式:</span>
           </span>
           {([2, 3, 4] as const).map((mode) => (
@@ -146,7 +146,7 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
               className={`px-3 py-1 rounded-xl text-xs font-black transition cursor-pointer ${
                 teamMode === mode
                   ? 'bg-gradient-to-r from-pink-500 to-indigo-600 text-white shadow-md'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-white'
               }`}
             >
               {mode} 队对战
@@ -155,7 +155,7 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
         </div>
 
         {/* 核心中轴：Kahoot 原生经典悬浮白色长胶囊 */}
-        <div className="mx-auto bg-white rounded-3xl py-2 px-5 sm:px-8 shadow-2xl border border-slate-200 flex items-center gap-4 sm:gap-6 text-slate-900 transition-transform hover:scale-[1.01]">
+        <div className="mx-auto bg-white rounded-3xl py-2 px-5 sm:px-8 shadow-xl border-2 border-indigo-100 flex items-center gap-4 sm:gap-6 text-slate-900 transition-transform hover:scale-[1.01]">
           <div className="flex flex-col text-left leading-tight hidden sm:flex">
             <span className="text-xs sm:text-sm font-black text-slate-800">
               微信扫码 或 浏览器访问
@@ -197,8 +197,8 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
 
         {/* 右侧：人数指示与锁房 */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs font-black text-white shadow-md">
-            <Users className="w-3.5 h-3.5 text-pink-400" />
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-slate-100 border border-gray-200 text-xs font-black text-slate-800 shadow-xs">
+            <Users className="w-3.5 h-3.5 text-pink-500" />
             <span>{students.length} 人在场</span>
           </div>
 
@@ -206,12 +206,12 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
             onClick={onToggleLockRoom}
             className={`p-2 rounded-2xl border transition cursor-pointer ${
               settings.isRoomLocked
-                ? 'bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-amber-500/20'
-                : 'bg-slate-900/90 text-slate-400 hover:text-white border-slate-800'
+                ? 'bg-amber-50 text-amber-700 border-amber-300 shadow-xs'
+                : 'bg-slate-100 text-slate-600 hover:text-slate-900 border-gray-200'
             }`}
             title={settings.isRoomLocked ? '房间已锁定' : '点击锁定房间'}
           >
-            {settings.isRoomLocked ? <Lock className="w-4 h-4 text-amber-400" /> : <Unlock className="w-4 h-4" />}
+            {settings.isRoomLocked ? <Lock className="w-4 h-4 text-amber-600" /> : <Unlock className="w-4 h-4" />}
           </button>
         </div>
       </div>
@@ -223,32 +223,32 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
       */}
       <div className="w-full flex-1 flex flex-col justify-center my-auto px-1 sm:px-4">
         <div
-          className={`w-full ${getArenaHeightClass()} relative rounded-3xl overflow-hidden border border-slate-800/80 bg-slate-950/50 backdrop-blur-md shadow-2xl flex flex-col transition-all duration-300`}
+          className={`w-full ${getArenaHeightClass()} relative rounded-3xl overflow-hidden border border-gray-200 bg-white shadow-xl flex flex-col transition-all duration-300`}
         >
           {/* 顶部常驻固定阵营横幅栏 (Header) */}
-          <div className="w-full flex items-center justify-between px-6 py-2.5 border-b border-slate-800/80 bg-slate-900/85 flex-shrink-0 z-20 gap-3 flex-wrap">
-            <div className="flex items-center gap-2 text-blue-400 font-black text-base sm:text-lg">
+          <div className="w-full flex items-center justify-between px-6 py-2.5 border-b border-gray-200 bg-slate-50 flex-shrink-0 z-20 gap-3 flex-wrap">
+            <div className="flex items-center gap-2 text-blue-600 font-black text-base sm:text-lg">
               <span className="text-xl">🛡️</span>
               <span>{teams.blue.name}</span>
-              <span className="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-700 border border-blue-200">
                 {blueStudents.length} 人
               </span>
             </div>
 
             {teamMode >= 3 && (
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1.5 text-amber-400 font-black text-sm sm:text-base">
+                <div className="flex items-center gap-1.5 text-amber-600 font-black text-sm sm:text-base">
                   <span>⚡</span>
                   <span>{teams.yellow.name}</span>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 border border-amber-200">
                     {yellowStudents.length} 人
                   </span>
                 </div>
                 {teamMode === 4 && (
-                  <div className="flex items-center gap-1.5 text-emerald-400 font-black text-sm sm:text-base">
+                  <div className="flex items-center gap-1.5 text-emerald-600 font-black text-sm sm:text-base">
                     <span>🦅</span>
                     <span>{teams.green.name}</span>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200">
                       {greenStudents.length} 人
                     </span>
                   </div>
@@ -256,8 +256,8 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
               </div>
             )}
 
-            <div className="flex items-center justify-end gap-2 text-rose-400 font-black text-base sm:text-lg pr-4">
-              <span className="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">
+            <div className="flex items-center justify-end gap-2 text-rose-600 font-black text-base sm:text-lg pr-4">
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200">
                 {redStudents.length} 人
               </span>
               <span>{teams.red.name}</span>
@@ -287,7 +287,7 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
                 {/* 左侧：蓝队花名册 */}
                 <div className="pr-10">
                   {blueStudents.length === 0 ? (
-                    <div className="h-24 rounded-2xl border border-dashed border-blue-500/30 bg-blue-950/20 flex items-center justify-center text-xs sm:text-sm font-bold text-blue-300/70 px-4 text-center">
+                    <div className="h-24 rounded-2xl border-2 border-dashed border-blue-200 bg-blue-50/50 flex items-center justify-center text-xs sm:text-sm font-bold text-blue-600 px-4 text-center">
                       等待学生手机输入 PIN 码 [{formattedPin}] 加入蓝队...
                     </div>
                   ) : (
@@ -295,8 +295,8 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
                       {blueStudents.map((stu) =>
                         renderStudentCard(
                           stu,
-                          'bg-[#1d4ed8]/95 text-white',
-                          'border-blue-400/60 shadow-blue-500/20'
+                          'bg-blue-600 text-white',
+                          'border-blue-400 shadow-blue-500/20'
                         )
                       )}
                     </div>
@@ -306,7 +306,7 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
                 {/* 右侧：红队花名册 */}
                 <div className="pl-10">
                   {redStudents.length === 0 ? (
-                    <div className="h-24 rounded-2xl border border-dashed border-rose-500/30 bg-rose-950/20 flex items-center justify-center text-xs sm:text-sm font-bold text-rose-300/70 px-4 text-center">
+                    <div className="h-24 rounded-2xl border-2 border-dashed border-rose-200 bg-rose-50/50 flex items-center justify-center text-xs sm:text-sm font-bold text-rose-600 px-4 text-center">
                       等待学生手机输入 PIN 码 [{formattedPin}] 加入红队...
                     </div>
                   ) : (
@@ -314,8 +314,8 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
                       {redStudents.map((stu) =>
                         renderStudentCard(
                           stu,
-                          'bg-[#b91c1c]/95 text-white',
-                          'border-rose-400/60 shadow-rose-500/20'
+                          'bg-rose-600 text-white',
+                          'border-rose-400 shadow-rose-500/20'
                         )
                       )}
                     </div>
@@ -337,25 +337,25 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
               <div className="w-full flex flex-col gap-6 relative min-h-full">
                 <div className="w-full grid grid-cols-2 relative pb-6">
                   <div className="pr-8">
-                    <div className="text-blue-400 font-bold text-sm mb-2">🛡️ 蓝队 ({blueStudents.length}人)</div>
+                    <div className="text-blue-600 font-bold text-sm mb-2">🛡️ 蓝队 ({blueStudents.length}人)</div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-                      {blueStudents.map((stu) => renderStudentCard(stu, 'bg-[#1d4ed8]/95 text-white', 'border-blue-400/60'))}
+                      {blueStudents.map((stu) => renderStudentCard(stu, 'bg-blue-600 text-white', 'border-blue-400'))}
                     </div>
                   </div>
 
                   <div className="pl-8">
-                    <div className="text-rose-400 font-bold text-sm mb-2">⚔️ 红队 ({redStudents.length}人)</div>
+                    <div className="text-rose-600 font-bold text-sm mb-2">⚔️ 红队 ({redStudents.length}人)</div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-                      {redStudents.map((stu) => renderStudentCard(stu, 'bg-[#b91c1c]/95 text-white', 'border-rose-400/60'))}
+                      {redStudents.map((stu) => renderStudentCard(stu, 'bg-rose-600 text-white', 'border-rose-400'))}
                     </div>
                   </div>
                 </div>
 
                 {/* 下方黄队 */}
-                <div className="pt-2 border-t border-amber-500/30">
-                  <div className="text-amber-400 font-bold text-sm mb-2">⚡ 黄队 ({yellowStudents.length}人)</div>
+                <div className="pt-2 border-t border-amber-200">
+                  <div className="text-amber-600 font-bold text-sm mb-2">⚡ 黄队 ({yellowStudents.length}人)</div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2.5">
-                    {yellowStudents.map((stu) => renderStudentCard(stu, 'bg-[#b45309]/95 text-white', 'border-amber-400/60'))}
+                    {yellowStudents.map((stu) => renderStudentCard(stu, 'bg-amber-500 text-white', 'border-amber-300'))}
                   </div>
                 </div>
 
@@ -371,31 +371,31 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
             */}
             {teamMode === 4 && (
               <div className="w-full grid grid-cols-2 gap-6 relative min-h-full">
-                <div className="p-3 bg-blue-950/20 rounded-2xl border border-blue-500/30">
-                  <div className="text-blue-400 font-bold text-sm mb-2">🛡️ 蓝队 ({blueStudents.length}人)</div>
+                <div className="p-3 bg-blue-50/60 rounded-2xl border border-blue-200">
+                  <div className="text-blue-600 font-bold text-sm mb-2">🛡️ 蓝队 ({blueStudents.length}人)</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {blueStudents.map((stu) => renderStudentCard(stu, 'bg-[#1d4ed8]/95 text-white', 'border-blue-400/60'))}
+                    {blueStudents.map((stu) => renderStudentCard(stu, 'bg-blue-600 text-white', 'border-blue-400'))}
                   </div>
                 </div>
 
-                <div className="p-3 bg-rose-950/20 rounded-2xl border border-rose-500/30">
-                  <div className="text-rose-400 font-bold text-sm mb-2">⚔️ 红队 ({redStudents.length}人)</div>
+                <div className="p-3 bg-rose-50/60 rounded-2xl border border-rose-200">
+                  <div className="text-rose-600 font-bold text-sm mb-2">⚔️ 红队 ({redStudents.length}人)</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {redStudents.map((stu) => renderStudentCard(stu, 'bg-[#b91c1c]/95 text-white', 'border-rose-400/60'))}
+                    {redStudents.map((stu) => renderStudentCard(stu, 'bg-rose-600 text-white', 'border-rose-400'))}
                   </div>
                 </div>
 
-                <div className="p-3 bg-amber-950/20 rounded-2xl border border-amber-500/30">
-                  <div className="text-amber-400 font-bold text-sm mb-2">⚡ 黄队 ({yellowStudents.length}人)</div>
+                <div className="p-3 bg-amber-50/60 rounded-2xl border border-amber-200">
+                  <div className="text-amber-600 font-bold text-sm mb-2">⚡ 黄队 ({yellowStudents.length}人)</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {yellowStudents.map((stu) => renderStudentCard(stu, 'bg-[#b45309]/95 text-white', 'border-amber-400/60'))}
+                    {yellowStudents.map((stu) => renderStudentCard(stu, 'bg-amber-500 text-white', 'border-amber-300'))}
                   </div>
                 </div>
 
-                <div className="p-3 bg-emerald-950/20 rounded-2xl border border-emerald-500/30">
-                  <div className="text-emerald-400 font-bold text-sm mb-2">🦅 绿队 ({greenStudents.length}人)</div>
+                <div className="p-3 bg-emerald-50/60 rounded-2xl border border-emerald-200">
+                  <div className="text-emerald-600 font-bold text-sm mb-2">🦅 绿队 ({greenStudents.length}人)</div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {greenStudents.map((stu) => renderStudentCard(stu, 'bg-[#047857]/95 text-white', 'border-emerald-400/60'))}
+                    {greenStudents.map((stu) => renderStudentCard(stu, 'bg-emerald-600 text-white', 'border-emerald-400'))}
                   </div>
                 </div>
 
@@ -410,17 +410,17 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
             <div className="absolute right-3 bottom-3 flex items-center gap-1.5 z-30 animate-fadeIn">
               <button
                 onClick={handleScrollUp}
-                className="p-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 shadow-md cursor-pointer transition"
+                className="p-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 border border-gray-200 shadow-md cursor-pointer transition"
                 title="向上滑动"
               >
                 <ChevronUp className="w-4 h-4" />
               </button>
               <button
                 onClick={handleScrollDown}
-                className="p-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 shadow-md cursor-pointer transition"
+                className="p-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 border border-gray-200 shadow-md cursor-pointer transition"
                 title="向下滑动查看更多学生"
               >
-                <ChevronDown className="w-4 h-4 text-pink-400" />
+                <ChevronDown className="w-4 h-4 text-pink-500" />
               </button>
             </div>
           )}
@@ -432,13 +432,13 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
         3. 底部主控栏：调配队伍 + 锁定 + 巨型【Start 开始答题】按键
         ========================================================================
       */}
-      <div className="w-full flex items-center justify-between px-3 sm:px-6 py-2.5 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-xl flex-shrink-0 z-20">
+      <div className="w-full flex items-center justify-between px-3 sm:px-6 py-2.5 bg-white rounded-2xl border border-gray-200 shadow-md flex-shrink-0 z-20">
         <div className="flex items-center gap-3">
           <button
             onClick={onRebalanceTeams}
-            className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs sm:text-sm border border-slate-700 transition cursor-pointer flex items-center gap-1.5"
+            className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm border border-gray-200 transition cursor-pointer flex items-center gap-1.5"
           >
-            <RefreshCw className="w-4 h-4 text-cyan-400" />
+            <RefreshCw className="w-4 h-4 text-indigo-600" />
             <span>🔄 调配队伍 (自动均衡)</span>
           </button>
         </div>
@@ -447,7 +447,7 @@ export const LobbyView: React.FC<LobbyViewProps> = ({
         <div className="flex items-center gap-3">
           <button
             onClick={onStartGame}
-            className="px-8 sm:px-12 py-3 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 hover:scale-105 active:scale-95 text-white font-black text-base sm:text-xl shadow-xl shadow-pink-500/30 transition-transform cursor-pointer flex items-center gap-2 border border-pink-400/40"
+            className="px-8 sm:px-12 py-3 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 hover:scale-105 active:scale-95 text-white font-black text-base sm:text-xl shadow-lg shadow-pink-500/25 transition-transform cursor-pointer flex items-center gap-2 border border-pink-400/40"
           >
             <Play className="w-5 h-5 fill-current animate-pulse" />
             <span>Start 开始答题</span>

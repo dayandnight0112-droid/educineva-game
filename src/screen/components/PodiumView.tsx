@@ -272,7 +272,7 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col justify-between p-1.5 sm:p-2.5 select-none relative overflow-hidden bg-gradient-to-b from-[#091522] via-[#0d2130] to-[#07131c] text-white animate-fadeIn font-sans gap-1 sm:gap-2">
+    <div className="w-full h-full flex flex-col justify-between p-1.5 sm:p-2.5 select-none relative overflow-hidden bg-gradient-to-b from-white via-amber-50/35 to-slate-50 text-slate-800 animate-fadeIn font-sans gap-1 sm:gap-2">
       {/* 
         ========================================================================
         1. 顶部经典横幅 (对标 Kahoot 纯白大标题卡片 + 教师主控栏)
@@ -280,7 +280,7 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
       */}
       <div className="w-full relative flex items-center justify-end gap-2 px-2 sm:px-4 py-1 flex-shrink-0 z-30 min-h-[42px]">
         {/* 居中对齐：对标 Kahoot 纯白赛事大字卡片，正对第 1 名立柱 */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 px-4 sm:px-6 py-1 sm:py-1.5 rounded-xl bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-lg tracking-wide flex items-center gap-1.5 border-b-2 border-slate-300 pointer-events-none select-none z-10 whitespace-nowrap">
+        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 px-4 sm:px-6 py-1 sm:py-1.5 rounded-xl bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-md tracking-wide flex items-center gap-1.5 border border-amber-200 pointer-events-none select-none z-10 whitespace-nowrap">
           <span className="text-amber-500 text-sm sm:text-base">🏆</span>
           <span>{roomName || settlementData?.roomName || '一年级趣味科学与数学大挑战'}</span>
         </div>
@@ -289,23 +289,23 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
         <div className="flex items-center gap-2 sm:gap-2.5 z-20">
           <button
             onClick={triggerConfetti}
-            className="px-2.5 py-1 rounded-xl bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 border border-pink-500/40 text-xs font-bold flex items-center gap-1 transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95"
+            className="px-2.5 py-1 rounded-xl bg-pink-50 hover:bg-pink-100 text-pink-600 border border-pink-200 text-xs font-bold flex items-center gap-1 transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95"
           >
-            <Sparkles className="w-3.5 h-3.5 text-pink-400" />
+            <Sparkles className="w-3.5 h-3.5 text-pink-500" />
             <span className="hidden sm:inline">庆祝礼花</span>
           </button>
 
           <button
             onClick={() => setShowReviewModal(true)}
-            className="px-3 py-1 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-bold flex items-center gap-1 transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95"
+            className="px-3 py-1 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-300 text-xs font-bold flex items-center gap-1 transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95"
           >
-            <BookOpen className="w-3.5 h-3.5 text-amber-400" />
+            <BookOpen className="w-3.5 h-3.5 text-amber-600" />
             <span>错题复盘</span>
           </button>
 
           <button
             onClick={onRestart}
-            className="px-4 sm:px-5 py-1 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-black text-xs shadow-md shadow-blue-600/30 transition-all hover:scale-105 active:scale-95 flex items-center gap-1 border border-blue-400/40 cursor-pointer"
+            className="px-4 sm:px-5 py-1 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-black text-xs shadow-md shadow-blue-600/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-1 border border-blue-400/40 cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>再来一局</span>
@@ -315,15 +315,15 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
 
       {/* 
         ========================================================================
-        2. 核心大屏 1:1 对标 Kahoot 领奖台 (深墨青一体化连体台阶 + 纯白微倾斜名牌 + 底部悬浮殿军卡)
+        2. 核心大屏 1:1 炫亮金银铜 3D 立体领奖台 (亮白主题高颜值质感)
         ========================================================================
       */}
       <div className="w-full flex-1 flex flex-col justify-end items-center relative pb-3 sm:pb-4 z-10 overflow-visible">
-        {/* 背景光影 */}
-        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-cyan-500/10 to-transparent pointer-events-none"></div>
+        {/* 背景柔和阳光光晕 */}
+        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-amber-100/40 to-transparent pointer-events-none"></div>
 
         {/* 
-          三位一体的深墨青连体领奖台 (左2、中1、右3 紧密拼接)
+          三位一体的金银铜连体领奖台 (左2、中1、右3 紧密拼接)
         */}
         <div className="relative flex items-end justify-center flex-shrink-0">
           {/* 
@@ -341,7 +341,7 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
               }`}
             >
               {/* 正圆形小头像 */}
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full p-0.5 bg-white shadow-md mb-1 relative flex-shrink-0">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full p-0.5 bg-white border-2 border-slate-300 shadow-md mb-1 relative flex-shrink-0">
                 <img
                   src={rank2?.avatar || './assets/games/char_b.png'}
                   alt={rank2?.name}
@@ -352,32 +352,32 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
                 />
               </div>
 
-              {/* 对标 Kahoot：微倾斜纯白立体名牌 (第 2 名亚军) */}
+              {/* 微倾斜纯白立体名牌 (第 2 名亚军) */}
               <div
                 style={{ transform: 'rotate(-2deg)' }}
-                className="w-[92%] py-1 rounded-lg bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-xl tracking-tight border-b-2 border-slate-300 truncate text-center select-none"
+                className="w-[92%] py-1 rounded-lg bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-lg tracking-tight border border-slate-200 border-b-2 border-b-slate-300 truncate text-center select-none"
               >
                 {rank2 ? rank2.name : hasRealParticipants ? '虚位以待' : '机智天天'}
               </div>
             </div>
 
-            {/* 深墨青柱体 (2号银台) */}
+            {/* 亮银渐变柱体 (2号银台) */}
             <div
               style={{
                 height: podiumStep >= 2 ? '180px' : '0px',
                 transition: 'height 800ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
-              className="w-full rounded-tl-xl bg-[#1b3744] border-t-2 border-l border-white/20 shadow-[-5px_0_15px_rgba(0,0,0,0.3)] flex flex-col items-center pt-1.5 sm:pt-2 px-1 overflow-hidden"
+              className="w-full rounded-tl-xl bg-gradient-to-b from-slate-200 via-slate-300 to-slate-400 border-t-2 border-l border-white shadow-lg flex flex-col items-center pt-1.5 sm:pt-2 px-1 overflow-hidden"
             >
               {/* 正面银色五角徽章 */}
               <PentagonMedal rank={2} />
 
               {/* 得分与战绩 */}
               <div className="flex flex-col items-center text-center mt-0.5">
-                <span className="text-base sm:text-lg lg:text-xl font-black font-mono text-white tracking-tight drop-shadow leading-tight">
+                <span className="text-base sm:text-lg lg:text-xl font-black font-mono text-slate-900 tracking-tight leading-tight">
                   {rank2 ? rank2.score : hasRealParticipants ? '-' : 380}
                 </span>
-                <span className="text-[10px] sm:text-xs font-bold font-mono text-cyan-300/80">
+                <span className="text-[10px] sm:text-xs font-bold font-mono text-slate-700">
                   {rank2
                     ? `${rank2.correctCount}/${totalQuestions} 答对`
                     : hasRealParticipants
@@ -403,9 +403,9 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
               }`}
             >
               {/* 正圆形冠军头像 + 金皇冠 */}
-              <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full p-0.5 bg-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.7)] mb-1 relative flex-shrink-0">
+              <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full p-0.5 bg-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.5)] mb-1 relative flex-shrink-0">
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 animate-bounce">
-                  <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-amber-300 fill-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.9)]" />
+                  <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-amber-500 fill-amber-400" />
                 </div>
                 <img
                   src={rank1?.avatar || './assets/games/char_b.png'}
@@ -417,32 +417,32 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
                 />
               </div>
 
-              {/* 对标 Kahoot：微倾斜纯白立体名牌 (第 1 名冠军) */}
+              {/* 微倾斜纯白立体名牌 (第 1 名冠军) */}
               <div
                 style={{ transform: 'rotate(1deg)' }}
-                className="w-[94%] py-1 sm:py-1.5 rounded-lg bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-2xl tracking-tight border-b-2 border-slate-300 truncate text-center select-none"
+                className="w-[94%] py-1 sm:py-1.5 rounded-lg bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-xl tracking-tight border border-amber-300 border-b-2 border-b-amber-400 truncate text-center select-none"
               >
                 {rank1 ? rank1.name : hasRealParticipants ? '虚位以待' : '学霸小涵'}
               </div>
             </div>
 
-            {/* 深墨青最高柱体 (1号金台) */}
+            {/* 璀璨黄金最高柱体 (1号金台) */}
             <div
               style={{
                 height: podiumStep >= 3 ? '245px' : '0px',
                 transition: 'height 900ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
-              className="w-full rounded-t-xl bg-[#204252] border-t-3 border-x border-white/25 shadow-[0_0_30px_rgba(0,0,0,0.5)] flex flex-col items-center pt-1.5 sm:pt-2 px-1 relative overflow-hidden"
+              className="w-full rounded-t-xl bg-gradient-to-b from-amber-300 via-amber-400 to-amber-500 border-t-3 border-x border-amber-200 shadow-[0_10px_30px_rgba(245,158,11,0.3)] flex flex-col items-center pt-1.5 sm:pt-2 px-1 relative overflow-hidden"
             >
               {/* 正面金色五角徽章 */}
               <PentagonMedal rank={1} />
 
               {/* 得分与战绩 */}
               <div className="flex flex-col items-center text-center mt-0.5">
-                <span className="text-lg sm:text-xl lg:text-2xl font-black font-mono text-amber-300 tracking-tight drop-shadow-md leading-tight">
+                <span className="text-lg sm:text-xl lg:text-2xl font-black font-mono text-slate-950 tracking-tight leading-tight">
                   {rank1 ? rank1.score : hasRealParticipants ? '-' : 390}
                 </span>
-                <span className="text-[10px] sm:text-xs font-bold font-mono text-cyan-200">
+                <span className="text-[10px] sm:text-xs font-bold font-mono text-amber-950">
                   {rank1
                     ? `${rank1.correctCount}/${totalQuestions} 答对 ⚡`
                     : hasRealParticipants
@@ -468,7 +468,7 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
               }`}
             >
               {/* 正圆形小头像 */}
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full p-0.5 bg-white shadow-md mb-1 relative flex-shrink-0">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full p-0.5 bg-white border-2 border-orange-300 shadow-md mb-1 relative flex-shrink-0">
                 <img
                   src={rank3?.avatar || './assets/games/char_b.png'}
                   alt={rank3?.name}
@@ -479,32 +479,32 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
                 />
               </div>
 
-              {/* 对标 Kahoot：微倾斜纯白立体名牌 (第 3 名季军) */}
+              {/* 微倾斜纯白立体名牌 (第 3 名季军) */}
               <div
                 style={{ transform: 'rotate(2deg)' }}
-                className="w-[92%] py-1 rounded-lg bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-xl tracking-tight border-b-2 border-slate-300 truncate text-center select-none"
+                className="w-[92%] py-1 rounded-lg bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-lg tracking-tight border border-slate-200 border-b-2 border-b-slate-300 truncate text-center select-none"
               >
                 {rank3 ? rank3.name : hasRealParticipants ? '虚位以待' : '元气阳阳'}
               </div>
             </div>
 
-            {/* 深墨青柱体 (3号铜台) */}
+            {/* 亮铜渐变柱体 (3号铜台) */}
             <div
               style={{
                 height: podiumStep >= 1 ? '145px' : '0px',
                 transition: 'height 750ms cubic-bezier(0.16, 1, 0.3, 1)',
               }}
-              className="w-full rounded-tr-xl bg-[#17303c] border-t-2 border-r border-white/20 shadow-[5px_0_15px_rgba(0,0,0,0.3)] flex flex-col items-center pt-1.5 sm:pt-2 px-1 overflow-hidden"
+              className="w-full rounded-tr-xl bg-gradient-to-b from-orange-200 via-orange-300 to-amber-600/80 border-t-2 border-r border-orange-100 shadow-lg flex flex-col items-center pt-1.5 sm:pt-2 px-1 overflow-hidden"
             >
               {/* 正面铜色五角徽章 */}
               <PentagonMedal rank={3} />
 
               {/* 得分与战绩 */}
               <div className="flex flex-col items-center text-center mt-0.5">
-                <span className="text-base sm:text-lg lg:text-xl font-black font-mono text-white tracking-tight drop-shadow leading-tight">
+                <span className="text-base sm:text-lg lg:text-xl font-black font-mono text-slate-900 tracking-tight leading-tight">
                   {rank3 ? rank3.score : hasRealParticipants ? '-' : 350}
                 </span>
-                <span className="text-[10px] sm:text-xs font-bold font-mono text-cyan-300/80">
+                <span className="text-[10px] sm:text-xs font-bold font-mono text-slate-800">
                   {rank3
                     ? `${rank3.correctCount}/${totalQuestions} 答对`
                     : hasRealParticipants
@@ -520,40 +520,40 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
             【对标 Kahoot 原版：左移放于第 2 名与第 1 名下方，不超过第 2 名，绝不碰到第 3 名】
             --------------------------------------------------------------------
           */}
-          <div className="absolute -bottom-2 sm:-bottom-2.5 left-2 sm:left-3 right-[130px] sm:right-[155px] lg:right-[175px] z-30 bg-[#0f242e]/95 border border-[#2b5163] rounded-2xl py-1 px-2.5 sm:px-3.5 shadow-2xl backdrop-blur-md flex flex-col items-center">
+          <div className="absolute -bottom-2 sm:-bottom-2.5 left-2 sm:left-3 right-[130px] sm:right-[155px] lg:right-[175px] z-30 bg-white/95 border border-gray-200 rounded-2xl py-1 px-2.5 sm:px-3.5 shadow-xl backdrop-blur-md flex flex-col items-center">
             {/* 殿军小标题 */}
-            <span className="text-[10px] font-black uppercase text-cyan-300 tracking-widest mb-1">
+            <span className="text-[10px] font-black uppercase text-indigo-600 tracking-widest mb-1">
               殿  軍
             </span>
 
             {/* 左右并排两颗胶囊 */}
             <div className="flex items-center gap-1.5 sm:gap-2.5 w-full justify-center">
               {/* 第 4 名胶囊 */}
-              <div className="flex-1 flex items-center justify-between gap-1 bg-[#1b3947] hover:bg-[#204557] px-2 sm:px-2.5 py-1 rounded-xl border border-white/10 text-white shadow-xs transition-all">
+              <div className="flex-1 flex items-center justify-between gap-1 bg-slate-50 hover:bg-slate-100 px-2 sm:px-2.5 py-1 rounded-xl border border-gray-200 text-slate-800 shadow-xs transition-all">
                 <div className="flex items-center gap-1 truncate">
-                  <div className="w-4 h-4 rounded-full bg-cyan-500/20 text-cyan-300 font-mono font-black text-[10px] flex items-center justify-center border border-cyan-400/40 flex-shrink-0">
+                  <div className="w-4 h-4 rounded-full bg-indigo-100 text-indigo-700 font-mono font-black text-[10px] flex items-center justify-center border border-indigo-200 flex-shrink-0">
                     4
                   </div>
                   <span className="text-xs font-black truncate">
                     {rank4 ? rank4.name : hasRealParticipants ? '暂无' : '城堡朵朵'}
                   </span>
                 </div>
-                <span className="text-[11px] font-mono font-bold text-amber-300 flex-shrink-0">
+                <span className="text-[11px] font-mono font-bold text-amber-600 flex-shrink-0">
                   {rank4 ? rank4.score : hasRealParticipants ? '-' : 340}
                 </span>
               </div>
 
               {/* 第 5 名胶囊 */}
-              <div className="flex-1 flex items-center justify-between gap-1 bg-[#1b3947] hover:bg-[#204557] px-2 sm:px-2.5 py-1 rounded-xl border border-white/10 text-white shadow-xs transition-all">
+              <div className="flex-1 flex items-center justify-between gap-1 bg-slate-50 hover:bg-slate-100 px-2 sm:px-2.5 py-1 rounded-xl border border-gray-200 text-slate-800 shadow-xs transition-all">
                 <div className="flex items-center gap-1 truncate">
-                  <div className="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-300 font-mono font-black text-[10px] flex items-center justify-center border border-emerald-400/40 flex-shrink-0">
+                  <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 font-mono font-black text-[10px] flex items-center justify-center border border-emerald-200 flex-shrink-0">
                     5
                   </div>
                   <span className="text-xs font-black truncate">
                     {rank5 ? rank5.name : hasRealParticipants ? '暂无' : '神射小宇'}
                   </span>
                 </div>
-                <span className="text-[11px] font-mono font-bold text-amber-300 flex-shrink-0">
+                <span className="text-[11px] font-mono font-bold text-amber-600 flex-shrink-0">
                   {rank5 ? rank5.score : hasRealParticipants ? '-' : 320}
                 </span>
               </div>
@@ -567,21 +567,21 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
         3. 底部极简战报与错题提示条
         ========================================================================
       */}
-      <div className="w-full flex items-center justify-between px-4 py-1 text-xs text-slate-400 font-medium z-10 flex-wrap gap-2">
+      <div className="w-full flex items-center justify-between px-4 py-1 text-xs text-slate-600 font-medium z-10 flex-wrap gap-2">
         <div className="flex items-center gap-2 flex-wrap">
           <span>🏆 战队总积分：</span>
           {activeTeamIds.map((tid, idx) => (
             <React.Fragment key={tid}>
-              {idx > 0 && <span className="text-slate-600">|</span>}
+              {idx > 0 && <span className="text-slate-300">|</span>}
               <span
                 className={`font-bold ${
                   tid === 'blue'
-                    ? 'text-blue-400'
+                    ? 'text-blue-600'
                     : tid === 'red'
-                    ? 'text-rose-400'
+                    ? 'text-rose-600'
                     : tid === 'yellow'
-                    ? 'text-amber-400'
-                    : 'text-emerald-400'
+                    ? 'text-amber-600'
+                    : 'text-emerald-600'
                 }`}
               >
                 {teams[tid].shortName} {teamScores[tid]}分
@@ -592,43 +592,43 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
 
         <button
           onClick={() => setShowReviewModal(true)}
-          className="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 cursor-pointer transition"
+          className="text-amber-600 hover:text-amber-700 font-bold flex items-center gap-1 cursor-pointer transition"
         >
-          <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
+          <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
           <span>全班正答率 {averageAccuracy}% · 点击查看教学复盘与错题解析 ➔</span>
         </button>
       </div>
 
       {/* 
         ========================================================================
-        4. 教师专属全班学情与风琴式（Accordion）全员错题复盘弹层
+        4. 教师专属全班学情与风琴式（Accordion）全员错题复盘弹层 (亮白主题)
         ========================================================================
       */}
       {showReviewModal && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-fadeIn"
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-fadeIn"
           onClick={() => setShowReviewModal(false)}
         >
           <div
-            className="bg-slate-900 border border-indigo-500/40 rounded-3xl p-5 sm:p-7 max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl text-left relative animate-scaleUp"
+            className="bg-white border border-indigo-200 rounded-3xl p-5 sm:p-7 max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl text-left relative animate-scaleUp text-slate-800"
             onClick={(e) => e.stopPropagation()}
           >
             {/* 头部 */}
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4 flex-shrink-0">
-              <div className="flex items-center gap-2.5 text-indigo-300 font-black text-base sm:text-lg">
-                <div className="p-2 rounded-xl bg-indigo-500/20 border border-indigo-500/30 text-indigo-400">
+            <div className="flex items-center justify-between pb-3 border-b border-gray-200 mb-4 flex-shrink-0">
+              <div className="flex items-center gap-2.5 text-indigo-700 font-black text-base sm:text-lg">
+                <div className="p-2 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-600">
                   <BookOpen className="w-5 h-5" />
                 </div>
                 <div>
                   <div>全班参赛学生成绩与错题复盘看板</div>
-                  <p className="text-xs text-slate-400 font-normal mt-0.5">
+                  <p className="text-xs text-slate-500 font-normal mt-0.5">
                     按单人成绩第 1 名（答对最多题且回答最快）依次排列 · 点击任意学生展开查看错题明细
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setShowReviewModal(false)}
-                className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -636,21 +636,21 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
 
             {/* 学情速览数据条 */}
             <div className="grid grid-cols-3 gap-3 mb-4 flex-shrink-0">
-              <div className="p-2.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
-                <span className="text-[11px] text-slate-400 font-bold block">全班正答率</span>
-                <span className="text-lg sm:text-xl font-black font-mono text-emerald-400">
+              <div className="p-2.5 rounded-2xl bg-emerald-50/60 border border-emerald-200 text-center">
+                <span className="text-[11px] text-emerald-700 font-bold block">全班正答率</span>
+                <span className="text-lg sm:text-xl font-black font-mono text-emerald-600">
                   {averageAccuracy}%
                 </span>
               </div>
-              <div className="p-2.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
-                <span className="text-[11px] text-slate-400 font-bold block">总挑战题数</span>
-                <span className="text-lg sm:text-xl font-black font-mono text-white">
+              <div className="p-2.5 rounded-2xl bg-slate-50 border border-gray-200 text-center">
+                <span className="text-[11px] text-slate-500 font-bold block">总挑战题数</span>
+                <span className="text-lg sm:text-xl font-black font-mono text-slate-900">
                   {totalQuestions} 题
                 </span>
               </div>
-              <div className="p-2.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-center">
-                <span className="text-[11px] text-slate-400 font-bold block">参与学生人数</span>
-                <span className="text-lg sm:text-xl font-black font-mono text-indigo-400">
+              <div className="p-2.5 rounded-2xl bg-indigo-50/60 border border-indigo-200 text-center">
+                <span className="text-[11px] text-indigo-700 font-bold block">参与学生人数</span>
+                <span className="text-lg sm:text-xl font-black font-mono text-indigo-600">
                   {serverLeaderboard.length} 人
                 </span>
               </div>
@@ -668,35 +668,35 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
                   const teamObj = teams[stu.teamId] || teams.blue;
                   const teamBadgeStyle =
                     stu.teamId === 'blue'
-                      ? 'bg-blue-500/20 text-blue-300 border-blue-500/40'
+                      ? 'bg-blue-50 text-blue-700 border-blue-200'
                       : stu.teamId === 'red'
-                      ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
+                      ? 'bg-rose-50 text-rose-700 border-rose-200'
                       : stu.teamId === 'yellow'
-                      ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
-                      : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+                      ? 'bg-amber-50 text-amber-700 border-amber-200'
+                      : 'bg-emerald-50 text-emerald-700 border-emerald-200';
 
                   return (
                     <div
                       key={stu.id}
-                      className="rounded-2xl bg-slate-950/90 border border-slate-800 overflow-hidden transition-all"
+                      className="rounded-2xl bg-slate-50 border border-gray-200 overflow-hidden transition-all"
                     >
                       {/* 风琴简介画面（默认收起态）：左边 [名次 + 队伍 + 玩家头像 + 名字] | 右边 [对多少题 + 多少分数] */}
                       <button
                         type="button"
                         onClick={() => toggleStudentAccordion(stu.id)}
-                        className="w-full px-4 py-3 flex items-center justify-between gap-3 hover:bg-slate-800/60 transition-colors cursor-pointer text-left"
+                        className="w-full px-4 py-3 flex items-center justify-between gap-3 hover:bg-slate-100/80 transition-colors cursor-pointer text-left"
                       >
                         {/* 左边：名次 + 队伍 + 玩家头像 + 名字 */}
                         <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
                           <span
                             className={`w-7 h-7 rounded-lg font-mono font-black text-xs flex items-center justify-center flex-shrink-0 ${
                               idx === 0
-                                ? 'bg-amber-400 text-slate-950 shadow-sm'
+                                ? 'bg-amber-400 text-slate-950 shadow-xs'
                                 : idx === 1
                                 ? 'bg-slate-300 text-slate-900'
                                 : idx === 2
-                                ? 'bg-amber-700 text-white'
-                                : 'bg-slate-800 text-slate-400 border border-slate-700'
+                                ? 'bg-amber-600 text-white'
+                                : 'bg-white text-slate-600 border border-gray-200'
                             }`}
                           >
                             {idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `#${stu.rank}`}
@@ -710,7 +710,7 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
                           </span>
 
                           {/* 玩家头像 */}
-                          <div className="w-9 h-9 rounded-full p-0.5 bg-slate-800 border border-white/20 overflow-hidden flex-shrink-0">
+                          <div className="w-9 h-9 rounded-full p-0.5 bg-white border border-gray-200 overflow-hidden flex-shrink-0">
                             <img
                               src={stu.avatar}
                               alt={stu.name}
@@ -722,7 +722,7 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
                           </div>
 
                           {/* 玩家名字 */}
-                          <span className="text-sm sm:text-base font-black text-white truncate">
+                          <span className="text-sm sm:text-base font-black text-slate-900 truncate">
                             {stu.name}
                           </span>
                         </div>
@@ -730,27 +730,27 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
                         {/* 右边：对多少题 + 多少分数 + 风琴箭头 */}
                         <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
                           <div className="flex items-center gap-1.5">
-                            <span className="px-2.5 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-black">
+                            <span className="px-2.5 py-1 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-black">
                               答对 {stu.correctCount}/{totalQuestions} 题
                             </span>
                             {stu.wrongQuestions.length > 0 ? (
-                              <span className="hidden sm:inline-block px-2 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 text-[11px] font-bold">
+                              <span className="hidden sm:inline-block px-2 py-0.5 rounded-lg bg-rose-50 text-rose-600 border border-rose-200 text-[11px] font-bold">
                                 错 {stu.wrongQuestions.length} 题
                               </span>
                             ) : (
-                              <span className="hidden sm:inline-block px-2 py-0.5 rounded-lg bg-amber-500/20 text-amber-300 text-[11px] font-bold">
+                              <span className="hidden sm:inline-block px-2 py-0.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 text-[11px] font-bold">
                                 全对
                               </span>
                             )}
                           </div>
 
-                          <span className="text-sm sm:text-base font-black font-mono text-amber-300 min-w-[60px] text-right">
+                          <span className="text-sm sm:text-base font-black font-mono text-amber-600 min-w-[60px] text-right">
                             {stu.score} 分
                           </span>
 
-                          <div className="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400">
+                          <div className="w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-slate-500">
                             {isExpanded ? (
-                              <ChevronUp className="w-4 h-4 text-indigo-400" />
+                              <ChevronUp className="w-4 h-4 text-indigo-600" />
                             ) : (
                               <ChevronDown className="w-4 h-4" />
                             )}
@@ -760,51 +760,51 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
 
                       {/* 风琴展开内容区：该学生的错题明细（含错选与超时未答） */}
                       {isExpanded && (
-                        <div className="px-4 pb-4 pt-2 border-t border-slate-800/80 bg-slate-900/60 space-y-2.5 animate-fadeIn">
+                        <div className="px-4 pb-4 pt-2 border-t border-gray-200 bg-white space-y-2.5 animate-fadeIn">
                           {stu.wrongQuestions.length === 0 ? (
-                            <div className="py-4 px-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-black flex items-center gap-2">
-                              <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                            <div className="py-4 px-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs sm:text-sm font-black flex items-center gap-2">
+                              <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                               <span>🎉 太棒了！{stu.name} 本场全部题目均回答正确，零错题！</span>
                             </div>
                           ) : (
                             stu.wrongQuestions.map((wq, wIdx) => (
                               <div
                                 key={wIdx}
-                                className="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 space-y-2"
+                                className="p-3.5 rounded-xl bg-slate-50 border border-gray-200 space-y-2"
                               >
                                 <div className="flex items-center justify-between gap-2">
-                                  <span className="text-xs font-black text-indigo-300 bg-indigo-500/20 px-2.5 py-0.5 rounded-lg">
+                                  <span className="text-xs font-black text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-lg">
                                     第 {wq.questionNumber < 10 ? `0${wq.questionNumber}` : wq.questionNumber} 题
                                   </span>
                                   {wq.isTimeout ? (
-                                    <span className="text-[11px] font-black text-amber-300 bg-amber-500/20 border border-amber-500/30 px-2.5 py-0.5 rounded-full">
+                                    <span className="text-[11px] font-black text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full">
                                       ⏰ 未及时回答 (超时未选)
                                     </span>
                                   ) : (
-                                    <span className="text-[11px] font-black text-rose-300 bg-rose-500/20 border border-rose-500/30 px-2.5 py-0.5 rounded-full">
+                                    <span className="text-[11px] font-black text-rose-700 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full">
                                       ❌ 选项答错
                                     </span>
                                   )}
                                 </div>
 
-                                <div className="text-sm font-black text-white leading-snug">
+                                <div className="text-sm font-black text-slate-900 leading-snug">
                                   {wq.questionText}
                                 </div>
 
                                 {/* 若未及时回答：仅显示正确答案；若有选择但答错：显示错误选择 + 正确答案 */}
                                 {wq.isTimeout || !wq.studentSelectedText ? (
-                                  <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs flex items-center gap-2 text-emerald-300 font-bold">
-                                    <Check className="w-4 h-4 text-emerald-400 flex-shrink-0 stroke-[3]" />
+                                  <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs flex items-center gap-2 text-emerald-700 font-bold">
+                                    <Check className="w-4 h-4 text-emerald-600 flex-shrink-0 stroke-[3]" />
                                     <span>标准正确答案：{wq.correctAnswerText}</span>
                                   </div>
                                 ) : (
                                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                                    <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center gap-2 text-rose-300 font-bold">
-                                      <X className="w-4 h-4 text-rose-400 flex-shrink-0 stroke-[3]" />
+                                    <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-200 flex items-center gap-2 text-rose-700 font-bold">
+                                      <X className="w-4 h-4 text-rose-600 flex-shrink-0 stroke-[3]" />
                                       <span>学生错误选择：{wq.studentSelectedText}</span>
                                     </div>
-                                    <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-2 text-emerald-300 font-bold">
-                                      <Check className="w-4 h-4 text-emerald-400 flex-shrink-0 stroke-[3]" />
+                                    <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center gap-2 text-emerald-700 font-bold">
+                                      <Check className="w-4 h-4 text-emerald-600 flex-shrink-0 stroke-[3]" />
                                       <span>标准正确答案：{wq.correctAnswerText}</span>
                                     </div>
                                   </div>
@@ -821,8 +821,8 @@ export const PodiumView: React.FC<PodiumViewProps> = ({
             </div>
 
             {/* 底部按钮 */}
-            <div className="flex items-center justify-between pt-4 border-t border-slate-800 mt-3 flex-shrink-0">
-              <span className="text-xs text-slate-400">
+            <div className="flex items-center justify-between pt-4 border-t border-gray-200 mt-3 flex-shrink-0">
+              <span className="text-xs text-slate-500">
                 点击任意学生行可展开或收起其个人错题详情
               </span>
               <button

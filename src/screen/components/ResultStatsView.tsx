@@ -84,38 +84,38 @@ export const ResultStatsView: React.FC<ResultStatsViewProps> = ({
   const maxCount = Math.max(...keys.map((k) => distribution[k].count), 1);
 
   return (
-    <div className="w-full h-full flex flex-col justify-between p-2 sm:p-3.5 select-none relative overflow-hidden bg-[#0c1022] text-white animate-fadeIn font-sans gap-2 sm:gap-3">
+    <div className="w-full h-full flex flex-col justify-between p-2 sm:p-3.5 select-none relative overflow-hidden bg-gradient-to-b from-white via-slate-50/70 to-white text-slate-800 animate-fadeIn font-sans gap-2 sm:gap-3">
       {/* 
         ========================================================================
         1. 顶部经典控制横幅 (题干大字 + 班级正答率 + 官方题解弹层 + Kahoot 经典 Next 按键)
         ========================================================================
       */}
-      <div className="w-full bg-slate-900/95 rounded-2xl px-4 sm:px-6 py-2 border border-slate-800 shadow-xl flex items-center justify-between gap-4 flex-shrink-0 z-20">
+      <div className="w-full bg-white rounded-2xl px-4 sm:px-6 py-2 border border-gray-200 shadow-md flex items-center justify-between gap-4 flex-shrink-0 z-20">
         {/* 左侧：题号与题目题干 */}
         <div className="flex items-center gap-3 min-w-0 flex-1">
-          <div className="px-3 py-1 rounded-xl bg-indigo-600/30 text-indigo-300 border border-indigo-500/40 text-xs sm:text-sm font-black flex items-center gap-1 flex-shrink-0">
+          <div className="px-3 py-1 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs sm:text-sm font-black flex items-center gap-1 flex-shrink-0">
             <span>Q{question.number}</span>
-            <span className="text-slate-500">/</span>
-            <span className="text-slate-400">{question.total}</span>
+            <span className="text-slate-400">/</span>
+            <span className="text-slate-500">{question.total}</span>
           </div>
 
-          <h2 className="text-base sm:text-xl font-black text-white truncate drop-shadow">
+          <h2 className="text-base sm:text-xl font-black text-slate-900 truncate">
             {question.prompt}
           </h2>
         </div>
 
         {/* 右侧：班级速报、题解按钮与标志性 Next 下一题按键 */}
         <div className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0">
-          <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-xl bg-slate-950/80 border border-slate-800 text-xs font-bold text-slate-300">
-            <Users className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-xl bg-slate-50 border border-gray-200 text-xs font-bold text-slate-700">
+            <Users className="w-3.5 h-3.5 text-indigo-600" />
             <span>已答: {totalSubmitted}人</span>
           </div>
 
           <div
             className={`hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-xl border text-xs sm:text-sm font-black shadow-xs ${
               accuracyRate >= 60
-                ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
-                : 'bg-amber-500/20 border-amber-500/40 text-amber-300'
+                ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
+                : 'bg-amber-50 border-amber-200 text-amber-700'
             }`}
           >
             <Award className="w-4 h-4" />
@@ -125,16 +125,16 @@ export const ResultStatsView: React.FC<ResultStatsViewProps> = ({
           {/* 题解开关按钮 (不占用主屏空间，点击呼出官方题解弹层) */}
           <button
             onClick={() => setShowExplanation(true)}
-            className="px-3.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+            className="px-3.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95"
           >
-            <BookOpen className="w-4 h-4 text-amber-400" />
+            <BookOpen className="w-4 h-4 text-amber-600" />
             <span>官方题解</span>
           </button>
 
           {/* Kahoot 经典明蓝主控 Next 按键 */}
           <button
             onClick={onProceed}
-            className="px-6 sm:px-8 py-1.5 rounded-xl bg-[#1368ce] hover:bg-[#0f52a5] text-white font-black text-sm sm:text-base shadow-lg shadow-blue-600/30 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 border border-blue-400/40 cursor-pointer"
+            className="px-6 sm:px-8 py-1.5 rounded-xl bg-[#1368ce] hover:bg-[#0f52a5] text-white font-black text-sm sm:text-base shadow-lg shadow-blue-600/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 border border-blue-400/40 cursor-pointer"
           >
             <span>Next 下一题</span>
             <ArrowRight className="w-4 h-4" />
@@ -145,28 +145,18 @@ export const ResultStatsView: React.FC<ResultStatsViewProps> = ({
       {/* 
         ========================================================================
         2. 上半屏：真正对标 Kahoot 的【垂直挺拔冲天立柱】(占据屏幕 68% 核心高度)
-           - 立柱宽度严格收敛为 76px~88px，修长挺拔，极具视觉冲击力！
-           - 最高立柱（黄色 19 票）可垂直冲天生长到 62% 高度，柱高超过 240px，高宽比超 3:1！
-           - 矮立柱（4、3、2 票）依比例生长，与冲天的黄色冠军立柱形成极具震撼的梯级落差！
-           - 顶部预留整整 60px 充裕呼吸安全区，绝对不顶到顶栏！
-           - 纯白纯净大字号数字在最高峰，大绿勾贴柱，完全吻合 Kahoot 原版！
         ========================================================================
       */}
       <div className="w-full flex-1 min-h-[300px] flex items-end justify-center gap-8 sm:gap-14 lg:gap-20 px-4 sm:px-12 pb-3 relative z-10">
         {/* 地平基准线 */}
-        <div className="absolute bottom-3 inset-x-8 sm:inset-x-16 h-1 bg-slate-800/80 rounded-full pointer-events-none"></div>
+        <div className="absolute bottom-3 inset-x-8 sm:inset-x-16 h-1 bg-slate-200 rounded-full pointer-events-none"></div>
 
         {/* 4 根垂直立柱容器 */}
         {keys.map((key, idx) => {
-          const opt = question.options[idx];
           const stat = distribution[key];
           const isCorrect = key === correctOptionKey;
           const theme = KAHOOT_THEMES[key];
 
-          // 核心高度比例：
-          // - 冠军立柱（maxCount 19 票）生长到图表区的 62%（约 200px~260px 高度）
-          // - 其他票数按比例平滑落差：4 票约为 13%、3 票约为 10%、2 票约为 7%
-          // - 0 票为 0%
           const maxGrowthPercent = 62;
           const targetHeightPercent =
             stat.count === 0
@@ -178,9 +168,6 @@ export const ResultStatsView: React.FC<ResultStatsViewProps> = ({
               key={key}
               className="w-18 sm:w-22 lg:w-24 h-full flex flex-col justify-end items-center relative z-10"
             >
-              {/* 
-                直立矩形平顶柱体 (直上直下，顶端微圆角，与底座完全同宽，修长挺拔！)
-              */}
               <div
                 style={{
                   height: animated ? `${targetHeightPercent}%` : '0%',
@@ -188,42 +175,33 @@ export const ResultStatsView: React.FC<ResultStatsViewProps> = ({
                 }}
                 className={`w-full rounded-t-sm relative flex flex-col items-center justify-start ${theme.barBg} ${
                   isCorrect
-                    ? 'opacity-100 shadow-[0_0_35px_rgba(216,158,0,0.5)]'
-                    : 'opacity-40'
+                    ? 'opacity-100 shadow-[0_8px_25px_rgba(216,158,0,0.35)]'
+                    : 'opacity-45'
                 }`}
               >
-                {/* 
-                  柱顶指示器：紧贴柱体平顶上方
-                  - Kahoot 原版顺位：
-                    1. 最上方：纯白大字号数字 (如 19, 4, 3, 2)
-                    2. 下方紧贴柱顶：大绿勾 ✓ (正确选项独享)
-                */}
+                {/* 柱顶指示器 */}
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 flex flex-col items-center justify-end pb-1.5 whitespace-nowrap pointer-events-none">
-                  {/* 1. 顶部加粗纯净数字 (得分之巅，大字号高清对比) */}
+                  {/* 1. 顶部加粗纯净数字 (亮白底色下使用深色高对比大字) */}
                   <span
-                    className={`text-2xl sm:text-3xl lg:text-4xl font-black font-mono leading-none tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]`}
+                    className={`text-2xl sm:text-3xl lg:text-4xl font-black font-mono leading-none tracking-tight text-slate-900`}
                   >
                     {stat.count}
                   </span>
 
-                  {/* 2. 贴在立柱顶端的鲜亮大对勾 (对标原生 Kahoot) */}
+                  {/* 2. 贴在立柱顶端的鲜亮大对勾 */}
                   {isCorrect && (
                     <div className="flex items-center justify-center mt-1.5 animate-bounce">
-                      <Check className="w-7 h-7 sm:w-8 sm:h-8 text-emerald-400 stroke-[4] drop-shadow-[0_0_12px_rgba(52,211,153,0.9)]" />
+                      <Check className="w-7 h-7 sm:w-8 sm:h-8 text-emerald-600 stroke-[4]" />
                     </div>
                   )}
                 </div>
               </div>
 
-              {/* 
-                Kahoot 标志性专属几何彩色底座 (Base Podium)
-                - 包含纯白色的几何形状：▲、◆、●、■
-                - 底座保持扎实色块感与纯白符号，绝不变黑变灰
-              */}
+              {/* Kahoot 标志性专属几何彩色底座 (Base Podium) */}
               <div
-                className={`w-full h-10 sm:h-11 rounded-b-sm flex items-center justify-center text-white text-xl sm:text-2xl font-black shadow-md border-t border-black/30 flex-shrink-0 transition-all ${
+                className={`w-full h-10 sm:h-11 rounded-b-sm flex items-center justify-center text-white text-xl sm:text-2xl font-black shadow-md border-t border-black/20 flex-shrink-0 transition-all ${
                   theme.baseBg
-                } ${isCorrect ? 'opacity-100 shadow-[0_0_20px_rgba(216,158,0,0.4)]' : 'opacity-90'}`}
+                } ${isCorrect ? 'opacity-100' : 'opacity-90'}`}
               >
                 <span className="text-white drop-shadow-md select-none">{theme.symbol}</span>
               </div>
@@ -235,10 +213,6 @@ export const ResultStatsView: React.FC<ResultStatsViewProps> = ({
       {/* 
         ========================================================================
         3. 下半屏：1:1 对标 Kahoot 经典【四色巨幕选项卡 (2×2 网格)】
-           - 占满下半屏精炼空间 (约 26% 高度，为上方立柱腾出整整 68% 耸立高度)
-           - 正确选项卡：100% 全亮高饱和金黄 + 纯白外边框 + 璀璨绿色对勾徽章
-           - 错误选项卡：保持正宗红/蓝/绿底色 (带轻度半透)，文字保持 100% 高清纯白大字！
-           - 错误选项右侧带半透明圆圈叉号 ✕，正误对比极致鲜明！
         ========================================================================
       */}
       <div className="w-full h-[25%] sm:h-[27%] max-h-[160px] min-h-[105px] grid grid-cols-2 grid-rows-2 gap-2 sm:gap-2.5 flex-shrink-0 z-10">
@@ -250,10 +224,10 @@ export const ResultStatsView: React.FC<ResultStatsViewProps> = ({
           return (
             <div
               key={key}
-              className={`rounded-xl sm:rounded-2xl px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between shadow-lg transition-all duration-500 relative overflow-hidden border-2 ${
+              className={`rounded-xl sm:rounded-2xl px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between shadow-md transition-all duration-500 relative overflow-hidden border-2 ${
                 isCorrect
-                  ? `${theme.cardBg} border-white shadow-[0_0_35px_rgba(255,255,255,0.35)] scale-[1.01] text-white`
-                  : `${theme.cardBg} opacity-40 hover:opacity-55 border-transparent text-white`
+                  ? `${theme.cardBg} border-emerald-500 ring-2 ring-emerald-400/50 scale-[1.01] text-white`
+                  : `${theme.cardBg} opacity-45 hover:opacity-65 border-transparent text-white`
               }`}
             >
               {/* 左侧：白色几何符号 + 选项文本 */}
@@ -269,11 +243,11 @@ export const ResultStatsView: React.FC<ResultStatsViewProps> = ({
 
               {/* 右侧：正确展示圆圈大绿勾，错误展示半透明小叉号 */}
               {isCorrect ? (
-                <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white text-emerald-600 flex items-center justify-center shadow-2xl flex-shrink-0 border-2 border-emerald-500 animate-pulse ml-2">
+                <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white text-emerald-600 flex items-center justify-center shadow-lg flex-shrink-0 border-2 border-emerald-500 animate-pulse ml-2">
                   <Check className="w-4 h-4 sm:w-6 sm:h-6 stroke-[4] text-emerald-600" />
                 </div>
               ) : (
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-black/35 text-white/60 flex items-center justify-center flex-shrink-0 ml-2 border border-white/15">
+                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-black/30 text-white/80 flex items-center justify-center flex-shrink-0 ml-2 border border-white/20">
                   <X className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                 </div>
               )}
@@ -285,29 +259,28 @@ export const ResultStatsView: React.FC<ResultStatsViewProps> = ({
       {/* 
         ========================================================================
         4. 教师专属精讲题解弹层 (Modal Drawer)
-           - 点击顶部「官方题解」弹出，老师复盘完毕即可一键关闭，绝不挤占游戏巨幕空间
         ========================================================================
       */}
       {showExplanation && (
         <div
-          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn"
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn"
           onClick={() => setShowExplanation(false)}
         >
           <div
-            className="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl text-left relative animate-scaleUp"
+            className="bg-white border border-amber-200 rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl text-left relative animate-scaleUp text-slate-800"
             onClick={(e) => e.stopPropagation()}
           >
             {/* 弹窗头部 */}
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-              <div className="flex items-center gap-2.5 text-amber-300 font-black text-base sm:text-lg">
-                <div className="p-2 rounded-xl bg-amber-500/20 border border-amber-500/30">
-                  <BookOpen className="w-5 h-5 text-amber-400" />
+            <div className="flex items-center justify-between pb-3 border-b border-gray-200 mb-4">
+              <div className="flex items-center gap-2.5 text-amber-700 font-black text-base sm:text-lg">
+                <div className="p-2 rounded-xl bg-amber-50 border border-amber-200">
+                  <BookOpen className="w-5 h-5 text-amber-600" />
                 </div>
                 <span>教师讲解要点 · 官方权威题解</span>
               </div>
               <button
                 onClick={() => setShowExplanation(false)}
-                className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer"
+                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -315,15 +288,15 @@ export const ResultStatsView: React.FC<ResultStatsViewProps> = ({
 
             {/* 正确选项提示 */}
             <div className="mb-3 flex items-center gap-2">
-              <span className="text-xs sm:text-sm text-slate-400 font-bold">正确选项为：</span>
-              <span className="px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-black text-sm sm:text-base flex items-center gap-1.5">
+              <span className="text-xs sm:text-sm text-slate-500 font-bold">正确选项为：</span>
+              <span className="px-3 py-1 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 font-black text-sm sm:text-base flex items-center gap-1.5">
                 <Check className="w-4 h-4 stroke-[3]" />
                 {correctOptionKey}. {question.options[question.correctOptionIndex].text}
               </span>
             </div>
 
             {/* 解析正文 */}
-            <div className="bg-slate-950/70 p-4 sm:p-5 rounded-2xl border border-slate-800 text-slate-200 text-sm sm:text-base leading-relaxed font-medium">
+            <div className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-gray-200 text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
               {question.explanation}
             </div>
 

@@ -8247,73 +8247,73 @@
     onBackToAdmin
   }) => {
     const stateLabels = {
-      lobby: { label: "\u7B49\u5F85\u5927\u5385 \xB7 \u6295\u5C4F\u626B\u7801", color: "bg-indigo-500/20 text-indigo-300 border-indigo-400/30" },
-      "question-prompt": { label: "\u9636\u6BB5 2A \xB7 \u9898\u5E72\u5BA1\u9898\u601D\u8003 (\u5012\u8BA1\u65F6 1)", color: "bg-amber-500/20 text-amber-300 border-amber-400/30" },
-      "question-options": { label: "\u9636\u6BB5 2B \xB7 \u9009\u9879\u5C55\u5F00\u62A2\u7B54 (\u5012\u8BA1\u65F6 2)", color: "bg-emerald-500/20 text-emerald-300 border-emerald-400/30" },
-      "result-stats": { label: "\u753B\u9762\u4E09 \xB7 \u67F1\u72B6\u5206\u5E03\u4E0E\u7B54\u6848\u63ED\u6653", color: "bg-cyan-500/20 text-cyan-300 border-cyan-400/30" },
-      scoreboard: { label: "\u753B\u9762\u56DB \xB7 \u5C40\u95F4\u603B\u79EF\u5206\u699C\u4E0E\u6218\u961F\u6001\u52BF", color: "bg-purple-500/20 text-purple-300 border-purple-400/30" },
-      podium: { label: "\u753B\u9762\u4E94 \xB7 \u7EC8\u5C40\u9881\u5956\u5178\u793C\u4E0E\u6559\u5B66\u6D1E\u5BDF", color: "bg-rose-500/20 text-rose-300 border-rose-400/30" }
+      lobby: { label: "\u7B49\u5F85\u5927\u5385 \xB7 \u6295\u5C4F\u626B\u7801", color: "bg-indigo-50 text-indigo-700 border-indigo-200" },
+      "question-prompt": { label: "\u9636\u6BB5 2A \xB7 \u9898\u5E72\u5BA1\u9898\u601D\u8003 (\u5012\u8BA1\u65F6 1)", color: "bg-amber-50 text-amber-700 border-amber-200" },
+      "question-options": { label: "\u9636\u6BB5 2B \xB7 \u9009\u9879\u5C55\u5F00\u62A2\u7B54 (\u5012\u8BA1\u65F6 2)", color: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+      "result-stats": { label: "\u753B\u9762\u4E09 \xB7 \u67F1\u72B6\u5206\u5E03\u4E0E\u7B54\u6848\u63ED\u6653", color: "bg-sky-50 text-sky-700 border-sky-200" },
+      scoreboard: { label: "\u753B\u9762\u56DB \xB7 \u5C40\u95F4\u603B\u79EF\u5206\u699C\u4E0E\u6218\u961F\u6001\u52BF", color: "bg-purple-50 text-purple-700 border-purple-200" },
+      podium: { label: "\u753B\u9762\u4E94 \xB7 \u7EC8\u5C40\u9881\u5956\u5178\u793C\u4E0E\u6559\u5B66\u6D1E\u5BDF", color: "bg-rose-50 text-rose-700 border-rose-200" }
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", { className: "w-full flex items-center justify-between px-6 py-3 bg-slate-900/80 backdrop-blur-md border-b border-slate-800/80 select-none z-40 transition-all", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", { className: "w-full flex items-center justify-between px-6 py-3 bg-white/95 backdrop-blur-md border-b border-gray-200/90 shadow-xs select-none z-40 transition-all text-slate-800", children: [
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-4", children: [
         onBackToAdmin && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
           "button",
           {
             onClick: onBackToAdmin,
-            className: "px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 text-xs font-bold flex items-center gap-1.5 transition cursor-pointer",
+            className: "px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-gray-200 text-xs font-bold flex items-center gap-1.5 transition cursor-pointer",
             title: "\u8FD4\u56DE\u6559\u5E08\u7BA1\u7406\u540E\u53F0\u91CD\u65B0\u9009\u6E38\u620F\u6216\u9898\u76EE",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { className: "w-3.5 h-3.5 text-pink-400" }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { className: "w-3.5 h-3.5 text-pink-500" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "hidden md:inline", children: "\u8FD4\u56DE\u540E\u53F0" })
             ]
           }
         ),
         /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2.5", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-pink-500/20", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "w-5 h-5 text-white" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-600 to-indigo-500 flex items-center justify-center shadow-md shadow-pink-500/20", children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "w-5 h-5 text-white" }) }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-white font-black text-base tracking-wide flex items-center gap-1.5", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-slate-900 font-black text-base tracking-wide flex items-center gap-1.5", children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Educineva" }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-500/30", children: "\u5927\u5C4F\u63A7\u5236\u7AEF" })
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-pink-50 text-pink-600 border border-pink-200", children: "\u5927\u5C4F\u63A7\u5236\u7AEF" })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-slate-400 font-medium truncate max-w-[200px] xl:max-w-xs", children: settings.roomName })
+            /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "text-xs text-slate-500 font-medium truncate max-w-[200px] xl:max-w-xs", children: settings.roomName })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-800/90 border border-slate-700/80 shadow-inner", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-xs text-slate-400 font-bold uppercase tracking-wider", children: "PIN \u7801" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-lg font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-200", children: settings.pin }),
-          settings.isRoomLocked && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "text-xs text-rose-400 flex items-center gap-0.5 bg-rose-500/10 px-1.5 py-0.5 rounded border border-rose-500/30", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-amber-50/90 border border-amber-200/80 shadow-xs", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-xs text-amber-700 font-bold uppercase tracking-wider", children: "PIN \u7801" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-lg font-black tracking-widest text-slate-900 font-mono", children: settings.pin }),
+          settings.isRoomLocked && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { className: "text-xs text-rose-600 flex items-center gap-0.5 bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Shield, { className: "w-3 h-3" }),
             " \u5DF2\u9501\u623F"
           ] })
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
-        currentState !== "lobby" && currentState !== "podium" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "px-3 py-1 rounded-full bg-slate-800 text-white font-black text-xs sm:text-sm border border-slate-700 flex items-center gap-1.5 shadow-md", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-pink-400", children: "\u7B2C" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-amber-300 text-base", children: currentQNum }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-slate-500", children: "/" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-slate-400", children: totalQNum }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-pink-400", children: "\u9898" })
+        currentState !== "lobby" && currentState !== "podium" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "px-3 py-1 rounded-full bg-slate-100 text-slate-800 font-black text-xs sm:text-sm border border-gray-200 flex items-center gap-1.5 shadow-xs", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-pink-600", children: "\u7B2C" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-indigo-600 text-base", children: currentQNum }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-slate-400", children: "/" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-slate-500", children: totalQNum }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-pink-600", children: "\u9898" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
           "div",
           {
-            className: `px-3.5 py-1 rounded-full text-xs font-bold border backdrop-blur-sm shadow-xs transition-all ${stateLabels[currentState].color}`,
+            className: `px-3.5 py-1 rounded-full text-xs font-bold border shadow-xs transition-all ${stateLabels[currentState].color}`,
             children: stateLabels[currentState].label
           }
         )
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-3", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/70 border border-slate-700/60 text-xs font-black", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-1.5 text-blue-400", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-gray-200 text-xs font-black", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-1.5 text-blue-600", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
               "\u84DD\u961F: ",
               teams.blue.score
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-slate-600 font-normal", children: "|" }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-1.5 text-rose-400", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-slate-300 font-normal", children: "|" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-1.5 text-rose-600", children: [
             /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
               "\u7EA2\u961F: ",
@@ -8321,15 +8321,15 @@
             ] })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs font-bold text-slate-300", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, { className: "w-3.5 h-3.5 text-indigo-400" }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-gray-200 text-xs font-bold text-slate-700", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, { className: "w-3.5 h-3.5 text-indigo-600" }),
           /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: currentState === "question-options" ? `${submittedCount} / ${totalStudents} \u63D0\u4EA4` : `${totalStudents} \u4EBA\u5728\u573A` })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
           "button",
           {
             onClick: onToggleSound,
-            className: `p-2 rounded-xl transition border cursor-pointer ${settings.soundEnabled ? "bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700" : "bg-slate-900 text-slate-500 border-slate-800"}`,
+            className: `p-2 rounded-xl transition border cursor-pointer ${settings.soundEnabled ? "bg-slate-100 hover:bg-slate-200 text-slate-700 border-gray-200" : "bg-slate-50 text-slate-400 border-gray-200"}`,
             title: settings.soundEnabled ? "\u97F3\u6548\u5F00\u542F" : "\u97F3\u6548\u9759\u97F3",
             children: settings.soundEnabled ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Volume2, { className: "w-4 h-4" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VolumeX, { className: "w-4 h-4" })
           }
@@ -8338,16 +8338,16 @@
           "button",
           {
             onClick: onOpenSettings,
-            className: "p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition cursor-pointer",
+            className: "p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-gray-200 transition cursor-pointer",
             title: "\u5927\u5C4F\u5012\u8BA1\u65F6\u4E0E\u53C2\u6570\u8BBE\u7F6E",
-            children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersVertical, { className: "w-4 h-4 text-amber-300" })
+            children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SlidersVertical, { className: "w-4 h-4 text-amber-600" })
           }
         ),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
           "button",
           {
             onClick: onToggleFullscreen,
-            className: "px-3 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-indigo-600/30 transition cursor-pointer",
+            className: "px-3 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-indigo-600/20 transition cursor-pointer",
             title: "\u5207\u6362\u5168\u5C4F\u6F14\u793A\u6A21\u5F0F",
             children: isFullscreen ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Minimize2, { className: "w-4 h-4" }),
@@ -8402,7 +8402,7 @@
             "button",
             {
               onClick: () => setIsCollapsed(!isCollapsed),
-              className: "flex items-center gap-1.5 px-3 py-1 bg-slate-900/95 hover:bg-slate-800 text-pink-400 font-bold text-xs rounded-t-xl border-t border-x border-slate-700/80 shadow-lg cursor-pointer backdrop-blur-md",
+              className: "flex items-center gap-1.5 px-3 py-1 bg-white/95 hover:bg-slate-50 text-pink-600 font-bold text-xs rounded-t-xl border-t border-x border-gray-200 shadow-md cursor-pointer backdrop-blur-md",
               children: [
                 /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Wrench, { className: "w-3.5 h-3.5" }),
                 /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u79BB\u7EBF\u8C03\u8BD5\u5DE5\u5177\u6761 (Debug Bar)" }),
@@ -8410,9 +8410,9 @@
               ]
             }
           ) }),
-          !isCollapsed && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "bg-slate-950/95 backdrop-blur-xl border-t border-slate-800 px-4 py-2.5 shadow-2xl text-slate-200", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs", children: [
+          !isCollapsed && /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "bg-white/95 backdrop-blur-xl border-t border-gray-200 px-4 py-2.5 shadow-xl text-slate-700", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs", children: [
             /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: "text-[11px] font-black uppercase text-slate-400 tracking-wider flex items-center gap-1 mr-1", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: "text-[11px] font-black uppercase text-slate-500 tracking-wider flex items-center gap-1 mr-1", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Sparkles, { className: "w-3 h-3 text-pink-500" }),
                 /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u753B\u9762\u79D2\u5207:" })
               ] }),
@@ -8422,32 +8422,32 @@
                   "button",
                   {
                     onClick: () => onSelectState(item.state),
-                    className: `px-3 py-1.5 rounded-lg font-black transition-all cursor-pointer whitespace-nowrap text-xs ${isActive ? "bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-md shadow-pink-500/30 scale-105" : "bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/60"}`,
+                    className: `px-3 py-1.5 rounded-lg font-black transition-all cursor-pointer whitespace-nowrap text-xs ${isActive ? "bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow-md shadow-pink-500/20 scale-105" : "bg-slate-100 hover:bg-slate-200 text-slate-700 border border-gray-200"}`,
                     children: item.name
                   },
                   item.state
                 );
               })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex items-center gap-1 bg-slate-900/90 p-1 rounded-lg border border-slate-800", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: "text-[10px] text-slate-400 font-bold px-1.5", children: "\u9898\u76EE:" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-gray-200", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: "text-[10px] text-slate-500 font-bold px-1.5", children: "\u9898\u76EE:" }),
               Array.from({ length: totalQuestions }).map((_, idx) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
                 "button",
                 {
                   onClick: () => onSelectQuestion(idx),
-                  className: `w-6 h-6 rounded font-black text-xs transition cursor-pointer flex items-center justify-center ${currentQIndex === idx ? "bg-indigo-600 text-white shadow-xs" : "text-slate-400 hover:text-white hover:bg-slate-800"}`,
+                  className: `w-6 h-6 rounded font-black text-xs transition cursor-pointer flex items-center justify-center ${currentQIndex === idx ? "bg-indigo-600 text-white shadow-xs" : "text-slate-600 hover:text-slate-900 hover:bg-white"}`,
                   children: idx + 1
                 },
                 idx
               ))
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex items-center gap-1 bg-slate-900/90 p-1 rounded-lg border border-slate-800", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: "text-[10px] text-slate-400 font-bold px-1", children: "\u6218\u961F:" }),
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-gray-200", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: "text-[10px] text-slate-500 font-bold px-1", children: "\u6218\u961F:" }),
               [2, 3, 4].map((m) => /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
                 "button",
                 {
                   onClick: () => onChangeTeamMode?.(m),
-                  className: `px-1.5 py-0.5 rounded text-[11px] font-black transition cursor-pointer ${settings.teamMode === m ? "bg-pink-600 text-white shadow-xs" : "text-slate-400 hover:text-white"}`,
+                  className: `px-1.5 py-0.5 rounded text-[11px] font-black transition cursor-pointer ${settings.teamMode === m ? "bg-pink-600 text-white shadow-xs" : "text-slate-600 hover:text-slate-900"}`,
                   children: [
                     m,
                     "\u961F"
@@ -8456,14 +8456,14 @@
                 m
               ))
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex items-center gap-2 bg-slate-900/90 px-2.5 py-1 rounded-lg border border-slate-800", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex items-center gap-1.5 text-amber-300 font-black", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex items-center gap-2 bg-slate-100 px-2.5 py-1 rounded-lg border border-gray-200", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex items-center gap-1.5 text-amber-600 font-black", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Clock, { className: "w-3.5 h-3.5" }),
                 /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: "text-xs", children: [
                   countdownPhase === "timer1" ? "T1" : countdownPhase === "timer2" ? "T2" : "Timer",
                   ":",
                   " ",
-                  /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: "text-white text-sm font-mono", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("span", { className: "text-slate-900 text-sm font-mono", children: [
                     timeLeft,
                     "s"
                   ] })
@@ -8473,31 +8473,31 @@
                 "button",
                 {
                   onClick: onToggleTimer,
-                  className: "p-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition cursor-pointer",
+                  className: "p-1 rounded bg-white hover:bg-slate-200 text-slate-700 border border-gray-200 transition cursor-pointer",
                   title: isTimerRunning ? "\u6682\u505C\u8BA1\u65F6" : "\u7EE7\u7EED\u8BA1\u65F6",
-                  children: isTimerRunning ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Pause, { className: "w-3 h-3 text-amber-400" }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Play, { className: "w-3 h-3 text-emerald-400" })
+                  children: isTimerRunning ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Pause, { className: "w-3 h-3 text-amber-600" }) : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Play, { className: "w-3 h-3 text-emerald-600" })
                 }
               ),
               /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
                 "button",
                 {
                   onClick: onSkipTimer,
-                  className: "p-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition cursor-pointer",
+                  className: "p-1 rounded bg-white hover:bg-slate-200 text-slate-700 border border-gray-200 transition cursor-pointer",
                   title: "\u7ACB\u5373\u8DF3\u8FC7\u672C\u9636\u6BB5",
-                  children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SkipForward, { className: "w-3 h-3 text-pink-400" })
+                  children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SkipForward, { className: "w-3 h-3 text-pink-500" })
                 }
               )
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "flex items-center gap-1.5", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "inline-flex rounded-lg bg-slate-900 border border-slate-800 p-0.5", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "inline-flex rounded-lg bg-slate-100 border border-gray-200 p-0.5", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
                   "button",
                   {
                     onClick: () => onSimulateAddStudents(1),
-                    className: "px-2 py-1 text-[11px] font-bold text-slate-300 hover:text-white hover:bg-slate-800 rounded transition cursor-pointer flex items-center gap-1",
+                    className: "px-2 py-1 text-[11px] font-bold text-slate-700 hover:text-slate-900 hover:bg-white rounded transition cursor-pointer flex items-center gap-1",
                     title: "\u8FDB\u623F +1 \u540D\u5B66\u751F",
                     children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(UserPlus, { className: "w-3 h-3 text-cyan-400" }),
+                      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(UserPlus, { className: "w-3 h-3 text-indigo-600" }),
                       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "+1\u4EBA" })
                     ]
                   }
@@ -8506,18 +8506,18 @@
                   "button",
                   {
                     onClick: () => onSimulateAddStudents(5),
-                    className: "px-2 py-1 text-[11px] font-bold text-slate-300 hover:text-white hover:bg-slate-800 rounded transition cursor-pointer",
+                    className: "px-2 py-1 text-[11px] font-bold text-slate-700 hover:text-slate-900 hover:bg-white rounded transition cursor-pointer",
                     title: "\u8FDB\u623F +5 \u540D\u5B66\u751F",
                     children: "+5\u4EBA"
                   }
                 )
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "inline-flex rounded-lg bg-slate-900 border border-slate-800 p-0.5", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "inline-flex rounded-lg bg-slate-100 border border-gray-200 p-0.5", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
                   "button",
                   {
                     onClick: () => onSimulateSubmissionRatio(0),
-                    className: "px-2 py-1 text-[11px] font-bold text-slate-300 hover:text-white hover:bg-slate-800 rounded transition cursor-pointer",
+                    className: "px-2 py-1 text-[11px] font-bold text-slate-700 hover:text-slate-900 hover:bg-white rounded transition cursor-pointer",
                     title: "\u6A21\u62DF\u65E0\u4EBA\u63D0\u4EA4",
                     children: "0%"
                   }
@@ -8526,7 +8526,7 @@
                   "button",
                   {
                     onClick: () => onSimulateSubmissionRatio(0.5),
-                    className: "px-2 py-1 text-[11px] font-bold text-amber-300 hover:bg-slate-800 rounded transition cursor-pointer",
+                    className: "px-2 py-1 text-[11px] font-bold text-amber-700 hover:bg-white rounded transition cursor-pointer",
                     title: "\u6A21\u62DF\u534A\u6570\u63D0\u4EA4",
                     children: "50%"
                   }
@@ -8535,7 +8535,7 @@
                   "button",
                   {
                     onClick: () => onSimulateSubmissionRatio(1),
-                    className: "px-2 py-1 text-[11px] font-bold text-emerald-400 hover:bg-slate-800 rounded transition cursor-pointer flex items-center gap-0.5",
+                    className: "px-2 py-1 text-[11px] font-bold text-emerald-700 hover:bg-white rounded transition cursor-pointer flex items-center gap-0.5",
                     title: "\u6A21\u62DF\u5168\u5458\u63D0\u4EA4\u5B8C\u6BD5",
                     children: [
                       /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(CircleCheck, { className: "w-3 h-3" }),
@@ -8548,7 +8548,7 @@
                 "button",
                 {
                   onClick: onResetAll,
-                  className: "p-1.5 rounded-lg bg-slate-800 hover:bg-rose-900/40 text-slate-400 hover:text-rose-400 border border-slate-700/60 transition cursor-pointer",
+                  className: "p-1.5 rounded-lg bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 border border-gray-200 transition cursor-pointer",
                   title: "\u91CD\u7F6E\u6240\u6709\u72B6\u6001\u5230\u5927\u5385",
                   children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(RefreshCw, { className: "w-3.5 h-3.5" })
                 }
@@ -8571,22 +8571,22 @@
     if (!isOpen) return null;
     const timer1Presets = [5, 10, 15, 20, 30];
     const timer2Presets = [10, 15, 20, 30, 45];
-    return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md select-none animate-fadeIn", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "w-full max-w-lg bg-slate-900 border border-slate-700/80 rounded-3xl p-6 shadow-2xl text-white relative overflow-hidden", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "absolute top-0 right-0 w-48 h-48 bg-pink-500/10 rounded-full blur-3xl pointer-events-none" }),
-      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "absolute bottom-0 left-0 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" }),
-      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center justify-between pb-4 border-b border-slate-800", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm select-none animate-fadeIn", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "w-full max-w-lg bg-white border border-gray-200 rounded-3xl p-6 shadow-2xl text-slate-800 relative overflow-hidden", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "absolute top-0 right-0 w-48 h-48 bg-pink-100/50 rounded-full blur-3xl pointer-events-none" }),
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "absolute bottom-0 left-0 w-48 h-48 bg-indigo-100/50 rounded-full blur-3xl pointer-events-none" }),
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center justify-between pb-4 border-b border-gray-200", children: [
         /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center gap-2.5", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "p-2 rounded-xl bg-pink-500/20 text-pink-400 border border-pink-500/30", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(SlidersVertical, { className: "w-5 h-5" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "p-2 rounded-xl bg-pink-50 text-pink-600 border border-pink-200", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(SlidersVertical, { className: "w-5 h-5" }) }),
           /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h2", { className: "text-lg font-black tracking-wide", children: "\u8001\u5E08\u5927\u5C4F\u8282\u594F\u4E0E\u53C2\u6570\u8BBE\u7F6E" }),
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "text-xs text-slate-400", children: "\u5B9E\u65F6\u8C03\u6574\u5012\u8BA1\u65F6 1\uFF08\u5BA1\u9898\uFF09\u4E0E\u5012\u8BA1\u65F6 2\uFF08\u4F5C\u7B54\uFF09\u65F6\u957F" })
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("h2", { className: "text-lg font-black tracking-wide text-slate-900", children: "\u8001\u5E08\u5927\u5C4F\u8282\u594F\u4E0E\u53C2\u6570\u8BBE\u7F6E" }),
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "text-xs text-slate-500", children: "\u5B9E\u65F6\u8C03\u6574\u5012\u8BA1\u65F6 1\uFF08\u5BA1\u9898\uFF09\u4E0E\u5012\u8BA1\u65F6 2\uFF08\u4F5C\u7B54\uFF09\u65F6\u957F" })
           ] })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
           "button",
           {
             onClick: onClose,
-            className: "w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition cursor-pointer",
+            className: "w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition cursor-pointer",
             children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(X, { className: "w-4 h-4" })
           }
         )
@@ -8594,22 +8594,22 @@
       /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "py-5 space-y-6", children: [
         /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "space-y-2", children: [
           /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center justify-between text-sm font-bold", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center gap-2 text-amber-300", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center gap-2 text-amber-700", children: [
               /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Clock, { className: "w-4 h-4" }),
               /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: "\u5012\u8BA1\u65F6 1\uFF1A\u9898\u5E72\u5BA1\u9898\u4E0E\u601D\u8003\u65F6\u957F" })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: "text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-black border border-amber-500/30", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: "text-xs px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 font-black border border-amber-200", children: [
               "\u5F53\u524D: ",
               settings.durationTimer1,
               " \u79D2"
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "text-xs text-slate-400", children: "\u6B64\u9636\u6BB5\u5927\u5C4F\u4EC5\u5C55\u793A\u8D85\u5927\u6E05\u6670\u9898\u5E72\uFF0C\u9009\u9879\u88AB\u906E\u7F69\uFF0C\u5F15\u5BFC\u5168\u73ED\u805A\u7126\u5BA1\u9898\u601D\u8003\u3002" }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "text-xs text-slate-500", children: "\u6B64\u9636\u6BB5\u5927\u5C4F\u4EC5\u5C55\u793A\u8D85\u5927\u6E05\u6670\u9898\u5E72\uFF0C\u9009\u9879\u88AB\u906E\u7F69\uFF0C\u5F15\u5BFC\u5168\u73ED\u805A\u7126\u5BA1\u9898\u601D\u8003\u3002" }),
           /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "grid grid-cols-5 gap-2 pt-1", children: timer1Presets.map((val) => /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
             "button",
             {
               onClick: () => onUpdateSettings({ durationTimer1: val }),
-              className: `py-2 rounded-xl font-black text-xs transition-all cursor-pointer ${settings.durationTimer1 === val ? "bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 shadow-md shadow-amber-500/30 scale-105" : "bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700"}`,
+              className: `py-2 rounded-xl font-black text-xs transition-all cursor-pointer ${settings.durationTimer1 === val ? "bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 shadow-md shadow-amber-500/20 scale-105" : "bg-slate-100 hover:bg-slate-200 text-slate-700 border border-gray-200"}`,
               children: [
                 val,
                 " \u79D2"
@@ -8620,22 +8620,22 @@
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "space-y-2", children: [
           /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center justify-between text-sm font-bold", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center gap-2 text-emerald-300", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center gap-2 text-emerald-700", children: [
               /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Sparkles, { className: "w-4 h-4" }),
               /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: "\u5012\u8BA1\u65F6 2\uFF1A\u56DB\u8272\u9009\u9879\u5C55\u5F00\u4F5C\u7B54\u65F6\u957F" })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: "text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-black border border-emerald-500/30", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("span", { className: "text-xs px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-black border border-emerald-200", children: [
               "\u5F53\u524D: ",
               settings.durationTimer2,
               " \u79D2"
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "text-xs text-slate-400", children: "\u6B64\u9636\u6BB5\u56DB\u8272\u9009\u9879\u5361\u7247\u5B8C\u6574\u4EAE\u76F8\uFF0C\u5B66\u751F\u624B\u673A\u624B\u67C4\u6FC0\u6D3B\u62A2\u7B54\u3002" }),
+          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("p", { className: "text-xs text-slate-500", children: "\u6B64\u9636\u6BB5\u56DB\u8272\u9009\u9879\u5361\u7247\u5B8C\u6574\u4EAE\u76F8\uFF0C\u5B66\u751F\u624B\u673A\u624B\u67C4\u6FC0\u6D3B\u62A2\u7B54\u3002" }),
           /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "grid grid-cols-5 gap-2 pt-1", children: timer2Presets.map((val) => /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
             "button",
             {
               onClick: () => onUpdateSettings({ durationTimer2: val }),
-              className: `py-2 rounded-xl font-black text-xs transition-all cursor-pointer ${settings.durationTimer2 === val ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md shadow-emerald-500/30 scale-105" : "bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700"}`,
+              className: `py-2 rounded-xl font-black text-xs transition-all cursor-pointer ${settings.durationTimer2 === val ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-md shadow-emerald-500/20 scale-105" : "bg-slate-100 hover:bg-slate-200 text-slate-700 border border-gray-200"}`,
               children: [
                 val,
                 " \u79D2"
@@ -8644,21 +8644,21 @@
             val
           )) })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "pt-2 border-t border-slate-800 space-y-3", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "pt-2 border-t border-gray-200 space-y-3", children: [
           /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center justify-between py-2", children: [
             /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "text-sm font-bold text-slate-200", children: "\u5BA1\u9898\u5012\u8BA1\u65F6\u7ED3\u675F\u540E\u81EA\u52A8\u5C55\u5F00\u9009\u9879" }),
-              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "text-xs text-slate-400", children: "\u82E5\u5173\u95ED\uFF0C\u5219\u9700\u8981\u8001\u5E08\u624B\u52A8\u70B9\u51FB\u3010\u51FA\u9009\u9879\u3011\u6309\u94AE" })
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "text-sm font-bold text-slate-800", children: "\u5BA1\u9898\u5012\u8BA1\u65F6\u7ED3\u675F\u540E\u81EA\u52A8\u5C55\u5F00\u9009\u9879" }),
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "text-xs text-slate-500", children: "\u82E5\u5173\u95ED\uFF0C\u5219\u9700\u8981\u8001\u5E08\u624B\u52A8\u70B9\u51FB\u3010\u51FA\u9009\u9879\u3011\u6309\u94AE" })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
               "button",
               {
                 onClick: () => onUpdateSettings({ autoAdvanceToOptions: !settings.autoAdvanceToOptions }),
-                className: `w-12 h-6 rounded-full transition-colors relative cursor-pointer ${settings.autoAdvanceToOptions ? "bg-pink-500" : "bg-slate-700"}`,
+                className: `w-12 h-6 rounded-full transition-colors relative cursor-pointer ${settings.autoAdvanceToOptions ? "bg-pink-500" : "bg-slate-300"}`,
                 children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                   "div",
                   {
-                    className: `w-5 h-5 rounded-full bg-white transition-transform transform absolute top-0.5 ${settings.autoAdvanceToOptions ? "left-6.5" : "left-0.5"}`
+                    className: `w-5 h-5 rounded-full bg-white shadow-xs transition-transform transform absolute top-0.5 ${settings.autoAdvanceToOptions ? "left-6.5" : "left-0.5"}`
                   }
                 )
               }
@@ -8666,18 +8666,18 @@
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center justify-between py-2", children: [
             /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center gap-2", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Volume2, { className: "w-4 h-4 text-pink-400" }),
-              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "text-sm font-bold text-slate-200", children: "\u97F3\u6548\u63D0\u793A\u97F3" })
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Volume2, { className: "w-4 h-4 text-pink-500" }),
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "text-sm font-bold text-slate-800", children: "\u97F3\u6548\u63D0\u793A\u97F3" })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
               "button",
               {
                 onClick: () => onUpdateSettings({ soundEnabled: !settings.soundEnabled }),
-                className: `w-12 h-6 rounded-full transition-colors relative cursor-pointer ${settings.soundEnabled ? "bg-pink-500" : "bg-slate-700"}`,
+                className: `w-12 h-6 rounded-full transition-colors relative cursor-pointer ${settings.soundEnabled ? "bg-pink-500" : "bg-slate-300"}`,
                 children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                   "div",
                   {
-                    className: `w-5 h-5 rounded-full bg-white transition-transform transform absolute top-0.5 ${settings.soundEnabled ? "left-6.5" : "left-0.5"}`
+                    className: `w-5 h-5 rounded-full bg-white shadow-xs transition-transform transform absolute top-0.5 ${settings.soundEnabled ? "left-6.5" : "left-0.5"}`
                   }
                 )
               }
@@ -8685,18 +8685,18 @@
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center justify-between py-2", children: [
             /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center gap-2", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Shield, { className: "w-4 h-4 text-amber-400" }),
-              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "text-sm font-bold text-slate-200", children: "\u9501\u5B9A\u623F\u95F4\uFF08\u7981\u6B62\u65B0\u73A9\u5BB6\u52A0\u5165\uFF09" })
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Shield, { className: "w-4 h-4 text-amber-500" }),
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "text-sm font-bold text-slate-800", children: "\u9501\u5B9A\u623F\u95F4\uFF08\u7981\u6B62\u65B0\u73A9\u5BB6\u52A0\u5165\uFF09" })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
               "button",
               {
                 onClick: () => onUpdateSettings({ isRoomLocked: !settings.isRoomLocked }),
-                className: `w-12 h-6 rounded-full transition-colors relative cursor-pointer ${settings.isRoomLocked ? "bg-amber-500" : "bg-slate-700"}`,
+                className: `w-12 h-6 rounded-full transition-colors relative cursor-pointer ${settings.isRoomLocked ? "bg-amber-500" : "bg-slate-300"}`,
                 children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
                   "div",
                   {
-                    className: `w-5 h-5 rounded-full bg-white transition-transform transform absolute top-0.5 ${settings.isRoomLocked ? "left-6.5" : "left-0.5"}`
+                    className: `w-5 h-5 rounded-full bg-white shadow-xs transition-transform transform absolute top-0.5 ${settings.isRoomLocked ? "left-6.5" : "left-0.5"}`
                   }
                 )
               }
@@ -8704,7 +8704,7 @@
           ] })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "pt-4 border-t border-slate-800 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "pt-4 border-t border-gray-200 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
         "button",
         {
           onClick: onClose,
@@ -9062,18 +9062,18 @@
       },
       stu.id
     );
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "w-full h-full flex flex-col justify-between p-2 sm:p-4 select-none relative overflow-hidden bg-gradient-to-b from-slate-950 via-[#0b0e24] to-slate-950 text-white", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "w-full h-full flex flex-col justify-between p-2 sm:p-4 select-none relative overflow-hidden bg-gradient-to-b from-white via-slate-50/70 to-white text-slate-800", children: [
       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "w-full flex items-center justify-between gap-4 px-2 sm:px-6 pt-1 flex-shrink-0 z-30", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "hidden lg:flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-2xl border border-slate-800 shadow-md", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { className: "text-[11px] font-bold text-slate-400 px-2 flex items-center gap-1", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Zap, { className: "w-3 h-3 text-amber-400" }),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "hidden lg:flex items-center gap-1.5 bg-slate-100 p-1 rounded-2xl border border-gray-200 shadow-xs", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { className: "text-[11px] font-bold text-slate-500 px-2 flex items-center gap-1", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Zap, { className: "w-3 h-3 text-amber-500" }),
             /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u9635\u8425\u6A21\u5F0F:" })
           ] }),
           [2, 3, 4].map((mode) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
             "button",
             {
               onClick: () => onChangeTeamMode?.(mode),
-              className: `px-3 py-1 rounded-xl text-xs font-black transition cursor-pointer ${teamMode === mode ? "bg-gradient-to-r from-pink-500 to-indigo-600 text-white shadow-md" : "text-slate-400 hover:text-white hover:bg-slate-800"}`,
+              className: `px-3 py-1 rounded-xl text-xs font-black transition cursor-pointer ${teamMode === mode ? "bg-gradient-to-r from-pink-500 to-indigo-600 text-white shadow-md" : "text-slate-600 hover:text-slate-900 hover:bg-white"}`,
               children: [
                 mode,
                 " \u961F\u5BF9\u6218"
@@ -9082,7 +9082,7 @@
             mode
           ))
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "mx-auto bg-white rounded-3xl py-2 px-5 sm:px-8 shadow-2xl border border-slate-200 flex items-center gap-4 sm:gap-6 text-slate-900 transition-transform hover:scale-[1.01]", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "mx-auto bg-white rounded-3xl py-2 px-5 sm:px-8 shadow-xl border-2 border-indigo-100 flex items-center gap-4 sm:gap-6 text-slate-900 transition-transform hover:scale-[1.01]", children: [
           /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex flex-col text-left leading-tight hidden sm:flex", children: [
             /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "text-xs sm:text-sm font-black text-slate-800", children: "\u5FAE\u4FE1\u626B\u7801 \u6216 \u6D4F\u89C8\u5668\u8BBF\u95EE" }),
             /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "text-xs font-bold text-slate-500 font-mono", children: "educineva.com" })
@@ -9114,8 +9114,8 @@
           )
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-slate-900/90 border border-slate-800 text-xs font-black text-white shadow-md", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Users, { className: "w-3.5 h-3.5 text-pink-400" }),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-slate-100 border border-gray-200 text-xs font-black text-slate-800 shadow-xs", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Users, { className: "w-3.5 h-3.5 text-pink-500" }),
             /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { children: [
               students.length,
               " \u4EBA\u5728\u573A"
@@ -9125,9 +9125,9 @@
             "button",
             {
               onClick: onToggleLockRoom,
-              className: `p-2 rounded-2xl border transition cursor-pointer ${settings.isRoomLocked ? "bg-amber-500/20 text-amber-300 border-amber-500/40 shadow-amber-500/20" : "bg-slate-900/90 text-slate-400 hover:text-white border-slate-800"}`,
+              className: `p-2 rounded-2xl border transition cursor-pointer ${settings.isRoomLocked ? "bg-amber-50 text-amber-700 border-amber-300 shadow-xs" : "bg-slate-100 text-slate-600 hover:text-slate-900 border-gray-200"}`,
               title: settings.isRoomLocked ? "\u623F\u95F4\u5DF2\u9501\u5B9A" : "\u70B9\u51FB\u9501\u5B9A\u623F\u95F4",
-              children: settings.isRoomLocked ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Lock, { className: "w-4 h-4 text-amber-400" }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(LockOpen, { className: "w-4 h-4" })
+              children: settings.isRoomLocked ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Lock, { className: "w-4 h-4 text-amber-600" }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(LockOpen, { className: "w-4 h-4" })
             }
           )
         ] })
@@ -9135,37 +9135,37 @@
       /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "w-full flex-1 flex flex-col justify-center my-auto px-1 sm:px-4", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
         "div",
         {
-          className: `w-full ${getArenaHeightClass()} relative rounded-3xl overflow-hidden border border-slate-800/80 bg-slate-950/50 backdrop-blur-md shadow-2xl flex flex-col transition-all duration-300`,
+          className: `w-full ${getArenaHeightClass()} relative rounded-3xl overflow-hidden border border-gray-200 bg-white shadow-xl flex flex-col transition-all duration-300`,
           children: [
-            /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "w-full flex items-center justify-between px-6 py-2.5 border-b border-slate-800/80 bg-slate-900/85 flex-shrink-0 z-20 gap-3 flex-wrap", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center gap-2 text-blue-400 font-black text-base sm:text-lg", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "w-full flex items-center justify-between px-6 py-2.5 border-b border-gray-200 bg-slate-50 flex-shrink-0 z-20 gap-3 flex-wrap", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center gap-2 text-blue-600 font-black text-base sm:text-lg", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "text-xl", children: "\u{1F6E1}\uFE0F" }),
                 /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: teams.blue.name }),
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { className: "text-xs px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { className: "text-xs px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-700 border border-blue-200", children: [
                   blueStudents.length,
                   " \u4EBA"
                 ] })
               ] }),
               teamMode >= 3 && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center gap-4", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center gap-1.5 text-amber-400 font-black text-sm sm:text-base", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center gap-1.5 text-amber-600 font-black text-sm sm:text-base", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u26A1" }),
                   /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: teams.yellow.name }),
-                  /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { className: "text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { className: "text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 border border-amber-200", children: [
                     yellowStudents.length,
                     " \u4EBA"
                   ] })
                 ] }),
-                teamMode === 4 && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center gap-1.5 text-emerald-400 font-black text-sm sm:text-base", children: [
+                teamMode === 4 && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center gap-1.5 text-emerald-600 font-black text-sm sm:text-base", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u{1F985}" }),
                   /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: teams.green.name }),
-                  /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { className: "text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { className: "text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200", children: [
                     greenStudents.length,
                     " \u4EBA"
                   ] })
                 ] })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center justify-end gap-2 text-rose-400 font-black text-base sm:text-lg pr-4", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { className: "text-xs px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex items-center justify-end gap-2 text-rose-600 font-black text-base sm:text-lg pr-4", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { className: "text-xs px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200", children: [
                   redStudents.length,
                   " \u4EBA"
                 ] }),
@@ -9180,26 +9180,26 @@
                 className: `w-full flex-1 relative px-4 sm:px-6 py-4 ${hasOverflow ? "overflow-y-auto custom-lobby-scrollbar" : "overflow-hidden"}`,
                 children: [
                   teamMode === 2 && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "w-full grid grid-cols-2 relative min-h-full", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "pr-10", children: blueStudents.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "h-24 rounded-2xl border border-dashed border-blue-500/30 bg-blue-950/20 flex items-center justify-center text-xs sm:text-sm font-bold text-blue-300/70 px-4 text-center", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "pr-10", children: blueStudents.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "h-24 rounded-2xl border-2 border-dashed border-blue-200 bg-blue-50/50 flex items-center justify-center text-xs sm:text-sm font-bold text-blue-600 px-4 text-center", children: [
                       "\u7B49\u5F85\u5B66\u751F\u624B\u673A\u8F93\u5165 PIN \u7801 [",
                       formattedPin,
                       "] \u52A0\u5165\u84DD\u961F..."
                     ] }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 content-start", children: blueStudents.map(
                       (stu) => renderStudentCard(
                         stu,
-                        "bg-[#1d4ed8]/95 text-white",
-                        "border-blue-400/60 shadow-blue-500/20"
+                        "bg-blue-600 text-white",
+                        "border-blue-400 shadow-blue-500/20"
                       )
                     ) }) }),
-                    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "pl-10", children: redStudents.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "h-24 rounded-2xl border border-dashed border-rose-500/30 bg-rose-950/20 flex items-center justify-center text-xs sm:text-sm font-bold text-rose-300/70 px-4 text-center", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "pl-10", children: redStudents.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "h-24 rounded-2xl border-2 border-dashed border-rose-200 bg-rose-50/50 flex items-center justify-center text-xs sm:text-sm font-bold text-rose-600 px-4 text-center", children: [
                       "\u7B49\u5F85\u5B66\u751F\u624B\u673A\u8F93\u5165 PIN \u7801 [",
                       formattedPin,
                       "] \u52A0\u5165\u7EA2\u961F..."
                     ] }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 content-start", children: redStudents.map(
                       (stu) => renderStudentCard(
                         stu,
-                        "bg-[#b91c1c]/95 text-white",
-                        "border-rose-400/60 shadow-rose-500/20"
+                        "bg-rose-600 text-white",
+                        "border-rose-400 shadow-rose-500/20"
                       )
                     ) }) }),
                     /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(RealisticLightning, { mode: 2 })
@@ -9207,64 +9207,64 @@
                   teamMode === 3 && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "w-full flex flex-col gap-6 relative min-h-full", children: [
                     /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "w-full grid grid-cols-2 relative pb-6", children: [
                       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "pr-8", children: [
-                        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-blue-400 font-bold text-sm mb-2", children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-blue-600 font-bold text-sm mb-2", children: [
                           "\u{1F6E1}\uFE0F \u84DD\u961F (",
                           blueStudents.length,
                           "\u4EBA)"
                         ] }),
-                        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5", children: blueStudents.map((stu) => renderStudentCard(stu, "bg-[#1d4ed8]/95 text-white", "border-blue-400/60")) })
+                        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5", children: blueStudents.map((stu) => renderStudentCard(stu, "bg-blue-600 text-white", "border-blue-400")) })
                       ] }),
                       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "pl-8", children: [
-                        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-rose-400 font-bold text-sm mb-2", children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-rose-600 font-bold text-sm mb-2", children: [
                           "\u2694\uFE0F \u7EA2\u961F (",
                           redStudents.length,
                           "\u4EBA)"
                         ] }),
-                        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5", children: redStudents.map((stu) => renderStudentCard(stu, "bg-[#b91c1c]/95 text-white", "border-rose-400/60")) })
+                        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5", children: redStudents.map((stu) => renderStudentCard(stu, "bg-rose-600 text-white", "border-rose-400")) })
                       ] })
                     ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "pt-2 border-t border-amber-500/30", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-amber-400 font-bold text-sm mb-2", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "pt-2 border-t border-amber-200", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-amber-600 font-bold text-sm mb-2", children: [
                         "\u26A1 \u9EC4\u961F (",
                         yellowStudents.length,
                         "\u4EBA)"
                       ] }),
-                      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2.5", children: yellowStudents.map((stu) => renderStudentCard(stu, "bg-[#b45309]/95 text-white", "border-amber-400/60")) })
+                      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2.5", children: yellowStudents.map((stu) => renderStudentCard(stu, "bg-amber-500 text-white", "border-amber-300")) })
                     ] }),
                     /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(RealisticLightning, { mode: 3 })
                   ] }),
                   teamMode === 4 && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "w-full grid grid-cols-2 gap-6 relative min-h-full", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "p-3 bg-blue-950/20 rounded-2xl border border-blue-500/30", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-blue-400 font-bold text-sm mb-2", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "p-3 bg-blue-50/60 rounded-2xl border border-blue-200", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-blue-600 font-bold text-sm mb-2", children: [
                         "\u{1F6E1}\uFE0F \u84DD\u961F (",
                         blueStudents.length,
                         "\u4EBA)"
                       ] }),
-                      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2", children: blueStudents.map((stu) => renderStudentCard(stu, "bg-[#1d4ed8]/95 text-white", "border-blue-400/60")) })
+                      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2", children: blueStudents.map((stu) => renderStudentCard(stu, "bg-blue-600 text-white", "border-blue-400")) })
                     ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "p-3 bg-rose-950/20 rounded-2xl border border-rose-500/30", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-rose-400 font-bold text-sm mb-2", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "p-3 bg-rose-50/60 rounded-2xl border border-rose-200", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-rose-600 font-bold text-sm mb-2", children: [
                         "\u2694\uFE0F \u7EA2\u961F (",
                         redStudents.length,
                         "\u4EBA)"
                       ] }),
-                      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2", children: redStudents.map((stu) => renderStudentCard(stu, "bg-[#b91c1c]/95 text-white", "border-rose-400/60")) })
+                      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2", children: redStudents.map((stu) => renderStudentCard(stu, "bg-rose-600 text-white", "border-rose-400")) })
                     ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "p-3 bg-amber-950/20 rounded-2xl border border-amber-500/30", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-amber-400 font-bold text-sm mb-2", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "p-3 bg-amber-50/60 rounded-2xl border border-amber-200", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-amber-600 font-bold text-sm mb-2", children: [
                         "\u26A1 \u9EC4\u961F (",
                         yellowStudents.length,
                         "\u4EBA)"
                       ] }),
-                      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2", children: yellowStudents.map((stu) => renderStudentCard(stu, "bg-[#b45309]/95 text-white", "border-amber-400/60")) })
+                      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2", children: yellowStudents.map((stu) => renderStudentCard(stu, "bg-amber-500 text-white", "border-amber-300")) })
                     ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "p-3 bg-emerald-950/20 rounded-2xl border border-emerald-500/30", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-emerald-400 font-bold text-sm mb-2", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "p-3 bg-emerald-50/60 rounded-2xl border border-emerald-200", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "text-emerald-600 font-bold text-sm mb-2", children: [
                         "\u{1F985} \u7EFF\u961F (",
                         greenStudents.length,
                         "\u4EBA)"
                       ] }),
-                      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2", children: greenStudents.map((stu) => renderStudentCard(stu, "bg-[#047857]/95 text-white", "border-emerald-400/60")) })
+                      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2", children: greenStudents.map((stu) => renderStudentCard(stu, "bg-emerald-600 text-white", "border-emerald-400")) })
                     ] }),
                     /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(RealisticLightning, { mode: 4 })
                   ] })
@@ -9276,7 +9276,7 @@
                 "button",
                 {
                   onClick: handleScrollUp,
-                  className: "p-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 shadow-md cursor-pointer transition",
+                  className: "p-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 border border-gray-200 shadow-md cursor-pointer transition",
                   title: "\u5411\u4E0A\u6ED1\u52A8",
                   children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(ChevronUp, { className: "w-4 h-4" })
                 }
@@ -9285,23 +9285,23 @@
                 "button",
                 {
                   onClick: handleScrollDown,
-                  className: "p-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 shadow-md cursor-pointer transition",
+                  className: "p-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 border border-gray-200 shadow-md cursor-pointer transition",
                   title: "\u5411\u4E0B\u6ED1\u52A8\u67E5\u770B\u66F4\u591A\u5B66\u751F",
-                  children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(ChevronDown, { className: "w-4 h-4 text-pink-400" })
+                  children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(ChevronDown, { className: "w-4 h-4 text-pink-500" })
                 }
               )
             ] })
           ]
         }
       ) }),
-      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "w-full flex items-center justify-between px-3 sm:px-6 py-2.5 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-xl flex-shrink-0 z-20", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "w-full flex items-center justify-between px-3 sm:px-6 py-2.5 bg-white rounded-2xl border border-gray-200 shadow-md flex-shrink-0 z-20", children: [
         /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "flex items-center gap-3", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
           "button",
           {
             onClick: onRebalanceTeams,
-            className: "px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs sm:text-sm border border-slate-700 transition cursor-pointer flex items-center gap-1.5",
+            className: "px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm border border-gray-200 transition cursor-pointer flex items-center gap-1.5",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(RefreshCw, { className: "w-4 h-4 text-cyan-400" }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(RefreshCw, { className: "w-4 h-4 text-indigo-600" }),
               /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u{1F504} \u8C03\u914D\u961F\u4F0D (\u81EA\u52A8\u5747\u8861)" })
             ]
           }
@@ -9310,7 +9310,7 @@
           "button",
           {
             onClick: onStartGame,
-            className: "px-8 sm:px-12 py-3 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 hover:scale-105 active:scale-95 text-white font-black text-base sm:text-xl shadow-xl shadow-pink-500/30 transition-transform cursor-pointer flex items-center gap-2 border border-pink-400/40",
+            className: "px-8 sm:px-12 py-3 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 hover:scale-105 active:scale-95 text-white font-black text-base sm:text-xl shadow-lg shadow-pink-500/25 transition-transform cursor-pointer flex items-center gap-2 border border-pink-400/40",
             children: [
               /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Play, { className: "w-5 h-5 fill-current animate-pulse" }),
               /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "Start \u5F00\u59CB\u7B54\u9898" })
@@ -9357,36 +9357,36 @@
     const circumference = 2 * Math.PI * radius;
     const strokeDashoffset = totalTime > 0 ? circumference - Math.max(0, timeLeft) / totalTime * circumference : 0;
     const submitPercentage = totalStudents > 0 ? Math.round(submittedCount / totalStudents * 100) : 0;
-    return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full h-full flex flex-col justify-between p-3 sm:p-5 select-none gap-3 relative overflow-hidden", children: [
-      isPromptPhase && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full flex-1 min-h-0 flex flex-col justify-between items-center bg-gradient-to-br from-slate-900/95 via-indigo-950/80 to-slate-900/95 rounded-3xl p-3.5 sm:p-6 border border-amber-500/30 shadow-2xl relative overflow-hidden animate-fadeIn", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none" }),
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" }),
+    return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full h-full flex flex-col justify-between p-3 sm:p-5 select-none gap-3 relative overflow-hidden bg-gradient-to-b from-white via-slate-50/70 to-white text-slate-800", children: [
+      isPromptPhase && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full flex-1 min-h-0 flex flex-col justify-between items-center bg-white rounded-3xl p-3.5 sm:p-6 border-2 border-amber-200 shadow-xl relative overflow-hidden animate-fadeIn", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "absolute top-0 right-0 w-[500px] h-[500px] bg-amber-100/50 rounded-full blur-3xl pointer-events-none" }),
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "absolute bottom-0 left-0 w-[500px] h-[500px] bg-pink-100/40 rounded-full blur-3xl pointer-events-none" }),
         /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full flex items-center justify-between flex-shrink-0 z-10", children: [
           /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-2.5 sm:gap-3", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "px-3.5 py-1.5 rounded-2xl bg-indigo-600/30 text-indigo-300 border border-indigo-500/40 text-xs sm:text-sm font-black flex items-center gap-1.5 shadow-md", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "px-3.5 py-1.5 rounded-2xl bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs sm:text-sm font-black flex items-center gap-1.5 shadow-xs", children: [
               /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "QUESTION" }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-white text-sm sm:text-base", children: question.number < 10 ? `0${question.number}` : question.number }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-slate-500", children: "/" }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-slate-400", children: question.total < 10 ? `0${question.total}` : question.total })
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-slate-900 text-sm sm:text-base", children: question.number < 10 ? `0${question.number}` : question.number }),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-slate-400", children: "/" }),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-slate-500", children: question.total < 10 ? `0${question.total}` : question.total })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "px-3 py-1 rounded-2xl bg-slate-800/80 border border-slate-700/80 text-xs sm:text-sm font-bold text-slate-300", children: question.category }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "px-3 py-1 rounded-2xl bg-amber-500/20 border border-amber-500/30 text-xs sm:text-sm font-black text-amber-300", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "px-3 py-1 rounded-2xl bg-slate-100 border border-gray-200 text-xs sm:text-sm font-bold text-slate-700", children: question.category }),
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "px-3 py-1 rounded-2xl bg-amber-50 border border-amber-200 text-xs sm:text-sm font-black text-amber-700", children: [
               "+",
               question.points,
               " PTS"
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-2 px-3.5 py-1 rounded-2xl bg-amber-500/20 border border-amber-500/40 text-amber-300 font-black text-xs sm:text-sm animate-pulse", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-2 px-3.5 py-1 rounded-2xl bg-amber-50 border border-amber-300 text-amber-700 font-black text-xs sm:text-sm animate-pulse", children: [
             /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Eye, { className: "w-3.5 h-3.5 sm:w-4 sm:h-4" }),
             /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u3010\u5012\u8BA1\u65F6 1 \xB7 \u9898\u5E72\u5BA1\u9898\u4E2D\u3011\u624B\u673A\u624B\u67C4\u5F85\u673A \xB7 \u8BF7\u770B\u5927\u5C4F\u601D\u8003" })
           ] })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex-1 w-full max-w-4xl mx-auto flex flex-col items-center justify-center text-center px-4 min-h-0 py-2 sm:py-3 gap-3 sm:gap-5 z-10", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-amber-400 bg-amber-500/10 px-3.5 py-1 rounded-full border border-amber-500/20 flex-shrink-0", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-amber-700 bg-amber-50 px-3.5 py-1 rounded-full border border-amber-200 flex-shrink-0", children: [
             /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Sparkles, { className: "w-3.5 h-3.5" }),
             /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u8BF7\u5168\u73ED\u5C0F\u8FBE\u4EBA\u4E13\u6CE8\u5BA1\u8BFB\u9898\u76EE \xB7 \u6784\u601D\u4F60\u7684\u7B54\u6848" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h1", { className: "text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-snug sm:leading-tight drop-shadow-lg px-2 max-w-3xl line-clamp-3", children: question.prompt }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h1", { className: "text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-snug sm:leading-tight px-2 max-w-3xl line-clamp-3", children: question.prompt }),
           /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
             "div",
             {
@@ -9399,7 +9399,7 @@
                       cx: "50",
                       cy: "50",
                       r: radius,
-                      className: "stroke-slate-800/90 fill-none",
+                      className: "stroke-slate-200 fill-none",
                       strokeWidth: "6"
                     }
                   ),
@@ -9409,7 +9409,7 @@
                       cx: "50",
                       cy: "50",
                       r: radius,
-                      className: `fill-none transition-all duration-1000 ease-linear ${isUrgent ? "stroke-rose-500" : "stroke-amber-400"}`,
+                      className: `fill-none transition-all duration-1000 ease-linear ${isUrgent ? "stroke-rose-500" : "stroke-amber-500"}`,
                       strokeWidth: "6",
                       strokeDasharray: circumference,
                       strokeDashoffset,
@@ -9421,27 +9421,27 @@
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
                     "span",
                     {
-                      className: `text-4xl sm:text-5xl font-black font-mono tracking-tighter leading-none ${isUrgent ? "text-rose-400 scale-105" : "text-amber-300"}`,
+                      className: `text-4xl sm:text-5xl font-black font-mono tracking-tighter leading-none ${isUrgent ? "text-rose-600 scale-105" : "text-amber-600"}`,
                       children: timeLeft
                     }
                   ),
-                  /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-[10px] font-black uppercase tracking-wider text-slate-400 mt-1", children: "\u5BA1\u9898\u79D2\u6570" })
+                  /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-[10px] font-black uppercase tracking-wider text-slate-500 mt-1", children: "\u5BA1\u9898\u79D2\u6570" })
                 ] })
               ]
             }
           )
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full flex items-center justify-between pt-2.5 sm:pt-3 border-t border-slate-800/80 flex-shrink-0 z-10", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full flex items-center justify-between pt-2.5 sm:pt-3 border-t border-gray-200 flex-shrink-0 z-10", children: [
           /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "flex items-center gap-2.5", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
             "button",
             {
               onClick: onToggleTimer,
-              className: "px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs flex items-center gap-1.5 border border-slate-700 transition cursor-pointer",
+              className: "px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center gap-1.5 border border-gray-200 transition cursor-pointer",
               children: isRunning ? /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Pause, { className: "w-3.5 h-3.5 text-amber-400" }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Pause, { className: "w-3.5 h-3.5 text-amber-600" }),
                 /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u6682\u505C\u5012\u8BA1\u65F6" })
               ] }) : /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Play, { className: "w-3.5 h-3.5 text-emerald-400" }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Play, { className: "w-3.5 h-3.5 text-emerald-600" }),
                 /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u7EE7\u7EED\u5012\u8BA1\u65F6" })
               ] })
             }
@@ -9462,7 +9462,7 @@
               "button",
               {
                 onClick: onSkipQuestion,
-                className: "px-3.5 py-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white font-bold text-xs sm:text-sm border border-slate-700 transition cursor-pointer flex items-center gap-1.5",
+                className: "px-3.5 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 font-bold text-xs sm:text-sm border border-gray-200 transition cursor-pointer flex items-center gap-1.5",
                 children: [
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(SkipForward, { className: "w-4 h-4" }),
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u8DF3\u8FC7" })
@@ -9473,29 +9473,29 @@
         ] })
       ] }),
       !isPromptPhase && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full h-full flex flex-col justify-between gap-3 animate-fadeIn", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full bg-slate-900/95 rounded-2xl px-6 py-3 border border-indigo-500/30 shadow-xl flex items-center justify-between gap-4 flex-shrink-0 transition-all duration-700 ease-out transform", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full bg-white rounded-2xl px-6 py-3 border border-gray-200 shadow-md flex items-center justify-between gap-4 flex-shrink-0 transition-all duration-700 ease-out transform", children: [
           /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-4 min-w-0 flex-1", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "px-3.5 py-1.5 rounded-xl bg-indigo-600/30 text-indigo-300 border border-indigo-500/40 text-xs sm:text-sm font-black flex items-center gap-1 flex-shrink-0", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "px-3.5 py-1.5 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs sm:text-sm font-black flex items-center gap-1 flex-shrink-0", children: [
               /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { children: [
                 "Q",
                 question.number
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-slate-500", children: "/" }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-slate-400", children: question.total })
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-slate-400", children: "/" }),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-slate-500", children: question.total })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h2", { className: "text-lg sm:text-2xl font-black text-white truncate drop-shadow", children: question.prompt })
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h2", { className: "text-lg sm:text-2xl font-black text-slate-900 truncate", children: question.prompt })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-4 flex-shrink-0", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs font-bold text-slate-300", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Users, { className: "w-3.5 h-3.5 text-emerald-400" }),
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-gray-200 text-xs font-bold text-slate-700", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Users, { className: "w-3.5 h-3.5 text-emerald-600" }),
               /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { children: [
                 "\u5DF2\u4EA4: ",
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("strong", { className: "text-emerald-400 text-sm", children: submittedCount }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("strong", { className: "text-emerald-600 text-sm", children: submittedCount }),
                 " / ",
                 totalStudents
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-slate-500", children: "|" }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { className: "text-emerald-400 font-mono font-black", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-slate-300", children: "|" }),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { className: "text-emerald-600 font-mono font-black", children: [
                 submitPercentage,
                 "%"
               ] })
@@ -9503,11 +9503,11 @@
             /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
               "div",
               {
-                className: `flex items-center gap-2 px-4 py-1.5 rounded-xl border font-black transition-all ${isUrgent ? "bg-rose-500/30 border-rose-500 text-rose-300 animate-urgent-heartbeat" : "bg-emerald-500/20 border-emerald-500/40 text-emerald-300"}`,
+                className: `flex items-center gap-2 px-4 py-1.5 rounded-xl border font-black transition-all ${isUrgent ? "bg-rose-50 border-rose-300 text-rose-700 animate-urgent-heartbeat" : "bg-emerald-50 border-emerald-200 text-emerald-700"}`,
                 children: [
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Clock, { className: "w-4 h-4" }),
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-xs uppercase font-extrabold", children: "\u5012\u8BA1\u65F6" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { className: "text-2xl font-mono text-white", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { className: "text-2xl font-mono text-slate-900", children: [
                     timeLeft,
                     "s"
                   ] })
@@ -9521,13 +9521,13 @@
           return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
             "div",
             {
-              className: `w-full h-full rounded-3xl p-6 sm:p-8 lg:p-10 flex items-center justify-between border-3 shadow-2xl transition-transform hover:scale-[1.01] active:scale-[0.99] cursor-default relative overflow-hidden group ${opt.bgClass} ${opt.borderClass}`,
+              className: `w-full h-full rounded-3xl p-6 sm:p-8 lg:p-10 flex items-center justify-between border-3 shadow-xl transition-transform hover:scale-[1.01] active:scale-[0.99] cursor-default relative overflow-hidden group ${opt.bgClass} ${opt.borderClass}`,
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/10 pointer-events-none" }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/10 pointer-events-none" }),
                 /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-5 sm:gap-8 min-w-0 flex-1 z-10", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-2xl bg-black/25 flex items-center justify-center text-white text-4xl sm:text-5xl lg:text-6xl font-black flex-shrink-0 shadow-2xl border-2 border-white/20", children: opt.symbol }),
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex flex-col text-left truncate", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { className: "text-xs sm:text-sm uppercase font-black text-white/80 tracking-widest mb-1", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { className: "text-xs sm:text-sm uppercase font-black text-white/85 tracking-widest mb-1", children: [
                       posLabel,
                       " \xB7 \u9009\u9879 ",
                       opt.key
@@ -9541,30 +9541,30 @@
             opt.key
           );
         }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full bg-slate-900/95 rounded-2xl px-6 py-3 border border-slate-800 shadow-xl flex flex-wrap items-center justify-between gap-4 flex-shrink-0", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "w-full bg-white rounded-2xl px-6 py-3 border border-gray-200 shadow-md flex flex-wrap items-center justify-between gap-4 flex-shrink-0", children: [
           /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-3", children: [
             /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
               "button",
               {
                 onClick: onToggleTimer,
-                className: "px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs flex items-center gap-1.5 border border-slate-700 transition cursor-pointer",
+                className: "px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center gap-1.5 border border-gray-200 transition cursor-pointer",
                 children: isRunning ? /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Pause, { className: "w-3.5 h-3.5 text-amber-400" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Pause, { className: "w-3.5 h-3.5 text-amber-600" }),
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u6682\u505C\u5012\u8BA1\u65F6" })
                 ] }) : /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Play, { className: "w-3.5 h-3.5 text-emerald-400" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Play, { className: "w-3.5 h-3.5 text-emerald-600" }),
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u7EE7\u7EED\u5012\u8BA1\u65F6" })
                 ] })
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-xs text-slate-400 hidden sm:inline", children: "\u5B66\u751F\u6B63\u5728\u624B\u673A\u624B\u67C4\u9009\u62E9\u5BF9\u5E94\u8272\u5757 \xB7 \u5012\u8BA1\u65F6\u7ED3\u675F\u6216\u5168\u5458\u63D0\u4EA4\u540E\u63ED\u6653" })
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "text-xs text-slate-500 hidden sm:inline", children: "\u5B66\u751F\u6B63\u5728\u624B\u673A\u624B\u67C4\u9009\u62E9\u5BF9\u5E94\u8272\u5757 \xB7 \u5012\u8BA1\u65F6\u7ED3\u675F\u6216\u5168\u5458\u63D0\u4EA4\u540E\u63ED\u6653" })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-3", children: [
             /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
               "button",
               {
                 onClick: onRevealResultEarly,
-                className: "px-8 py-3 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-600 to-rose-600 hover:scale-105 active:scale-95 text-white font-black text-sm sm:text-base shadow-xl shadow-rose-500/25 transition cursor-pointer flex items-center gap-2",
+                className: "px-8 py-3 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-600 to-rose-600 hover:scale-105 active:scale-95 text-white font-black text-sm sm:text-base shadow-lg shadow-rose-500/25 transition cursor-pointer flex items-center gap-2",
                 children: [
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(CircleCheckBig, { className: "w-5 h-5" }),
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u{1F4E2} \u7ACB\u5373\u63D0\u524D\u63ED\u6653 (\u8FDB\u5165\u67F1\u72B6\u7EDF\u8BA1)" })
@@ -9575,7 +9575,7 @@
               "button",
               {
                 onClick: onSkipQuestion,
-                className: "px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white font-bold text-xs sm:text-sm border border-slate-700 transition cursor-pointer flex items-center gap-1.5",
+                className: "px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 font-bold text-xs sm:text-sm border border-gray-200 transition cursor-pointer flex items-center gap-1.5",
                 children: [
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(SkipForward, { className: "w-4 h-4" }),
                   /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u8DF3\u8FC7" })
@@ -9639,22 +9639,22 @@
     const accuracyRate = Math.round(correctCount / totalSubmitted * 100);
     const keys = ["A", "B", "C", "D"];
     const maxCount = Math.max(...keys.map((k) => distribution[k].count), 1);
-    return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "w-full h-full flex flex-col justify-between p-2 sm:p-3.5 select-none relative overflow-hidden bg-[#0c1022] text-white animate-fadeIn font-sans gap-2 sm:gap-3", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "w-full bg-slate-900/95 rounded-2xl px-4 sm:px-6 py-2 border border-slate-800 shadow-xl flex items-center justify-between gap-4 flex-shrink-0 z-20", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "w-full h-full flex flex-col justify-between p-2 sm:p-3.5 select-none relative overflow-hidden bg-gradient-to-b from-white via-slate-50/70 to-white text-slate-800 animate-fadeIn font-sans gap-2 sm:gap-3", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "w-full bg-white rounded-2xl px-4 sm:px-6 py-2 border border-gray-200 shadow-md flex items-center justify-between gap-4 flex-shrink-0 z-20", children: [
         /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "flex items-center gap-3 min-w-0 flex-1", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "px-3 py-1 rounded-xl bg-indigo-600/30 text-indigo-300 border border-indigo-500/40 text-xs sm:text-sm font-black flex items-center gap-1 flex-shrink-0", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "px-3 py-1 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs sm:text-sm font-black flex items-center gap-1 flex-shrink-0", children: [
             /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { children: [
               "Q",
               question.number
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-slate-500", children: "/" }),
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-slate-400", children: question.total })
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-slate-400", children: "/" }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-slate-500", children: question.total })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h2", { className: "text-base sm:text-xl font-black text-white truncate drop-shadow", children: question.prompt })
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h2", { className: "text-base sm:text-xl font-black text-slate-900 truncate", children: question.prompt })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "flex items-center gap-2.5 sm:gap-3 flex-shrink-0", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "hidden md:flex items-center gap-2 px-3 py-1 rounded-xl bg-slate-950/80 border border-slate-800 text-xs font-bold text-slate-300", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Users, { className: "w-3.5 h-3.5 text-indigo-400" }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "hidden md:flex items-center gap-2 px-3 py-1 rounded-xl bg-slate-50 border border-gray-200 text-xs font-bold text-slate-700", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Users, { className: "w-3.5 h-3.5 text-indigo-600" }),
             /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { children: [
               "\u5DF2\u7B54: ",
               totalSubmitted,
@@ -9664,7 +9664,7 @@
           /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
             "div",
             {
-              className: `hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-xl border text-xs sm:text-sm font-black shadow-xs ${accuracyRate >= 60 ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-300" : "bg-amber-500/20 border-amber-500/40 text-amber-300"}`,
+              className: `hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-xl border text-xs sm:text-sm font-black shadow-xs ${accuracyRate >= 60 ? "bg-emerald-50 border-emerald-200 text-emerald-700" : "bg-amber-50 border-amber-200 text-amber-700"}`,
               children: [
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Award, { className: "w-4 h-4" }),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { children: [
@@ -9679,9 +9679,9 @@
             "button",
             {
               onClick: () => setShowExplanation(true),
-              className: "px-3.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm hover:scale-105 active:scale-95",
+              className: "px-3.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(BookOpen, { className: "w-4 h-4 text-amber-400" }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(BookOpen, { className: "w-4 h-4 text-amber-600" }),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u5B98\u65B9\u9898\u89E3" })
               ]
             }
@@ -9690,7 +9690,7 @@
             "button",
             {
               onClick: onProceed,
-              className: "px-6 sm:px-8 py-1.5 rounded-xl bg-[#1368ce] hover:bg-[#0f52a5] text-white font-black text-sm sm:text-base shadow-lg shadow-blue-600/30 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 border border-blue-400/40 cursor-pointer",
+              className: "px-6 sm:px-8 py-1.5 rounded-xl bg-[#1368ce] hover:bg-[#0f52a5] text-white font-black text-sm sm:text-base shadow-lg shadow-blue-600/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 border border-blue-400/40 cursor-pointer",
               children: [
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "Next \u4E0B\u4E00\u9898" }),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(ArrowRight, { className: "w-4 h-4" })
@@ -9700,9 +9700,8 @@
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "w-full flex-1 min-h-[300px] flex items-end justify-center gap-8 sm:gap-14 lg:gap-20 px-4 sm:px-12 pb-3 relative z-10", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "absolute bottom-3 inset-x-8 sm:inset-x-16 h-1 bg-slate-800/80 rounded-full pointer-events-none" }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "absolute bottom-3 inset-x-8 sm:inset-x-16 h-1 bg-slate-200 rounded-full pointer-events-none" }),
         keys.map((key, idx) => {
-          const opt = question.options[idx];
           const stat = distribution[key];
           const isCorrect = key === correctOptionKey;
           const theme = KAHOOT_THEMES[key];
@@ -9720,23 +9719,23 @@
                       height: animated ? `${targetHeightPercent}%` : "0%",
                       transition: "height 1000ms cubic-bezier(0.16, 1, 0.3, 1)"
                     },
-                    className: `w-full rounded-t-sm relative flex flex-col items-center justify-start ${theme.barBg} ${isCorrect ? "opacity-100 shadow-[0_0_35px_rgba(216,158,0,0.5)]" : "opacity-40"}`,
+                    className: `w-full rounded-t-sm relative flex flex-col items-center justify-start ${theme.barBg} ${isCorrect ? "opacity-100 shadow-[0_8px_25px_rgba(216,158,0,0.35)]" : "opacity-45"}`,
                     children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "absolute bottom-full left-1/2 -translate-x-1/2 flex flex-col items-center justify-end pb-1.5 whitespace-nowrap pointer-events-none", children: [
                       /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
                         "span",
                         {
-                          className: `text-2xl sm:text-3xl lg:text-4xl font-black font-mono leading-none tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]`,
+                          className: `text-2xl sm:text-3xl lg:text-4xl font-black font-mono leading-none tracking-tight text-slate-900`,
                           children: stat.count
                         }
                       ),
-                      isCorrect && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "flex items-center justify-center mt-1.5 animate-bounce", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Check, { className: "w-7 h-7 sm:w-8 sm:h-8 text-emerald-400 stroke-[4] drop-shadow-[0_0_12px_rgba(52,211,153,0.9)]" }) })
+                      isCorrect && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "flex items-center justify-center mt-1.5 animate-bounce", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Check, { className: "w-7 h-7 sm:w-8 sm:h-8 text-emerald-600 stroke-[4]" }) })
                     ] })
                   }
                 ),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
                   "div",
                   {
-                    className: `w-full h-10 sm:h-11 rounded-b-sm flex items-center justify-center text-white text-xl sm:text-2xl font-black shadow-md border-t border-black/30 flex-shrink-0 transition-all ${theme.baseBg} ${isCorrect ? "opacity-100 shadow-[0_0_20px_rgba(216,158,0,0.4)]" : "opacity-90"}`,
+                    className: `w-full h-10 sm:h-11 rounded-b-sm flex items-center justify-center text-white text-xl sm:text-2xl font-black shadow-md border-t border-black/20 flex-shrink-0 transition-all ${theme.baseBg} ${isCorrect ? "opacity-100" : "opacity-90"}`,
                     children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-white drop-shadow-md select-none", children: theme.symbol })
                   }
                 )
@@ -9753,13 +9752,13 @@
         return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
           "div",
           {
-            className: `rounded-xl sm:rounded-2xl px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between shadow-lg transition-all duration-500 relative overflow-hidden border-2 ${isCorrect ? `${theme.cardBg} border-white shadow-[0_0_35px_rgba(255,255,255,0.35)] scale-[1.01] text-white` : `${theme.cardBg} opacity-40 hover:opacity-55 border-transparent text-white`}`,
+            className: `rounded-xl sm:rounded-2xl px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between shadow-md transition-all duration-500 relative overflow-hidden border-2 ${isCorrect ? `${theme.cardBg} border-emerald-500 ring-2 ring-emerald-400/50 scale-[1.01] text-white` : `${theme.cardBg} opacity-45 hover:opacity-65 border-transparent text-white`}`,
             children: [
               /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "flex items-center gap-3 sm:gap-4 min-w-0 flex-1", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-xl sm:text-3xl font-black select-none drop-shadow flex-shrink-0 text-white", children: theme.symbol }),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-base sm:text-xl lg:text-2xl font-black drop-shadow leading-tight truncate text-white", children: opt.text })
               ] }),
-              isCorrect ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white text-emerald-600 flex items-center justify-center shadow-2xl flex-shrink-0 border-2 border-emerald-500 animate-pulse ml-2", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Check, { className: "w-4 h-4 sm:w-6 sm:h-6 stroke-[4] text-emerald-600" }) }) : /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-black/35 text-white/60 flex items-center justify-center flex-shrink-0 ml-2 border border-white/15", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(X, { className: "w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" }) })
+              isCorrect ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white text-emerald-600 flex items-center justify-center shadow-lg flex-shrink-0 border-2 border-emerald-500 animate-pulse ml-2", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Check, { className: "w-4 h-4 sm:w-6 sm:h-6 stroke-[4] text-emerald-600" }) }) : /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-black/30 text-white/80 flex items-center justify-center flex-shrink-0 ml-2 border border-white/20", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(X, { className: "w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" }) })
             ]
           },
           key
@@ -9768,38 +9767,38 @@
       showExplanation && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
         "div",
         {
-          className: "fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn",
+          className: "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn",
           onClick: () => setShowExplanation(false),
           children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
             "div",
             {
-              className: "bg-slate-900 border border-amber-500/40 rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl text-left relative animate-scaleUp",
+              className: "bg-white border border-amber-200 rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl text-left relative animate-scaleUp text-slate-800",
               onClick: (e) => e.stopPropagation(),
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "flex items-center justify-between pb-3 border-b border-slate-800 mb-4", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "flex items-center gap-2.5 text-amber-300 font-black text-base sm:text-lg", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "p-2 rounded-xl bg-amber-500/20 border border-amber-500/30", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(BookOpen, { className: "w-5 h-5 text-amber-400" }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "flex items-center justify-between pb-3 border-b border-gray-200 mb-4", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "flex items-center gap-2.5 text-amber-700 font-black text-base sm:text-lg", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "p-2 rounded-xl bg-amber-50 border border-amber-200", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(BookOpen, { className: "w-5 h-5 text-amber-600" }) }),
                     /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "\u6559\u5E08\u8BB2\u89E3\u8981\u70B9 \xB7 \u5B98\u65B9\u6743\u5A01\u9898\u89E3" })
                   ] }),
                   /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
                     "button",
                     {
                       onClick: () => setShowExplanation(false),
-                      className: "p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer",
+                      className: "p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all cursor-pointer",
                       children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(X, { className: "w-5 h-5" })
                     }
                   )
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "mb-3 flex items-center gap-2", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-xs sm:text-sm text-slate-400 font-bold", children: "\u6B63\u786E\u9009\u9879\u4E3A\uFF1A" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-black text-sm sm:text-base flex items-center gap-1.5", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-xs sm:text-sm text-slate-500 font-bold", children: "\u6B63\u786E\u9009\u9879\u4E3A\uFF1A" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "px-3 py-1 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 font-black text-sm sm:text-base flex items-center gap-1.5", children: [
                     /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Check, { className: "w-4 h-4 stroke-[3]" }),
                     correctOptionKey,
                     ". ",
                     question.options[question.correctOptionIndex].text
                   ] })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "bg-slate-950/70 p-4 sm:p-5 rounded-2xl border border-slate-800 text-slate-200 text-sm sm:text-base leading-relaxed font-medium", children: question.explanation }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "bg-slate-50 p-4 sm:p-5 rounded-2xl border border-gray-200 text-slate-700 text-sm sm:text-base leading-relaxed font-medium", children: question.explanation }),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "mt-5 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
                   "button",
                   {
@@ -9858,38 +9857,38 @@
         case 3:
           return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-700 to-amber-500 text-white flex items-center justify-center font-black text-xs shadow-[0_0_12px_rgba(180,83,9,0.5)] border border-amber-300 flex-shrink-0", children: "\u{1F949} 3" });
         default:
-          return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-8 h-8 rounded-xl bg-slate-800 text-slate-300 border border-slate-700 flex items-center justify-center font-black text-xs flex-shrink-0", children: [
+          return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-8 h-8 rounded-xl bg-slate-100 text-slate-700 border border-gray-200 flex items-center justify-center font-black text-xs flex-shrink-0", children: [
             "#",
             rank
           ] });
       }
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-full h-full flex flex-col justify-between p-3 sm:p-5 select-none gap-3 sm:gap-4 relative overflow-hidden bg-gradient-to-b from-slate-950 via-[#0d1026] to-slate-950 text-white animate-fadeIn", children: [
-      teamMode === 2 ? /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-full bg-slate-900/90 rounded-2xl px-5 py-2 sm:py-2.5 border border-indigo-500/30 shadow-xl flex-shrink-0", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-full h-full flex flex-col justify-between p-3 sm:p-5 select-none gap-3 sm:gap-4 relative overflow-hidden bg-gradient-to-b from-white via-slate-50/70 to-white text-slate-800 animate-fadeIn", children: [
+      teamMode === 2 ? /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-full bg-white rounded-2xl px-5 py-2 sm:py-2.5 border border-gray-200 shadow-md flex-shrink-0", children: [
         /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center justify-between text-xs sm:text-sm font-black mb-1.5", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center gap-2 text-blue-400", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center gap-2 text-blue-600", children: [
             /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-lg", children: "\u{1F6E1}\uFE0F" }),
             /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-xs sm:text-sm font-bold", children: teams.blue.name }),
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-base sm:text-lg font-mono text-white font-black", children: blueScore }),
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-[10px] text-blue-300 font-normal", children: "\u5206" })
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-base sm:text-lg font-mono text-slate-900 font-black", children: blueScore }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-[10px] text-blue-600 font-normal", children: "\u5206" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-slate-950/80 border border-slate-700 text-[11px] font-black shadow-inner", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Sparkles, { className: "w-3 h-3 text-amber-400" }),
-            isTie ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-amber-300", children: "\u6218\u51B5\u7126\u707C \xB7 \u53CC\u65B9\u5B8C\u5168\u5E73\u5206 \u2696\uFE0F" }) : /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: isBlueLeading ? "text-blue-300" : "text-rose-300", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-slate-50 border border-gray-200 text-[11px] font-black shadow-xs", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Sparkles, { className: "w-3 h-3 text-amber-500" }),
+            isTie ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-amber-700", children: "\u6218\u51B5\u7126\u707C \xB7 \u53CC\u65B9\u5B8C\u5168\u5E73\u5206 \u2696\uFE0F" }) : /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: isBlueLeading ? "text-blue-700" : "text-rose-700", children: [
               isBlueLeading ? "\u{1F7E6} \u84DD\u961F" : "\u{1F7E5} \u7EA2\u961F",
               " \u6682\u65F6\u9886\u8DD1 (+",
               scoreDiff,
               " \u5206) \u26A1"
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center gap-2 text-rose-400", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-[10px] text-rose-300 font-normal", children: "\u5206" }),
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-base sm:text-lg font-mono text-white font-black", children: redScore }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center gap-2 text-rose-600", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-[10px] text-rose-600 font-normal", children: "\u5206" }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-base sm:text-lg font-mono text-slate-900 font-black", children: redScore }),
             /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-xs sm:text-sm font-bold", children: teams.red.name }),
             /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-lg", children: "\u2694\uFE0F" })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-full h-2.5 rounded-full bg-slate-800 overflow-hidden flex shadow-inner", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-full h-2.5 rounded-full bg-slate-100 overflow-hidden flex shadow-inner", children: [
           /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
             "div",
             {
@@ -9907,18 +9906,18 @@
         ] })
       ] }) : (
         /* 3 队或 4 队并排战况展示 */
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "w-full bg-slate-900/90 rounded-2xl px-5 py-2 border border-indigo-500/30 shadow-xl grid grid-cols-3 sm:grid-cols-4 gap-2 flex-shrink-0", children: ["blue", "red", "yellow", "green"].slice(0, teamMode).map((tid) => {
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "w-full bg-white rounded-2xl px-5 py-2 border border-gray-200 shadow-md grid grid-cols-3 sm:grid-cols-4 gap-2 flex-shrink-0", children: ["blue", "red", "yellow", "green"].slice(0, teamMode).map((tid) => {
           const team = teams[tid];
           return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
             "div",
             {
-              className: "p-2 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between",
+              className: "p-2 rounded-xl bg-slate-50 border border-gray-200 flex items-center justify-between",
               children: [
                 /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center gap-1.5", children: [
                   /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-base", children: team.icon }),
-                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-xs font-bold text-slate-300", children: team.shortName })
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-xs font-bold text-slate-700", children: team.shortName })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: "text-sm font-black text-white font-mono", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: "text-sm font-black text-slate-900 font-mono", children: [
                   teamScores[tid],
                   "\u5206"
                 ] })
@@ -9928,16 +9927,16 @@
           );
         }) })
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-full flex-1 min-h-0 bg-slate-950/60 rounded-3xl p-3 sm:p-4 border border-slate-800/80 shadow-2xl flex flex-col justify-between overflow-hidden", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center justify-between pb-2 border-b border-slate-800/70 flex-shrink-0", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-full flex-1 min-h-0 bg-white rounded-3xl p-3 sm:p-4 border border-gray-200 shadow-xl flex flex-col justify-between overflow-hidden", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center justify-between pb-2 border-b border-gray-200 flex-shrink-0", children: [
           /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center border border-amber-500/30 shadow-md", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Trophy, { className: "w-4 h-4 text-amber-300" }) }),
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("h2", { className: "text-sm sm:text-base font-black text-white flex items-center gap-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-200 shadow-xs", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Trophy, { className: "w-4 h-4 text-amber-600" }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("h2", { className: "text-sm sm:text-base font-black text-slate-900 flex items-center gap-2", children: [
               /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: "\u73ED\u7EA7\u4E2A\u4EBA\u5148\u950B TOP 5 \u8363\u8A89\u699C" }),
-              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-[10px] px-2 py-0.2 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30", children: "\u7B54\u9898\u79EF\u5206\u5B9E\u65F6\u98DE\u5165\u4E2D" })
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-[10px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200", children: "\u7B54\u9898\u79EF\u5206\u5B9E\u65F6\u98DE\u5165\u4E2D" })
             ] }) })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-[11px] text-slate-400 font-medium hidden sm:inline", children: "\u79EF\u5206\u4F9D\u636E\u7B54\u9898\u6B63\u786E\u7387\u4E0E\u63D0\u4EA4\u901F\u5EA6\u7EFC\u5408\u52A0\u5195" })
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-[11px] text-slate-500 font-medium hidden sm:inline", children: "\u79EF\u5206\u4F9D\u636E\u7B54\u9898\u6B63\u786E\u7387\u4E0E\u63D0\u4EA4\u901F\u5EA6\u7EFC\u5408\u52A0\u5195" })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "flex-1 flex flex-col justify-around py-1 sm:py-2 gap-1.5 sm:gap-2 overflow-y-auto custom-lobby-scrollbar min-h-0", children: top5Students.map((stu, index) => {
           const rank = index + 1;
@@ -9947,13 +9946,13 @@
             "div",
             {
               style: { animationDelay: `${index * 100}ms` },
-              className: "w-full flex items-center gap-2.5 sm:gap-3.5 px-3 py-1.5 sm:py-2 rounded-xl bg-slate-900/80 border border-slate-800/90 shadow-md backdrop-blur-sm animate-leaderboard-slide group transition-all hover:bg-slate-900 hover:border-slate-700",
+              className: "w-full flex items-center gap-2.5 sm:gap-3.5 px-3 py-1.5 sm:py-2 rounded-xl bg-slate-50/80 border border-gray-200 shadow-xs animate-leaderboard-slide group transition-all hover:bg-white hover:border-pink-200",
               children: [
                 /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "flex-shrink-0", children: getRankBadge(rank) }),
                 /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
                   "div",
                   {
-                    className: `w-9 h-9 sm:w-10 sm:h-10 rounded-full p-0.5 border-2 flex items-center justify-center overflow-hidden bg-slate-950 flex-shrink-0 shadow-md ${isBlue ? "border-blue-400" : "border-rose-400"}`,
+                    className: `w-9 h-9 sm:w-10 sm:h-10 rounded-full p-0.5 border-2 flex items-center justify-center overflow-hidden bg-white flex-shrink-0 shadow-xs ${isBlue ? "border-blue-500" : "border-rose-500"}`,
                     children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
                       "img",
                       {
@@ -9968,33 +9967,33 @@
                   }
                 ),
                 /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-24 sm:w-32 flex flex-col text-left flex-shrink-0 min-w-0", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-xs sm:text-sm font-black text-white truncate leading-tight", children: stu.name }),
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-xs sm:text-sm font-black text-slate-900 truncate leading-tight", children: stu.name }),
                   /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center gap-1 mt-0.5", children: [
                     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
                       "span",
                       {
-                        className: `text-[9px] font-bold px-1.5 py-0.2 rounded ${isBlue ? "bg-blue-500/20 text-blue-300" : "bg-rose-500/20 text-rose-300"}`,
+                        className: `text-[9px] font-bold px-1.5 py-0.2 rounded ${isBlue ? "bg-blue-100 text-blue-700" : "bg-rose-100 text-rose-700"}`,
                         children: isBlue ? "\u84DD\u961F\u52C7\u58EB" : "\u7EA2\u961F\u5148\u950B"
                       }
                     ),
-                    stu.streak >= 2 && /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: "text-[9px] text-amber-300 font-bold flex items-center gap-0.5", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Flame, { className: "w-2.5 h-2.5 fill-amber-400 text-amber-400" }),
+                    stu.streak >= 2 && /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: "text-[9px] text-amber-600 font-bold flex items-center gap-0.5", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Flame, { className: "w-2.5 h-2.5 fill-amber-500 text-amber-500" }),
                       stu.streak,
                       "\u8FDE\u5BF9"
                     ] })
                   ] })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "flex-1 h-5 sm:h-6 bg-slate-950 rounded-lg overflow-hidden p-0.5 flex items-center relative border border-slate-800/80", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "flex-1 h-5 sm:h-6 bg-slate-200/70 rounded-lg overflow-hidden p-0.5 flex items-center relative border border-gray-200", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
                   "div",
                   {
                     style: { width: `${scoreBarPercent}%` },
-                    className: `h-full rounded-md transition-all duration-1000 ease-out flex items-center justify-end px-2 shadow-inner ${rank === 1 ? "bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.5)]" : isBlue ? "bg-gradient-to-r from-blue-600 to-sky-400" : "bg-gradient-to-r from-rose-600 to-amber-500"}`,
+                    className: `h-full rounded-md transition-all duration-1000 ease-out flex items-center justify-end px-2 shadow-inner ${rank === 1 ? "bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-400" : isBlue ? "bg-gradient-to-r from-blue-600 to-sky-400" : "bg-gradient-to-r from-rose-600 to-amber-500"}`,
                     children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "animate-point-pop text-[10px] font-black text-slate-950 bg-white/95 px-1 py-0.2 rounded shadow-xs", children: "+100" })
                   }
                 ) }),
                 /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-20 sm:w-24 text-right flex-shrink-0", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-base sm:text-lg font-black font-mono tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-white", children: stu.score }),
-                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-[10px] font-bold text-slate-400 ml-1", children: "PTS" })
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-base sm:text-lg font-black font-mono tracking-tight text-slate-900", children: stu.score }),
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "text-[10px] font-bold text-slate-500 ml-1", children: "PTS" })
                 ] })
               ]
             },
@@ -10002,9 +10001,9 @@
           );
         }) })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-full bg-slate-900/95 rounded-2xl px-5 sm:px-6 py-2 sm:py-2.5 border border-slate-800 shadow-xl flex items-center justify-between flex-shrink-0 z-20", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center gap-2 text-xs text-slate-400 font-medium", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Sparkles, { className: "w-4 h-4 text-amber-400" }),
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "w-full bg-white rounded-2xl px-5 sm:px-6 py-2 sm:py-2.5 border border-gray-200 shadow-md flex items-center justify-between flex-shrink-0 z-20", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-center gap-2 text-xs text-slate-600 font-medium", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Sparkles, { className: "w-4 h-4 text-amber-500" }),
           /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: isLastQuestion ? "\u5168\u90E8\u9898\u76EE\u7B54\u9898\u5B8C\u6BD5\uFF01\u70B9\u51FB\u5F00\u542F\u7EC8\u5C40 Kahoot \u9881\u5956\u5178\u793C\u4E0E\u6559\u5E08\u6559\u5B66\u6D1E\u5BDF" : `\u5F53\u524D\u7B2C ${currentQIndex + 1} \u9898\u7ED3\u7B97\u5B8C\u6210\uFF0C\u51C6\u5907\u5207\u5165\u7B2C ${currentQIndex + 2} \u9898\u5BA1\u9898\u5012\u8BA1\u65F6` })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
@@ -15121,9 +15120,9 @@
         clearTimeout(t3);
       };
     }, []);
-    return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "w-full h-full flex flex-col justify-between p-1.5 sm:p-2.5 select-none relative overflow-hidden bg-gradient-to-b from-[#091522] via-[#0d2130] to-[#07131c] text-white animate-fadeIn font-sans gap-1 sm:gap-2", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "w-full h-full flex flex-col justify-between p-1.5 sm:p-2.5 select-none relative overflow-hidden bg-gradient-to-b from-white via-amber-50/35 to-slate-50 text-slate-800 animate-fadeIn font-sans gap-1 sm:gap-2", children: [
       /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "w-full relative flex items-center justify-end gap-2 px-2 sm:px-4 py-1 flex-shrink-0 z-30 min-h-[42px]", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 px-4 sm:px-6 py-1 sm:py-1.5 rounded-xl bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-lg tracking-wide flex items-center gap-1.5 border-b-2 border-slate-300 pointer-events-none select-none z-10 whitespace-nowrap", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 px-4 sm:px-6 py-1 sm:py-1.5 rounded-xl bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-md tracking-wide flex items-center gap-1.5 border border-amber-200 pointer-events-none select-none z-10 whitespace-nowrap", children: [
           /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-amber-500 text-sm sm:text-base", children: "\u{1F3C6}" }),
           /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: roomName || settlementData?.roomName || "\u4E00\u5E74\u7EA7\u8DA3\u5473\u79D1\u5B66\u4E0E\u6570\u5B66\u5927\u6311\u6218" })
         ] }),
@@ -15132,9 +15131,9 @@
             "button",
             {
               onClick: triggerConfetti,
-              className: "px-2.5 py-1 rounded-xl bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 border border-pink-500/40 text-xs font-bold flex items-center gap-1 transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95",
+              className: "px-2.5 py-1 rounded-xl bg-pink-50 hover:bg-pink-100 text-pink-600 border border-pink-200 text-xs font-bold flex items-center gap-1 transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Sparkles, { className: "w-3.5 h-3.5 text-pink-400" }),
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Sparkles, { className: "w-3.5 h-3.5 text-pink-500" }),
                 /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "hidden sm:inline", children: "\u5E86\u795D\u793C\u82B1" })
               ]
             }
@@ -15143,9 +15142,9 @@
             "button",
             {
               onClick: () => setShowReviewModal(true),
-              className: "px-3 py-1 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-bold flex items-center gap-1 transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95",
+              className: "px-3 py-1 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-300 text-xs font-bold flex items-center gap-1 transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(BookOpen, { className: "w-3.5 h-3.5 text-amber-400" }),
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(BookOpen, { className: "w-3.5 h-3.5 text-amber-600" }),
                 /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "\u9519\u9898\u590D\u76D8" })
               ]
             }
@@ -15154,7 +15153,7 @@
             "button",
             {
               onClick: onRestart,
-              className: "px-4 sm:px-5 py-1 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-black text-xs shadow-md shadow-blue-600/30 transition-all hover:scale-105 active:scale-95 flex items-center gap-1 border border-blue-400/40 cursor-pointer",
+              className: "px-4 sm:px-5 py-1 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-black text-xs shadow-md shadow-blue-600/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-1 border border-blue-400/40 cursor-pointer",
               children: [
                 /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(RotateCcw, { className: "w-3.5 h-3.5" }),
                 /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "\u518D\u6765\u4E00\u5C40" })
@@ -15164,7 +15163,7 @@
         ] })
       ] }),
       /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "w-full flex-1 flex flex-col justify-end items-center relative pb-3 sm:pb-4 z-10 overflow-visible", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-cyan-500/10 to-transparent pointer-events-none" }),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-amber-100/40 to-transparent pointer-events-none" }),
         /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "relative flex items-end justify-center flex-shrink-0", children: [
           /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "w-[125px] sm:w-[150px] lg:w-[170px] flex flex-col items-center justify-end flex-shrink-0 z-10", children: [
             /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
@@ -15172,7 +15171,7 @@
               {
                 className: `w-full flex flex-col items-center justify-end mb-1.5 transition-all duration-700 ${podiumStep >= 2 ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-90 pointer-events-none"}`,
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-10 h-10 sm:w-11 sm:h-11 rounded-full p-0.5 bg-white shadow-md mb-1 relative flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-10 h-10 sm:w-11 sm:h-11 rounded-full p-0.5 bg-white border-2 border-slate-300 shadow-md mb-1 relative flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
                     "img",
                     {
                       src: rank2?.avatar || "./assets/games/char_b.png",
@@ -15187,7 +15186,7 @@
                     "div",
                     {
                       style: { transform: "rotate(-2deg)" },
-                      className: "w-[92%] py-1 rounded-lg bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-xl tracking-tight border-b-2 border-slate-300 truncate text-center select-none",
+                      className: "w-[92%] py-1 rounded-lg bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-lg tracking-tight border border-slate-200 border-b-2 border-b-slate-300 truncate text-center select-none",
                       children: rank2 ? rank2.name : hasRealParticipants ? "\u865A\u4F4D\u4EE5\u5F85" : "\u673A\u667A\u5929\u5929"
                     }
                   )
@@ -15201,12 +15200,12 @@
                   height: podiumStep >= 2 ? "180px" : "0px",
                   transition: "height 800ms cubic-bezier(0.16, 1, 0.3, 1)"
                 },
-                className: "w-full rounded-tl-xl bg-[#1b3744] border-t-2 border-l border-white/20 shadow-[-5px_0_15px_rgba(0,0,0,0.3)] flex flex-col items-center pt-1.5 sm:pt-2 px-1 overflow-hidden",
+                className: "w-full rounded-tl-xl bg-gradient-to-b from-slate-200 via-slate-300 to-slate-400 border-t-2 border-l border-white shadow-lg flex flex-col items-center pt-1.5 sm:pt-2 px-1 overflow-hidden",
                 children: [
                   /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(PentagonMedal, { rank: 2 }),
                   /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex flex-col items-center text-center mt-0.5", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-base sm:text-lg lg:text-xl font-black font-mono text-white tracking-tight drop-shadow leading-tight", children: rank2 ? rank2.score : hasRealParticipants ? "-" : 380 }),
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[10px] sm:text-xs font-bold font-mono text-cyan-300/80", children: rank2 ? `${rank2.correctCount}/${totalQuestions} \u7B54\u5BF9` : hasRealParticipants ? "\u4E9A\u519B\u5E2D\u4F4D" : "5/5 \u5168\u5BF9" })
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-base sm:text-lg lg:text-xl font-black font-mono text-slate-900 tracking-tight leading-tight", children: rank2 ? rank2.score : hasRealParticipants ? "-" : 380 }),
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[10px] sm:text-xs font-bold font-mono text-slate-700", children: rank2 ? `${rank2.correctCount}/${totalQuestions} \u7B54\u5BF9` : hasRealParticipants ? "\u4E9A\u519B\u5E2D\u4F4D" : "5/5 \u5168\u5BF9" })
                   ] })
                 ]
               }
@@ -15218,8 +15217,8 @@
               {
                 className: `w-full flex flex-col items-center justify-end mb-1.5 transition-all duration-700 ${podiumStep >= 3 ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-75 pointer-events-none"}`,
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "w-11 h-11 sm:w-13 sm:h-13 rounded-full p-0.5 bg-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.7)] mb-1 relative flex-shrink-0", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "absolute -top-3.5 left-1/2 -translate-x-1/2 animate-bounce", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Crown, { className: "w-5 h-5 sm:w-6 sm:h-6 text-amber-300 fill-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.9)]" }) }),
+                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "w-11 h-11 sm:w-13 sm:h-13 rounded-full p-0.5 bg-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.5)] mb-1 relative flex-shrink-0", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "absolute -top-3.5 left-1/2 -translate-x-1/2 animate-bounce", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Crown, { className: "w-5 h-5 sm:w-6 sm:h-6 text-amber-500 fill-amber-400" }) }),
                     /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
                       "img",
                       {
@@ -15236,7 +15235,7 @@
                     "div",
                     {
                       style: { transform: "rotate(1deg)" },
-                      className: "w-[94%] py-1 sm:py-1.5 rounded-lg bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-2xl tracking-tight border-b-2 border-slate-300 truncate text-center select-none",
+                      className: "w-[94%] py-1 sm:py-1.5 rounded-lg bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-xl tracking-tight border border-amber-300 border-b-2 border-b-amber-400 truncate text-center select-none",
                       children: rank1 ? rank1.name : hasRealParticipants ? "\u865A\u4F4D\u4EE5\u5F85" : "\u5B66\u9738\u5C0F\u6DB5"
                     }
                   )
@@ -15250,12 +15249,12 @@
                   height: podiumStep >= 3 ? "245px" : "0px",
                   transition: "height 900ms cubic-bezier(0.16, 1, 0.3, 1)"
                 },
-                className: "w-full rounded-t-xl bg-[#204252] border-t-3 border-x border-white/25 shadow-[0_0_30px_rgba(0,0,0,0.5)] flex flex-col items-center pt-1.5 sm:pt-2 px-1 relative overflow-hidden",
+                className: "w-full rounded-t-xl bg-gradient-to-b from-amber-300 via-amber-400 to-amber-500 border-t-3 border-x border-amber-200 shadow-[0_10px_30px_rgba(245,158,11,0.3)] flex flex-col items-center pt-1.5 sm:pt-2 px-1 relative overflow-hidden",
                 children: [
                   /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(PentagonMedal, { rank: 1 }),
                   /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex flex-col items-center text-center mt-0.5", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-lg sm:text-xl lg:text-2xl font-black font-mono text-amber-300 tracking-tight drop-shadow-md leading-tight", children: rank1 ? rank1.score : hasRealParticipants ? "-" : 390 }),
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[10px] sm:text-xs font-bold font-mono text-cyan-200", children: rank1 ? `${rank1.correctCount}/${totalQuestions} \u7B54\u5BF9 \u26A1` : hasRealParticipants ? "\u51A0\u519B\u5E2D\u4F4D" : "5/5 \u5168\u5BF9 \u26A1" })
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-lg sm:text-xl lg:text-2xl font-black font-mono text-slate-950 tracking-tight leading-tight", children: rank1 ? rank1.score : hasRealParticipants ? "-" : 390 }),
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[10px] sm:text-xs font-bold font-mono text-amber-950", children: rank1 ? `${rank1.correctCount}/${totalQuestions} \u7B54\u5BF9 \u26A1` : hasRealParticipants ? "\u51A0\u519B\u5E2D\u4F4D" : "5/5 \u5168\u5BF9 \u26A1" })
                   ] })
                 ]
               }
@@ -15267,7 +15266,7 @@
               {
                 className: `w-full flex flex-col items-center justify-end mb-1.5 transition-all duration-700 ${podiumStep >= 1 ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-90 pointer-events-none"}`,
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-10 h-10 sm:w-11 sm:h-11 rounded-full p-0.5 bg-white shadow-md mb-1 relative flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-10 h-10 sm:w-11 sm:h-11 rounded-full p-0.5 bg-white border-2 border-orange-300 shadow-md mb-1 relative flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
                     "img",
                     {
                       src: rank3?.avatar || "./assets/games/char_b.png",
@@ -15282,7 +15281,7 @@
                     "div",
                     {
                       style: { transform: "rotate(2deg)" },
-                      className: "w-[92%] py-1 rounded-lg bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-xl tracking-tight border-b-2 border-slate-300 truncate text-center select-none",
+                      className: "w-[92%] py-1 rounded-lg bg-white text-slate-900 font-black text-xs sm:text-sm lg:text-base shadow-lg tracking-tight border border-slate-200 border-b-2 border-b-slate-300 truncate text-center select-none",
                       children: rank3 ? rank3.name : hasRealParticipants ? "\u865A\u4F4D\u4EE5\u5F85" : "\u5143\u6C14\u9633\u9633"
                     }
                   )
@@ -15296,47 +15295,47 @@
                   height: podiumStep >= 1 ? "145px" : "0px",
                   transition: "height 750ms cubic-bezier(0.16, 1, 0.3, 1)"
                 },
-                className: "w-full rounded-tr-xl bg-[#17303c] border-t-2 border-r border-white/20 shadow-[5px_0_15px_rgba(0,0,0,0.3)] flex flex-col items-center pt-1.5 sm:pt-2 px-1 overflow-hidden",
+                className: "w-full rounded-tr-xl bg-gradient-to-b from-orange-200 via-orange-300 to-amber-600/80 border-t-2 border-r border-orange-100 shadow-lg flex flex-col items-center pt-1.5 sm:pt-2 px-1 overflow-hidden",
                 children: [
                   /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(PentagonMedal, { rank: 3 }),
                   /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex flex-col items-center text-center mt-0.5", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-base sm:text-lg lg:text-xl font-black font-mono text-white tracking-tight drop-shadow leading-tight", children: rank3 ? rank3.score : hasRealParticipants ? "-" : 350 }),
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[10px] sm:text-xs font-bold font-mono text-cyan-300/80", children: rank3 ? `${rank3.correctCount}/${totalQuestions} \u7B54\u5BF9` : hasRealParticipants ? "\u5B63\u519B\u5E2D\u4F4D" : "4/5 \u5BF9" })
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-base sm:text-lg lg:text-xl font-black font-mono text-slate-900 tracking-tight leading-tight", children: rank3 ? rank3.score : hasRealParticipants ? "-" : 350 }),
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[10px] sm:text-xs font-bold font-mono text-slate-800", children: rank3 ? `${rank3.correctCount}/${totalQuestions} \u7B54\u5BF9` : hasRealParticipants ? "\u5B63\u519B\u5E2D\u4F4D" : "4/5 \u5BF9" })
                   ] })
                 ]
               }
             )
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "absolute -bottom-2 sm:-bottom-2.5 left-2 sm:left-3 right-[130px] sm:right-[155px] lg:right-[175px] z-30 bg-[#0f242e]/95 border border-[#2b5163] rounded-2xl py-1 px-2.5 sm:px-3.5 shadow-2xl backdrop-blur-md flex flex-col items-center", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[10px] font-black uppercase text-cyan-300 tracking-widest mb-1", children: "\u6BBF  \u8ECD" }),
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "absolute -bottom-2 sm:-bottom-2.5 left-2 sm:left-3 right-[130px] sm:right-[155px] lg:right-[175px] z-30 bg-white/95 border border-gray-200 rounded-2xl py-1 px-2.5 sm:px-3.5 shadow-xl backdrop-blur-md flex flex-col items-center", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[10px] font-black uppercase text-indigo-600 tracking-widest mb-1", children: "\u6BBF  \u8ECD" }),
             /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-1.5 sm:gap-2.5 w-full justify-center", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex-1 flex items-center justify-between gap-1 bg-[#1b3947] hover:bg-[#204557] px-2 sm:px-2.5 py-1 rounded-xl border border-white/10 text-white shadow-xs transition-all", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex-1 flex items-center justify-between gap-1 bg-slate-50 hover:bg-slate-100 px-2 sm:px-2.5 py-1 rounded-xl border border-gray-200 text-slate-800 shadow-xs transition-all", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-1 truncate", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-4 h-4 rounded-full bg-cyan-500/20 text-cyan-300 font-mono font-black text-[10px] flex items-center justify-center border border-cyan-400/40 flex-shrink-0", children: "4" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-4 h-4 rounded-full bg-indigo-100 text-indigo-700 font-mono font-black text-[10px] flex items-center justify-center border border-indigo-200 flex-shrink-0", children: "4" }),
                   /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-xs font-black truncate", children: rank4 ? rank4.name : hasRealParticipants ? "\u6682\u65E0" : "\u57CE\u5821\u6735\u6735" })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] font-mono font-bold text-amber-300 flex-shrink-0", children: rank4 ? rank4.score : hasRealParticipants ? "-" : 340 })
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] font-mono font-bold text-amber-600 flex-shrink-0", children: rank4 ? rank4.score : hasRealParticipants ? "-" : 340 })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex-1 flex items-center justify-between gap-1 bg-[#1b3947] hover:bg-[#204557] px-2 sm:px-2.5 py-1 rounded-xl border border-white/10 text-white shadow-xs transition-all", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex-1 flex items-center justify-between gap-1 bg-slate-50 hover:bg-slate-100 px-2 sm:px-2.5 py-1 rounded-xl border border-gray-200 text-slate-800 shadow-xs transition-all", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-1 truncate", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-300 font-mono font-black text-[10px] flex items-center justify-center border border-emerald-400/40 flex-shrink-0", children: "5" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 font-mono font-black text-[10px] flex items-center justify-center border border-emerald-200 flex-shrink-0", children: "5" }),
                   /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-xs font-black truncate", children: rank5 ? rank5.name : hasRealParticipants ? "\u6682\u65E0" : "\u795E\u5C04\u5C0F\u5B87" })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] font-mono font-bold text-amber-300 flex-shrink-0", children: rank5 ? rank5.score : hasRealParticipants ? "-" : 320 })
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] font-mono font-bold text-amber-600 flex-shrink-0", children: rank5 ? rank5.score : hasRealParticipants ? "-" : 320 })
               ] })
             ] })
           ] })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "w-full flex items-center justify-between px-4 py-1 text-xs text-slate-400 font-medium z-10 flex-wrap gap-2", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "w-full flex items-center justify-between px-4 py-1 text-xs text-slate-600 font-medium z-10 flex-wrap gap-2", children: [
         /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-2 flex-wrap", children: [
           /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "\u{1F3C6} \u6218\u961F\u603B\u79EF\u5206\uFF1A" }),
           activeTeamIds.map((tid, idx) => /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(import_react7.default.Fragment, { children: [
-            idx > 0 && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-slate-600", children: "|" }),
+            idx > 0 && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-slate-300", children: "|" }),
             /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
               "span",
               {
-                className: `font-bold ${tid === "blue" ? "text-blue-400" : tid === "red" ? "text-rose-400" : tid === "yellow" ? "text-amber-400" : "text-emerald-400"}`,
+                className: `font-bold ${tid === "blue" ? "text-blue-600" : tid === "red" ? "text-rose-600" : tid === "yellow" ? "text-amber-600" : "text-emerald-600"}`,
                 children: [
                   teams[tid].shortName,
                   " ",
@@ -15351,9 +15350,9 @@
           "button",
           {
             onClick: () => setShowReviewModal(true),
-            className: "text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 cursor-pointer transition",
+            className: "text-amber-600 hover:text-amber-700 font-bold flex items-center gap-1 cursor-pointer transition",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(TriangleAlert, { className: "w-3.5 h-3.5 text-amber-400" }),
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(TriangleAlert, { className: "w-3.5 h-3.5 text-amber-500" }),
               /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { children: [
                 "\u5168\u73ED\u6B63\u7B54\u7387 ",
                 averageAccuracy,
@@ -15366,49 +15365,49 @@
       showReviewModal && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
         "div",
         {
-          className: "fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-fadeIn",
+          className: "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-fadeIn",
           onClick: () => setShowReviewModal(false),
           children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
             "div",
             {
-              className: "bg-slate-900 border border-indigo-500/40 rounded-3xl p-5 sm:p-7 max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl text-left relative animate-scaleUp",
+              className: "bg-white border border-indigo-200 rounded-3xl p-5 sm:p-7 max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl text-left relative animate-scaleUp text-slate-800",
               onClick: (e) => e.stopPropagation(),
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center justify-between pb-3 border-b border-slate-800 mb-4 flex-shrink-0", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-2.5 text-indigo-300 font-black text-base sm:text-lg", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "p-2 rounded-xl bg-indigo-500/20 border border-indigo-500/30 text-indigo-400", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(BookOpen, { className: "w-5 h-5" }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center justify-between pb-3 border-b border-gray-200 mb-4 flex-shrink-0", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-2.5 text-indigo-700 font-black text-base sm:text-lg", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "p-2 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-600", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(BookOpen, { className: "w-5 h-5" }) }),
                     /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { children: [
                       /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { children: "\u5168\u73ED\u53C2\u8D5B\u5B66\u751F\u6210\u7EE9\u4E0E\u9519\u9898\u590D\u76D8\u770B\u677F" }),
-                      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "text-xs text-slate-400 font-normal mt-0.5", children: "\u6309\u5355\u4EBA\u6210\u7EE9\u7B2C 1 \u540D\uFF08\u7B54\u5BF9\u6700\u591A\u9898\u4E14\u56DE\u7B54\u6700\u5FEB\uFF09\u4F9D\u6B21\u6392\u5217 \xB7 \u70B9\u51FB\u4EFB\u610F\u5B66\u751F\u5C55\u5F00\u67E5\u770B\u9519\u9898\u660E\u7EC6" })
+                      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "text-xs text-slate-500 font-normal mt-0.5", children: "\u6309\u5355\u4EBA\u6210\u7EE9\u7B2C 1 \u540D\uFF08\u7B54\u5BF9\u6700\u591A\u9898\u4E14\u56DE\u7B54\u6700\u5FEB\uFF09\u4F9D\u6B21\u6392\u5217 \xB7 \u70B9\u51FB\u4EFB\u610F\u5B66\u751F\u5C55\u5F00\u67E5\u770B\u9519\u9898\u660E\u7EC6" })
                     ] })
                   ] }),
                   /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
                     "button",
                     {
                       onClick: () => setShowReviewModal(false),
-                      className: "p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all cursor-pointer",
+                      className: "p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all cursor-pointer",
                       children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(X, { className: "w-5 h-5" })
                     }
                   )
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "grid grid-cols-3 gap-3 mb-4 flex-shrink-0", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-2.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-center", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] text-slate-400 font-bold block", children: "\u5168\u73ED\u6B63\u7B54\u7387" }),
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "text-lg sm:text-xl font-black font-mono text-emerald-400", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-2.5 rounded-2xl bg-emerald-50/60 border border-emerald-200 text-center", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] text-emerald-700 font-bold block", children: "\u5168\u73ED\u6B63\u7B54\u7387" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "text-lg sm:text-xl font-black font-mono text-emerald-600", children: [
                       averageAccuracy,
                       "%"
                     ] })
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-2.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-center", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] text-slate-400 font-bold block", children: "\u603B\u6311\u6218\u9898\u6570" }),
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "text-lg sm:text-xl font-black font-mono text-white", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-2.5 rounded-2xl bg-slate-50 border border-gray-200 text-center", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] text-slate-500 font-bold block", children: "\u603B\u6311\u6218\u9898\u6570" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "text-lg sm:text-xl font-black font-mono text-slate-900", children: [
                       totalQuestions,
                       " \u9898"
                     ] })
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-2.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-center", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] text-slate-400 font-bold block", children: "\u53C2\u4E0E\u5B66\u751F\u4EBA\u6570" }),
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "text-lg sm:text-xl font-black font-mono text-indigo-400", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-2.5 rounded-2xl bg-indigo-50/60 border border-indigo-200 text-center", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] text-indigo-700 font-bold block", children: "\u53C2\u4E0E\u5B66\u751F\u4EBA\u6570" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "text-lg sm:text-xl font-black font-mono text-indigo-600", children: [
                       serverLeaderboard.length,
                       " \u4EBA"
                     ] })
@@ -15417,24 +15416,24 @@
                 /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "flex-1 overflow-y-auto custom-lobby-scrollbar space-y-2.5 pr-1 min-h-0", children: serverLeaderboard.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "py-12 text-center text-slate-400 text-sm font-bold", children: "\u5F53\u524D\u6682\u65E0\u53C2\u8D5B\u5B66\u751F\u7B54\u9898\u8BB0\u5F55" }) : serverLeaderboard.map((stu, idx) => {
                   const isExpanded = Boolean(expandedStudentIds[stu.id]);
                   const teamObj = teams[stu.teamId] || teams.blue;
-                  const teamBadgeStyle = stu.teamId === "blue" ? "bg-blue-500/20 text-blue-300 border-blue-500/40" : stu.teamId === "red" ? "bg-rose-500/20 text-rose-300 border-rose-500/40" : stu.teamId === "yellow" ? "bg-amber-500/20 text-amber-300 border-amber-500/40" : "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
+                  const teamBadgeStyle = stu.teamId === "blue" ? "bg-blue-50 text-blue-700 border-blue-200" : stu.teamId === "red" ? "bg-rose-50 text-rose-700 border-rose-200" : stu.teamId === "yellow" ? "bg-amber-50 text-amber-700 border-amber-200" : "bg-emerald-50 text-emerald-700 border-emerald-200";
                   return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
                     "div",
                     {
-                      className: "rounded-2xl bg-slate-950/90 border border-slate-800 overflow-hidden transition-all",
+                      className: "rounded-2xl bg-slate-50 border border-gray-200 overflow-hidden transition-all",
                       children: [
                         /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
                           "button",
                           {
                             type: "button",
                             onClick: () => toggleStudentAccordion(stu.id),
-                            className: "w-full px-4 py-3 flex items-center justify-between gap-3 hover:bg-slate-800/60 transition-colors cursor-pointer text-left",
+                            className: "w-full px-4 py-3 flex items-center justify-between gap-3 hover:bg-slate-100/80 transition-colors cursor-pointer text-left",
                             children: [
                               /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-2.5 sm:gap-3 min-w-0", children: [
                                 /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
                                   "span",
                                   {
-                                    className: `w-7 h-7 rounded-lg font-mono font-black text-xs flex items-center justify-center flex-shrink-0 ${idx === 0 ? "bg-amber-400 text-slate-950 shadow-sm" : idx === 1 ? "bg-slate-300 text-slate-900" : idx === 2 ? "bg-amber-700 text-white" : "bg-slate-800 text-slate-400 border border-slate-700"}`,
+                                    className: `w-7 h-7 rounded-lg font-mono font-black text-xs flex items-center justify-center flex-shrink-0 ${idx === 0 ? "bg-amber-400 text-slate-950 shadow-xs" : idx === 1 ? "bg-slate-300 text-slate-900" : idx === 2 ? "bg-amber-600 text-white" : "bg-white text-slate-600 border border-gray-200"}`,
                                     children: idx === 0 ? "\u{1F947}" : idx === 1 ? "\u{1F948}" : idx === 2 ? "\u{1F949}" : `#${stu.rank}`
                                   }
                                 ),
@@ -15445,7 +15444,7 @@
                                     children: teamObj.name
                                   }
                                 ),
-                                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-9 h-9 rounded-full p-0.5 bg-slate-800 border border-white/20 overflow-hidden flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+                                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-9 h-9 rounded-full p-0.5 bg-white border border-gray-200 overflow-hidden flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
                                   "img",
                                   {
                                     src: stu.avatar,
@@ -15456,34 +15455,34 @@
                                     }
                                   }
                                 ) }),
-                                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-sm sm:text-base font-black text-white truncate", children: stu.name })
+                                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-sm sm:text-base font-black text-slate-900 truncate", children: stu.name })
                               ] }),
                               /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-3 sm:gap-4 flex-shrink-0", children: [
                                 /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center gap-1.5", children: [
-                                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "px-2.5 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-black", children: [
+                                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "px-2.5 py-1 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-black", children: [
                                     "\u7B54\u5BF9 ",
                                     stu.correctCount,
                                     "/",
                                     totalQuestions,
                                     " \u9898"
                                   ] }),
-                                  stu.wrongQuestions.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "hidden sm:inline-block px-2 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 text-[11px] font-bold", children: [
+                                  stu.wrongQuestions.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "hidden sm:inline-block px-2 py-0.5 rounded-lg bg-rose-50 text-rose-600 border border-rose-200 text-[11px] font-bold", children: [
                                     "\u9519 ",
                                     stu.wrongQuestions.length,
                                     " \u9898"
-                                  ] }) : /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "hidden sm:inline-block px-2 py-0.5 rounded-lg bg-amber-500/20 text-amber-300 text-[11px] font-bold", children: "\u5168\u5BF9" })
+                                  ] }) : /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "hidden sm:inline-block px-2 py-0.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 text-[11px] font-bold", children: "\u5168\u5BF9" })
                                 ] }),
-                                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "text-sm sm:text-base font-black font-mono text-amber-300 min-w-[60px] text-right", children: [
+                                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "text-sm sm:text-base font-black font-mono text-amber-600 min-w-[60px] text-right", children: [
                                   stu.score,
                                   " \u5206"
                                 ] }),
-                                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400", children: isExpanded ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ChevronUp, { className: "w-4 h-4 text-indigo-400" }) : /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ChevronDown, { className: "w-4 h-4" }) })
+                                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "w-7 h-7 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-slate-500", children: isExpanded ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ChevronUp, { className: "w-4 h-4 text-indigo-600" }) : /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(ChevronDown, { className: "w-4 h-4" }) })
                               ] })
                             ]
                           }
                         ),
-                        isExpanded && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "px-4 pb-4 pt-2 border-t border-slate-800/80 bg-slate-900/60 space-y-2.5 animate-fadeIn", children: stu.wrongQuestions.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "py-4 px-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-black flex items-center gap-2", children: [
-                          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(CircleCheck, { className: "w-4 h-4 text-emerald-400 flex-shrink-0" }),
+                        isExpanded && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "px-4 pb-4 pt-2 border-t border-gray-200 bg-white space-y-2.5 animate-fadeIn", children: stu.wrongQuestions.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "py-4 px-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs sm:text-sm font-black flex items-center gap-2", children: [
+                          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(CircleCheck, { className: "w-4 h-4 text-emerald-600 flex-shrink-0" }),
                           /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { children: [
                             "\u{1F389} \u592A\u68D2\u4E86\uFF01",
                             stu.name,
@@ -15492,33 +15491,33 @@
                         ] }) : stu.wrongQuestions.map((wq, wIdx) => /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
                           "div",
                           {
-                            className: "p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 space-y-2",
+                            className: "p-3.5 rounded-xl bg-slate-50 border border-gray-200 space-y-2",
                             children: [
                               /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center justify-between gap-2", children: [
-                                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "text-xs font-black text-indigo-300 bg-indigo-500/20 px-2.5 py-0.5 rounded-lg", children: [
+                                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "text-xs font-black text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-lg", children: [
                                   "\u7B2C ",
                                   wq.questionNumber < 10 ? `0${wq.questionNumber}` : wq.questionNumber,
                                   " \u9898"
                                 ] }),
-                                wq.isTimeout ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] font-black text-amber-300 bg-amber-500/20 border border-amber-500/30 px-2.5 py-0.5 rounded-full", children: "\u23F0 \u672A\u53CA\u65F6\u56DE\u7B54 (\u8D85\u65F6\u672A\u9009)" }) : /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] font-black text-rose-300 bg-rose-500/20 border border-rose-500/30 px-2.5 py-0.5 rounded-full", children: "\u274C \u9009\u9879\u7B54\u9519" })
+                                wq.isTimeout ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] font-black text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full", children: "\u23F0 \u672A\u53CA\u65F6\u56DE\u7B54 (\u8D85\u65F6\u672A\u9009)" }) : /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-[11px] font-black text-rose-700 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full", children: "\u274C \u9009\u9879\u7B54\u9519" })
                               ] }),
-                              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "text-sm font-black text-white leading-snug", children: wq.questionText }),
-                              wq.isTimeout || !wq.studentSelectedText ? /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs flex items-center gap-2 text-emerald-300 font-bold", children: [
-                                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Check, { className: "w-4 h-4 text-emerald-400 flex-shrink-0 stroke-[3]" }),
+                              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "text-sm font-black text-slate-900 leading-snug", children: wq.questionText }),
+                              wq.isTimeout || !wq.studentSelectedText ? /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs flex items-center gap-2 text-emerald-700 font-bold", children: [
+                                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Check, { className: "w-4 h-4 text-emerald-600 flex-shrink-0 stroke-[3]" }),
                                 /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { children: [
                                   "\u6807\u51C6\u6B63\u786E\u7B54\u6848\uFF1A",
                                   wq.correctAnswerText
                                 ] })
                               ] }) : /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs", children: [
-                                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center gap-2 text-rose-300 font-bold", children: [
-                                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(X, { className: "w-4 h-4 text-rose-400 flex-shrink-0 stroke-[3]" }),
+                                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-2.5 rounded-xl bg-rose-50 border border-rose-200 flex items-center gap-2 text-rose-700 font-bold", children: [
+                                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(X, { className: "w-4 h-4 text-rose-600 flex-shrink-0 stroke-[3]" }),
                                   /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { children: [
                                     "\u5B66\u751F\u9519\u8BEF\u9009\u62E9\uFF1A",
                                     wq.studentSelectedText
                                   ] })
                                 ] }),
-                                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-2 text-emerald-300 font-bold", children: [
-                                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Check, { className: "w-4 h-4 text-emerald-400 flex-shrink-0 stroke-[3]" }),
+                                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center gap-2 text-emerald-700 font-bold", children: [
+                                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Check, { className: "w-4 h-4 text-emerald-600 flex-shrink-0 stroke-[3]" }),
                                   /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { children: [
                                     "\u6807\u51C6\u6B63\u786E\u7B54\u6848\uFF1A",
                                     wq.correctAnswerText
@@ -15534,8 +15533,8 @@
                     stu.id
                   );
                 }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center justify-between pt-4 border-t border-slate-800 mt-3 flex-shrink-0", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-xs text-slate-400", children: "\u70B9\u51FB\u4EFB\u610F\u5B66\u751F\u884C\u53EF\u5C55\u5F00\u6216\u6536\u8D77\u5176\u4E2A\u4EBA\u9519\u9898\u8BE6\u60C5" }),
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "flex items-center justify-between pt-4 border-t border-gray-200 mt-3 flex-shrink-0", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-xs text-slate-500", children: "\u70B9\u51FB\u4EFB\u610F\u5B66\u751F\u884C\u53EF\u5C55\u5F00\u6216\u6536\u8D77\u5176\u4E2A\u4EBA\u9519\u9898\u8BE6\u60C5" }),
                   /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
                     "button",
                     {
@@ -16180,7 +16179,7 @@
     const handleUpdateSettings = (newSettings) => {
       setSettings((prev) => ({ ...prev, ...newSettings }));
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "w-screen h-screen overflow-hidden flex flex-col bg-radial from-slate-900 via-indigo-950 to-slate-950 text-white font-sans select-none relative", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "w-screen h-screen overflow-hidden flex flex-col bg-gradient-to-br from-[#f8fafc] via-white to-pink-50/40 text-slate-800 font-sans select-none relative", children: [
       /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
         ScreenHeader,
         {
@@ -16199,7 +16198,7 @@
         }
       ),
       /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("main", { className: "flex-1 w-full max-w-[1920px] mx-auto p-1 sm:p-2 lg:p-2.5 flex flex-col justify-center items-center relative overflow-hidden", children: [
-        currentState === "lobby" && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "w-full h-full flex flex-col justify-between items-center bg-slate-900/40 rounded-3xl border border-slate-800/80 backdrop-blur-md shadow-2xl relative overflow-hidden animate-fadeIn", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+        currentState === "lobby" && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "w-full h-full flex flex-col justify-between items-center bg-white rounded-3xl border border-gray-200/90 shadow-xl relative overflow-hidden animate-fadeIn", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
           LobbyView,
           {
             settings,
@@ -16212,7 +16211,7 @@
             onMoveStudent: handleMoveStudent
           }
         ) }),
-        (currentState === "question-prompt" || currentState === "question-options") && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "w-full h-full flex flex-col justify-between items-center bg-slate-900/40 rounded-3xl border border-slate-800/80 backdrop-blur-md shadow-2xl relative overflow-hidden animate-fadeIn", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+        (currentState === "question-prompt" || currentState === "question-options") && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "w-full h-full flex flex-col justify-between items-center bg-white rounded-3xl border border-gray-200/90 shadow-xl relative overflow-hidden animate-fadeIn", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
           QuestionLiveView,
           {
             currentState,
@@ -16229,7 +16228,7 @@
             onToggleTimer: () => countdown.isRunning ? countdown.pause() : countdown.resume()
           }
         ) }),
-        currentState === "result-stats" && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "w-full h-full flex flex-col justify-between items-center bg-slate-900/40 rounded-3xl border border-slate-800/80 backdrop-blur-md shadow-2xl relative overflow-hidden animate-fadeIn", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+        currentState === "result-stats" && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "w-full h-full flex flex-col justify-between items-center bg-white rounded-3xl border border-gray-200/90 shadow-xl relative overflow-hidden animate-fadeIn", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
           ResultStatsView,
           {
             question: currentQ,
@@ -16237,7 +16236,7 @@
             onProceed: handleProceedFromStats
           }
         ) }),
-        currentState === "scoreboard" && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "w-full h-full flex flex-col justify-between items-center bg-slate-900/40 rounded-3xl border border-slate-800/80 backdrop-blur-md shadow-2xl relative overflow-hidden animate-fadeIn", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+        currentState === "scoreboard" && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "w-full h-full flex flex-col justify-between items-center bg-white rounded-3xl border border-gray-200/90 shadow-xl relative overflow-hidden animate-fadeIn", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
           ScoreboardView,
           {
             teams,
@@ -16248,7 +16247,7 @@
             onNext: handleNextFromScoreboard
           }
         ) }),
-        currentState === "podium" && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "w-full h-full flex flex-col justify-between items-center bg-slate-900/40 rounded-3xl border border-slate-800/80 backdrop-blur-md shadow-2xl relative overflow-hidden animate-fadeIn", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+        currentState === "podium" && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "w-full h-full flex flex-col justify-between items-center bg-white rounded-3xl border border-gray-200/90 shadow-xl relative overflow-hidden animate-fadeIn", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
           PodiumView,
           {
             roomName: settings.roomName,
