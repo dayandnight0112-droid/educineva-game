@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educineva - Kahoot 式结算颁奖与错题学情复盘看板</title>
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --gold: #F59E0B;
+      --silver: #9CA3AF;
+      --bronze: #B45309;
+      --bg-dark: #0F172A;
+      --card-bg: #1E293B;
+      --card-border: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1E1B4B 0%, #0F172A 100%);
+      color: #F8FAFC;
+      min-height: 100vh;
+      padding: 24px 16px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* 顶部标题与控制栏 */
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #A78BFA 0%, #F472B6 50%, #FBBF24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #94A3B8;
+    }
+
+    .btn-reload {
+      position: absolute;
+      right: 0;
+      top: 0;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-reload:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.04);
+    }
+
+    /* 冠军队伍通知横幅 */
+    .winner-banner {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.2) 0%, rgba(245, 158, 11, 0.3) 50%, rgba(59, 130, 246, 0.2) 100%);
+      border: 1px solid #F59E0B;
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.25);
+      border-radius: 16px;
+      padding: 16px 20px;
+      text-align: center;
+      margin-bottom: 36px;
+      animation: pulse-glow 3s infinite alternate;
+    }
+
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.2); }
+      100% { box-shadow: 0 0 35px rgba(245, 158, 11, 0.5); }
+    }
+
+    .winner-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #FCD34D;
+      font-weight: 700;
+    }
+
+    .winner-name {
+      font-size: 26px;
+      font-weight: 900;
+      margin-top: 4px;
+      color: #FFF;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    /* 模块 A：Kahoot 风格领奖台 (Podium) */
+    .podium-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 16px;
+      margin: 40px auto 50px auto;
+      max-width: 680px;
+      height: 320px;
+    }
+
+    .podium-slot {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .podium-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 8px;
+      position: relative;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+    .podium-slot:hover .podium-avatar {
+      transform: translateY(-4px) scale(1.08);
+    }
+
+    .podium-slot.rank-1 .podium-avatar {
+      width: 76px;
+      height: 76px;
+      font-size: 34px;
+      border: 3px solid #F59E0B;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+    }
+
+    .crown-icon {
+      position: absolute;
+      top: -24px;
+      font-size: 24px;
+      animation: float-crown 2s ease-in-out infinite;
+    }
+
+    @keyframes float-crown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .podium-name {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 2px;
+      text-align: center;
+      max-width: 120px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .podium-score {
+      font-size: 13px;
+      color: #FBBF24;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .team-badge-mini {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      color: #fff;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    /* 台柱 */
+    .pillar {
+      width: 100%;
+      border-radius: 16px 16px 4px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.9);
+      box-shadow: inset 0 2px 6px rgba(255,255,255,0.3), 0 10px 25px rgba(0,0,0,0.4);
+      transition: height 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .pillar.gold {
+      height: 180px;
+      background: linear-gradient(180deg, #F59E0B 0%, #D97706 100%);
+      color: #78350F;
+    }
+
+    .pillar.silver {
+      height: 130px;
+      background: linear-gradient(180deg, #94A3B8 0%, #64748B 100%);
+      color: #1E293B;
+    }
+
+    .pillar.bronze {
+      height: 95px;
+      background: linear-gradient(180deg, #D97706 0%, #92400E 100%);
+      color: #451A03;
+    }
+
+    /* 模块 B：老师学情复盘看板 (可折叠手风琴) */
+    .dashboard-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 12px;
+    }
+
+    .dashboard-title {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dashboard-tips {
+      font-size: 13px;
+      color: #94A3B8;
+    }
+
+    /* 表格 */
+    .roster-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 8px;
+    }
+
+    .roster-table th {
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #64748B;
+      text-align: left;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .student-row {
+      background: #1E293B;
+      border: 1px solid #334155;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .student-row td {
+      padding: 14px 16px;
+      font-size: 14px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .student-row td:first-child {
+      border-left: 1px solid rgba(255,255,255,0.05);
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+    }
+
+    .student-row td:last-child {
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+
+    .student-row:hover {
+      background: #273549;
+      transform: translateY(-1px);
+    }
+
+    .student-row.is-open {
+      background: #243044;
+      border-color: #6366F1;
+    }
+
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .rank-1-badge { background: #F59E0B; color: #78350F; }
+    .rank-2-badge { background: #94A3B8; color: #0F172A; }
+    .rank-3-badge { background: #D97706; color: #FFF; }
+    .rank-other-badge { background: #334155; color: #94A3B8; }
+
+    .score-badge {
+      font-weight: 800;
+      color: #38BDF8;
+      font-size: 16px;
+    }
+
+    .wrong-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .wrong-badge.zero { background: rgba(16, 185, 129, 0.15); color: #34D399; }
+    .wrong-badge.has-wrong { background: rgba(239, 68, 68, 0.15); color: #F87171; }
+
+    .btn-toggle {
+      font-size: 12px;
+      color: #818CF8;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* 手风琴折叠子面板 */
+    .detail-row {
+      display: none;
+    }
+
+    .detail-row.show {
+      display: table-row;
+    }
+
+    .detail-card {
+      background: #0F172A;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 4px 0 12px 0;
+      animation: slide-down 0.25s ease-out;
+    }
+
+    @keyframes slide-down {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 全对满分卡片 */
+    .perfect-card {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 10px;
+      padding: 16px;
+      color: #34D399;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+    }
+
+    /* 错题卡片 */
+    .mistake-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .mistake-item {
+      background: #1E293B;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .mistake-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: #E2E8F0;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .compare-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .box-student-wrong {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #FCA5A5;
+    }
+
+    .box-correct-answer {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #6EE7B7;
+    }
+
+    .box-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: block;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 顶部状态栏 -->
+    <div class="header">
+      <div class="title">Educineva 游戏化课堂结算典礼</div>
+      <div class="subtitle" id="roomSubTitle">房间：智力竞速大冲关 | 模式：极速赛车 | 状态：比赛已圆满结算</div>
+      <button class="btn-reload" onclick="loadMockData()">🔄 刷新示例数据</button>
+    </div>
+
+    <!-- 模块 A：获胜队伍与领奖台 -->
+    <div class="winner-banner" id="winnerBanner">
+      <div class="winner-title">🏆 获胜冠军战队 🏆</div>
+      <div class="winner-name" id="winnerName">红队 (Red Force) - 总积分 450 分</div>
+    </div>
+
+    <div class="podium-container" id="podiumArea">
+      <!-- 2nd 亚军 (银台) -->
+      <div class="podium-slot rank-2">
+        <div class="podium-avatar">🥈</div>
+        <div class="podium-name" id="p2Name">张小明</div>
+        <div class="team-badge-mini" id="p2Team" style="background:#3B82F6">蓝队</div>
+        <div class="podium-score" id="p2Score">100 分</div>
+        <div class="pillar silver">2</div>
+      </div>
+
+      <!-- 1st 冠军 (金台) -->
+      <div class="podium-slot rank-1">
+        <div class="podium-avatar">
+          <div class="crown-icon">👑</div>
+          🥇
+        </div>
+        <div class="podium-name" id="p1Name">李小华</div>
+        <div class="team-badge-mini" id="p1Team" style="background:#EF4444">红队</div>
+        <div class="podium-score" id="p1Score">200 分</div>
+        <div class="pillar gold">1</div>
+      </div>
+
+      <!-- 3rd 季军 (铜台) -->
+      <div class="podium-slot rank-3">
+        <div class="podium-avatar">🥉</div>
+        <div class="podium-name" id="p3Name">王小刚</div>
+        <div class="team-badge-mini" id="p3Team" style="background:#EF4444">红队</div>
+        <div class="podium-score" id="p3Score">0 分</div>
+        <div class="pillar bronze">3</div>
+      </div>
+    </div>
+
+    <!-- 模块 B：老师专属复盘排行榜 (可展开手风琴表格) -->
+    <div class="dashboard-card">
+      <div class="dashboard-header">
+        <div class="dashboard-title">
+          <span>📊</span> 全班学情复盘排行榜
+        </div>
+        <div class="dashboard-tips">💡 点击任意学生行可向下展开错题对比与学情详情</div>
+      </div>
+
+      <table class="roster-table">
+        <thead>
+          <tr>
+            <th width="80">名次</th>
+            <th>玩家姓名</th>
+            <th>归属队伍</th>
+            <th>最终总得分</th>
+            <th>答错次数</th>
+            <th width="100" style="text-align: right;">复盘详情</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboardBody">
+          <!-- 动态渲染学生排行榜列表 -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 可选：引入 Socket.io-client 实现实时连接 -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    // 默认内置的验收测试模拟数据集
+    const defaultMockSettlement = {
+      roomName: "智力竞速大冲关",
+      winnerTeam: { id: "team_red", name: "红队", color: "#EF4444", score: 200 },
+      podium: [
+        { rank: 1, name: "李小华 (Student A)", teamName: "红队", teamColor: "#EF4444", score: 200, isPerfect: true },
+        { rank: 2, name: "张小明 (Student B)", teamName: "蓝队", teamColor: "#3B82F6", score: 100, isPerfect: false },
+        { rank: 3, name: "王小刚 (Student C)", teamName: "红队", teamColor: "#EF4444", score: 0, isPerfect: false }
+      ],
+      leaderboard: [
+        {
+          rank: 1,
+          studentId: "stu_101",
+          name: "李小华 (Student A)",
+          teamName: "红队",
+          teamColor: "#EF4444",
+          score: 200,
+          wrongCount: 0,
+          totalAnswered: 2,
+          isPerfect: true,
+          wrongQuestions: []
+        },
+        {
+          rank: 2,
+          studentId: "stu_102",
+          name: "张小明 (Student B)",
+          teamName: "蓝队",
+          teamColor: "#3B82F6",
+          score: 100,
+          wrongCount: 1,
+          totalAnswered: 2,
+          isPerfect: false,
+          wrongQuestions: [
+            {
+              questionId: "q1",
+              questionText: "10 - 4 等于几？",
+              studentSelected: "A",
+              studentSelectedText: "A (5)",
+              correctAnswer: "B",
+              correctAnswerText: "B (6)"
+            }
+          ]
+        },
+        {
+          rank: 3,
+          studentId: "stu_103",
+          name: "王小刚 (Student C)",
+          teamName: "红队",
+          teamColor: "#EF4444",
+          score: 0,
+          wrongCount: 2,
+          totalAnswered: 2,
+          isPerfect: false,
+          wrongQuestions: [
+            {
+              questionId: "q1",
+              questionText: "10 - 4 等于几？",
+              studentSelected: "C",
+              studentSelectedText: "C (7)",
+              correctAnswer: "B",
+              correctAnswerText: "B (6)"
+            },
+            {
+              questionId: "q2",
+              questionText: "地球是圆的吗？",
+              studentSelected: "B",
+              studentSelectedText: "B (否)",
+              correctAnswer: "A",
+              correctAnswerText: "A (是)"
+            }
+          ]
+        }
+      ]
+    };
+
+    function renderSettlement(data) {
+      if (!data) return;
+
+      // 1. 获胜战队横幅
+      if (data.winnerTeam) {
+        document.getElementById('winnerName').textContent = 
+          `${data.winnerTeam.name} - 总积分: ${data.winnerTeam.score} 分`;
+      }
+
+      // 2. 领奖台 (Podium)
+      const p1 = data.podium?.[0];
+      const p2 = data.podium?.[1];
+      const p3 = data.podium?.[2];
+
+      if (p1) {
+        document.getElementById('p1Name').textContent = p1.name;
+        document.getElementById('p1Score').textContent = `${p1.score} 分`;
+        document.getElementById('p1Team').textContent = p1.teamName;
+        document.getElementById('p1Team').style.background = p1.teamColor || '#EF4444';
+      }
+      if (p2) {
+        document.getElementById('p2Name').textContent = p2.name;
+        document.getElementById('p2Score').textContent = `${p2.score} 分`;
+        document.getElementById('p2Team').textContent = p2.teamName;
+        document.getElementById('p2Team').style.background = p2.teamColor || '#3B82F6';
+      }
+      if (p3) {
+        document.getElementById('p3Name').textContent = p3.name;
+        document.getElementById('p3Score').textContent = `${p3.score} 分`;
+        document.getElementById('p3Team').textContent = p3.teamName;
+        document.getElementById('p3Team').style.background = p3.teamColor || '#10B981';
+      }
+
+      // 3. 全员排行榜与手风琴表格
+      const tbody = document.getElementById('leaderboardBody');
+      tbody.innerHTML = '';
+
+      (data.leaderboard || []).forEach(student => {
+        // 主行
+        const trMain = document.createElement('tr');
+        trMain.className = 'student-row';
+        trMain.id = `row-${student.studentId}`;
+        trMain.onclick = () => toggleRow(student.studentId);
+
+        let rankBadgeClass = 'rank-other-badge';
+        if (student.rank === 1) rankBadgeClass = 'rank-1-badge';
+        else if (student.rank === 2) rankBadgeClass = 'rank-2-badge';
+        else if (student.rank === 3) rankBadgeClass = 'rank-3-badge';
+
+        trMain.innerHTML = `
+          <td><span class="rank-badge ${rankBadgeClass}">#${student.rank}</span></td>
+          <td><strong>${escapeHtml(student.name)}</strong></td>
+          <td><span class="team-badge-mini" style="background:${student.teamColor}">${escapeHtml(student.teamName)}</span></td>
+          <td><span class="score-badge">${student.score}</span></td>
+          <td>
+            <span class="wrong-badge ${student.wrongCount === 0 ? 'zero' : 'has-wrong'}">
+              ${student.wrongCount === 0 ? '✔ 全对 0 错' : '✘ ' + student.wrongCount + ' 处错题'}
+            </span>
+          </td>
+          <td style="text-align: right;">
+            <span class="btn-toggle" id="arrow-${student.studentId}">展开 ∨</span>
+          </td>
+        `;
+
+        // 折叠子行
+        const trDetail = document.createElement('tr');
+        trDetail.className = 'detail-row';
+        trDetail.id = `detail-${student.studentId}`;
+
+        let detailHtml = '';
+        if (student.isPerfect || (student.wrongQuestions && student.wrongQuestions.length === 0)) {
+          detailHtml = `
+            <div class="detail-card">
+              <div class="perfect-card">
+                <span style="font-size: 20px;">🎉</span>
+                <span>太厉害了！该学员全部答对，满分通关（${student.totalAnswered || 0} 道题无一差错）！</span>
+              </div>
+            </div>
+          `;
+        } else {
+          const listHtml = student.wrongQuestions.map((q, idx) => `
+            <div class="mistake-item">
+              <div class="mistake-title">
+                <span>📌 第 ${idx + 1} 题：</span>
+                <span>${escapeHtml(q.questionText)}</span>
+              </div>
+              <div class="compare-container">
+                <div class="box-student-wrong">
+                  <span class="box-label">❌ 学生的回答</span>
+                  <strong>${escapeHtml(q.studentSelectedText || q.studentSelected)}</strong>
+                </div>
+                <div class="box-correct-answer">
+                  <span class="box-label">✅ 正确标准答案</span>
+                  <strong>${escapeHtml(q.correctAnswerText || q.correctAnswer)}</strong>
+                </div>
+              </div>
+            </div>
+          `).join('');
+
+          detailHtml = `
+            <div class="detail-card">
+              <div style="font-size: 13px; color: #94A3B8; margin-bottom: 12px; font-weight: 600;">
+                📝 错题对比如下（共答错 ${student.wrongQuestions.length} 道）：
+              </div>
+              <div class="mistake-list">${listHtml}</div>
+            </div>
+          `;
+        }
+
+        trDetail.innerHTML = `<td colspan="6" style="padding: 0;">${detailHtml}</td>`;
+
+        tbody.appendChild(trMain);
+        tbody.appendChild(trDetail);
+      });
+    }
+
+    function toggleRow(studentId) {
+      const detailRow = document.getElementById(`detail-${studentId}`);
+      const mainRow = document.getElementById(`row-${studentId}`);
+      const arrow = document.getElementById(`arrow-${studentId}`);
+
+      if (!detailRow) return;
+
+      const isShowing = detailRow.classList.contains('show');
+      if (isShowing) {
+        detailRow.classList.remove('show');
+        mainRow.classList.remove('is-open');
+        arrow.textContent = '展开 ∨';
+      } else {
+        detailRow.classList.add('show');
+        mainRow.classList.add('is-open');
+        arrow.textContent = '收起 ∧';
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function loadMockData() {
+      renderSettlement(defaultMockSettlement);
+    }
+
+    // 页面加载默认渲染
+    loadMockData();
+
+    // 如果运行在 Socket.io 宿主环境中，自动监听实时结算广播
+    if (typeof io !== 'undefined') {
+      try {
+        const socket = io();
+        socket.on('game_settlement_data', (data) => {
+          console.log('[Live Socket] 接收到实时结算数据:', data);
+          document.getElementById('roomSubTitle').textContent = 
+            `房间：${data.roomName || '在线课堂'} | 模式：极速赛车 | 状态：已实时接收全服结算`;
+          renderSettlement(data);
+        });
+      } catch (e) {
+        console.log('Socket.io standalone mode');
+      }
+    }
+  </script>
+</body>
+</html>

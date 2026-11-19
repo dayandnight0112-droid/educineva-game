@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educineva 教师管理后台 - 题目管理</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- SheetJS 支持 Excel (.xlsx, .xls) 解析与导出 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- 左侧通用侧边导航栏 (Sidebar) -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <button class="back-btn" title="返回" onclick="showToast('点击返回上一页', 'info')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+        <div class="brand-info">
+          <h1 class="brand-title">Educineva</h1>
+          <span class="brand-subtitle">教师管理后台</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <!-- 游戏管理选项 -->
+        <div class="nav-item" id="navGames">
+          <span class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="6" y1="12" x2="10" y2="12"></line>
+              <line x1="8" y1="10" x2="8" y2="14"></line>
+              <line x1="15" y1="13" x2="15.01" y2="13"></line>
+              <line x1="18" y1="11" x2="18.01" y2="11"></line>
+              <rect x="2" y="6" width="20" height="12" rx="6"></rect>
+            </svg>
+          </span>
+          <span>Games</span>
+        </div>
+
+        <!-- 题目管理选项 (默认高亮) -->
+        <div class="nav-item active" id="navQuestion">
+          <span class="nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </span>
+          <span>Question</span>
+        </div>
+      </nav>
+
+      <!-- 底部教师信息 -->
+      <div class="sidebar-footer">
+        <div class="user-profile-badge" title="当前登录：Teacher 教师账号">
+          <div class="avatar-circle">
+            <!-- 矢量卡通教师头像 -->
+            <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
+              <circle cx="32" cy="32" r="32" fill="#FCE7F3"/>
+              <!-- 头发 -->
+              <path d="M16 36C14 24 20 14 32 14C44 14 50 24 48 36C45 42 43 45 43 45C38 38 26 38 21 45C21 45 18 41 16 36Z" fill="#78350F"/>
+              <circle cx="32" cy="34" r="16" fill="#FDE68A"/>
+              <ellipse cx="32" cy="35" rx="14" ry="15" fill="#FED7AA"/>
+              <!-- 齐刘海 -->
+              <path d="M18 28C22 24 30 24 34 26C38 24 44 25 46 28C48 24 44 18 32 18C20 18 16 24 18 28Z" fill="#78350F"/>
+              <!-- 眼睛 -->
+              <circle cx="26" cy="34" r="2" fill="#374151"/>
+              <circle cx="38" cy="34" r="2" fill="#374151"/>
+              <!-- 微笑 -->
+              <path d="M29 40C30.5 42 33.5 42 35 40" stroke="#E11D48" stroke-width="2" stroke-linecap="round"/>
+              <!-- 腮红 -->
+              <circle cx="23" cy="37" r="2.5" fill="#F43F5E" fill-opacity="0.4"/>
+              <circle cx="41" cy="37" r="2.5" fill="#F43F5E" fill-opacity="0.4"/>
+              <!-- 衣服 -->
+              <path d="M18 58C18 50 24 47 32 47C40 47 46 50 46 58V64H18V58Z" fill="#E11D48"/>
+              <polygon points="32 47 28 54 36 54" fill="#FFFFFF"/>
+            </svg>
+          </div>
+          <div class="user-text-info">
+            <span class="user-name">Teacher</span>
+            <span class="user-role">教师账号</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 主工作区：题目管理 (Question Management View) -->
+    <main class="main-content" id="questionManagementView">
+      <!-- 顶部标题与右侧教师端身份 -->
+      <div class="content-header">
+        <div class="header-titles">
+          <h2 class="page-title">题目管理</h2>
+          <p class="page-subtitle">建立题目文件，供课中游戏与课外练习使用</p>
+        </div>
+        <div class="header-actions">
+          <div class="teacher-mode-pill" onclick="showToast('教师端模式已启用', 'info')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>教师端</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- 顶部醒目的 + Add File 按钮 -->
+      <button class="add-file-banner-btn" id="btnAddFileBanner">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        <span>Add File</span>
+      </button>
+
+      <!-- 搜索框与下拉筛选器 -->
+      <div class="filters-toolbar">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="搜索题目文件" />
+        </div>
+
+        <!-- 年级筛选下拉 -->
+        <div class="filter-select-wrapper">
+          <select id="filterGrade" class="filter-select">
+            <option value="ALL">全部年级</option>
+          </select>
+          <svg class="select-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+
+        <!-- 科目筛选下拉 -->
+        <div class="filter-select-wrapper">
+          <select id="filterSubject" class="filter-select">
+            <option value="ALL">全部科目</option>
+          </select>
+          <svg class="select-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 分组标题：我的题目文件 -->
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="pink-bar-indicator"></span>
+          <span class="section-title">我的题目文件</span>
+        </div>
+        <span class="section-count" id="sectionCount">共 6 个文件</span>
+      </div>
+
+      <!-- 试卷卡片列表网格 (3列自适应) -->
+      <div class="papers-grid" id="papersGrid">
+        <!-- 试卷卡片由 JavaScript 动态渲染 -->
+      </div>
+
+      <!-- 底部提示信息 -->
+      <div class="page-footer-tip">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span>点击文件，编辑题目与答案</span>
+      </div>
+    </main>
+
+    <!-- 附属视图：游戏管理 (Games View Preview - 对应设计图 1.png) -->
+    <section class="games-view-container" id="gamesManagementView">
+      <div class="content-header">
+        <div class="header-titles">
+          <h2 class="page-title">游戏管理</h2>
+          <p class="page-subtitle">选择游戏，配置课堂活动或课外练习</p>
+        </div>
+        <div class="header-actions">
+          <div class="teacher-mode-pill">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>教师端</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+        <button style="background: var(--primary-pink); color: #fff; padding: 10px 24px; border-radius: 12px; font-weight: 700;">课中游戏</button>
+        <button style="background: #fff; border: 1.5px solid var(--border-light); padding: 10px 24px; border-radius: 12px; font-weight: 600; color: var(--text-regular);">课外游戏</button>
+      </div>
+
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="pink-bar-indicator"></span>
+          <span class="section-title">选择游戏后，设置房间、题目与队伍</span>
+        </div>
+      </div>
+
+      <div class="game-cards-grid">
+        <div class="game-mock-card">
+          <div class="game-thumb-placeholder" style="background: linear-gradient(135deg, #f87171, #ef4444);">🏎️ 极速赛车</div>
+          <div class="game-card-footer">
+            <span class="game-card-name">极速赛车</span>
+            <button class="game-config-btn" onclick="showToast('已绑定题目文件至极速赛车', 'success')">→ 游戏设定</button>
+          </div>
+        </div>
+        <div class="game-mock-card">
+          <div class="game-thumb-placeholder" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">⭐ 知识闯关</div>
+          <div class="game-card-footer">
+            <span class="game-card-name">知识闯关</span>
+            <button class="game-config-btn" onclick="showToast('已绑定题目文件至知识闯关', 'success')">→ 游戏设定</button>
+          </div>
+        </div>
+        <div class="game-mock-card">
+          <div class="game-thumb-placeholder" style="background: linear-gradient(135deg, #60a5fa, #3b82f6);">🚩 拔河挑战</div>
+          <div class="game-card-footer">
+            <span class="game-card-name">拔河挑战</span>
+            <button class="game-config-btn" onclick="showToast('已绑定题目文件至拔河挑战', 'success')">→ 游戏设定</button>
+          </div>
+        </div>
+        <div class="game-mock-card">
+          <div class="game-thumb-placeholder" style="background: linear-gradient(135deg, #818cf8, #6366f1);">🚀 太空冒险</div>
+          <div class="game-card-footer">
+            <span class="game-card-name">太空冒险</span>
+            <button class="game-config-btn" onclick="showToast('已绑定题目文件至太空冒险', 'success')">→ 游戏设定</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 新增文件弹窗 (Modal - 对应设计图 4.png) ================= -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header">
+          <div class="modal-header-left">
+            <div class="modal-icon-badge">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="12" y1="18" x2="12" y2="12"></line>
+                <line x1="9" y1="15" x2="15" y2="15"></line>
+              </svg>
+            </div>
+            <div>
+              <h3 class="modal-title" id="modalTitle">新增题目文件</h3>
+              <p class="modal-subtitle">填写文件资料，建立后即可添加题目</p>
+            </div>
+          </div>
+          <button class="modal-close-btn" id="btnCloseModal" title="关闭">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <form id="addFileForm" class="modal-form">
+          <div class="form-group">
+            <label class="form-label" for="modalFileName">文件名称 / File Name</label>
+            <input type="text" id="modalFileName" class="form-input" placeholder="请输入文件名称" autocomplete="off" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="modalGrade">年级</label>
+              <div class="filter-select-wrapper" style="width: 100%;">
+                <select id="modalGrade" class="filter-select" required>
+                  <option value="" disabled selected>选择年级</option>
+                </select>
+                <svg class="select-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="modalSubject">科目</label>
+              <div class="filter-select-wrapper" style="width: 100%;">
+                <select id="modalSubject" class="filter-select" required>
+                  <option value="" disabled selected>选择科目</option>
+                </select>
+                <svg class="select-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-secondary" id="btnCancelModal">取消</button>
+            <button type="submit" class="btn-primary-pink" id="btnSubmitModal">创建文件</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ================= 题目编辑抽屉 (Drawer - 对应设计图 5.png) ================= -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <aside class="drawer-panel" id="drawerPanel" role="dialog" aria-modal="true" aria-labelledby="drawerPaperTitle">
+      <!-- 抽屉顶部头部 -->
+      <div class="drawer-header">
+        <div class="drawer-header-left">
+          <div class="paper-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+          <div>
+            <div class="drawer-title-row">
+              <h3 class="drawer-title" id="drawerPaperTitle">Paper 1</h3>
+              <span class="badge badge-lavender" id="drawerGradeBadge">一年级</span>
+              <span class="badge badge-lavender" id="drawerSubjectBadge">数学</span>
+            </div>
+            <p class="drawer-subtitle" id="drawerCountBadge">题目编辑 · 共 20 道题</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="btnCloseDrawer" title="关闭抽屉">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 抽屉顶部操作区 -->
+      <div class="drawer-toolbar">
+        <!-- 批量导入与下载模版 -->
+        <div class="toolbar-row-top">
+          <button class="btn-bulk-import" id="btnBulkImport" title="上传 Excel 或 CSV 文件批量导入题目">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <span>Bulk Import Excel</span>
+          </button>
+          <a class="template-download-link" id="linkDownloadTemplate" title="下载标准题目模版">下载模版</a>
+          <!-- 隐藏的文件选择 input -->
+          <input type="file" id="excelFileInput" accept=".xlsx,.xls,.csv" style="display: none;" />
+        </div>
+
+        <!-- 顺序打乱、新增题目与批量操作 -->
+        <div class="toolbar-row-bottom">
+          <button class="btn-toolbar" id="btnShuffle" title="随机打乱所有题目顺序">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 3 21 3 21 8"></polyline>
+              <line x1="4" y1="20" x2="21" y2="3"></line>
+              <polyline points="21 16 21 21 16 21"></polyline>
+              <line x1="15" y1="15" x2="21" y2="21"></line>
+              <line x1="4" y1="4" x2="9" y2="9"></line>
+            </svg>
+            <span>打乱顺序</span>
+          </button>
+
+          <button class="btn-toolbar btn-toolbar-pink" id="btnAddQuestion" title="在末尾添加一道新题目">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>新增题目</span>
+          </button>
+
+          <button class="btn-toolbar" id="btnToggleSelectAll" title="全选或反选当前题目">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            <span>编辑</span>
+          </button>
+
+          <button class="btn-toolbar" id="btnBatchDelete" title="删除勾选的题目">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            <span>删除</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 题目内容编辑列表 (单选题) -->
+      <div class="drawer-body" id="drawerBody">
+        <div id="drawerQuestionsList">
+          <!-- 题目卡片列表由 JavaScript 动态渲染 -->
+        </div>
+      </div>
+
+      <!-- 抽屉底部保存栏 -->
+      <div class="drawer-footer">
+        <span class="drawer-footer-tip">修改后请保存</span>
+        <div class="drawer-footer-actions">
+          <button class="btn-secondary" id="btnCancelDrawer">取消</button>
+          <button class="btn-primary-pink" id="btnSaveQuestions">保存题目</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 浮动提示通知容器 -->
+    <div class="toast-container" id="toastContainer"></div>
+
+  </div>
+
+  <!-- 业务逻辑脚本引入 -->
+  <script src="js/sampleData.js"></script>
+  <script src="js/excelHelper.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

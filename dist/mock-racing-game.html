@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educineva 极速赛车 - SDK 即插即用演示子游戏</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background: #0B0F19;
+      color: #F8FAFC;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+      overflow-x: hidden;
+    }
+
+    .header-bar {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 10px 16px;
+      background: #1E293B;
+      border-radius: 12px;
+      border: 1px solid #334155;
+    }
+
+    .game-title {
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(90deg, #EF4444, #F59E0B, #3B82F6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .status-tag {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #10B981;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* 赛道画布容器 */
+    .track-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      background: #182234;
+      border-radius: 16px;
+      border: 2px solid #334155;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 240px;
+    }
+
+    /* 比分指示栏 */
+    .scores-row {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      max-width: 900px;
+      margin: 14px 0;
+      gap: 16px;
+    }
+
+    .team-card {
+      flex: 1;
+      background: #1E293B;
+      border-radius: 12px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-left: 6px solid #EF4444;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .team-card.blue {
+      border-left-color: #3B82F6;
+    }
+
+    .team-info h4 {
+      font-size: 14px;
+      color: #94A3B8;
+    }
+    .team-info .score-val {
+      font-size: 26px;
+      font-weight: 900;
+      color: #FFF;
+    }
+
+    /* 答题卡操作面板 */
+    .control-deck {
+      width: 100%;
+      max-width: 900px;
+      background: #1E293B;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 6px;
+    }
+
+    .question-box {
+      background: #0F172A;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      border-left: 4px solid #F59E0B;
+    }
+
+    .q-meta {
+      font-size: 12px;
+      color: #F59E0B;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .q-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: #F8FAFC;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .opt-btn {
+      background: #334155;
+      color: #fff;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .opt-btn:hover:not(:disabled) {
+      background: #475569;
+      transform: translateY(-2px);
+      border-color: #6366F1;
+    }
+    .opt-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .opt-btn.correct {
+      background: rgba(16, 185, 129, 0.3) !important;
+      border-color: #10B981 !important;
+      color: #34D399;
+    }
+    .opt-btn.wrong {
+      background: rgba(239, 68, 68, 0.3) !important;
+      border-color: #EF4444 !important;
+      color: #F87171;
+    }
+
+    .opt-tag {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    /* 辅助控制按钮栏 */
+    .action-bar {
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-action {
+      background: #4F46E5;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-action:hover {
+      background: #4338CA;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* 终局弹窗 */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #1E293B;
+      border: 2px solid #F59E0B;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 440px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(245, 158, 11, 0.4);
+      animation: pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header-bar">
+    <div class="game-title">
+      <span>🏎️</span>
+      <span>极速双车竞速赛 (Educineva 子游戏 DEMO)</span>
+    </div>
+    <div class="status-tag" id="statusBadge">已加载 EducinevaGameSDK</div>
+  </div>
+
+  <!-- 2D 赛道画布 -->
+  <div class="track-wrapper">
+    <canvas id="raceCanvas" width="900" height="240"></canvas>
+  </div>
+
+  <!-- 实时队伍积分卡 -->
+  <div class="scores-row">
+    <div class="team-card">
+      <div class="team-info">
+        <h4>🔴 红队战车 (Red Team)</h4>
+        <div class="score-val" id="redScore">0 米 / 0 分</div>
+      </div>
+      <div style="font-size: 32px;">🚗</div>
+    </div>
+    <div class="team-card blue">
+      <div class="team-info">
+        <h4>🔵 蓝队战车 (Blue Team)</h4>
+        <div class="score-val" id="blueScore">0 米 / 0 分</div>
+      </div>
+      <div style="font-size: 32px;">🚙</div>
+    </div>
+  </div>
+
+  <!-- 学生答题手柄区 (即插即用 SDK 双向验证) -->
+  <div class="control-deck">
+    <div class="question-box">
+      <div class="q-meta" id="qMeta">题目加载中...</div>
+      <div class="q-text" id="qText">正在等待母体系统发题信令...</div>
+    </div>
+
+    <div class="options-grid" id="optionsGrid">
+      <button class="opt-btn" onclick="handleClickAnswer('A')" id="btnA">
+        <span class="opt-tag">A</span> <span id="optA">选项 A</span>
+      </button>
+      <button class="opt-btn" onclick="handleClickAnswer('B')" id="btnB">
+        <span class="opt-tag">B</span> <span id="optB">选项 B</span>
+      </button>
+      <button class="opt-btn" onclick="handleClickAnswer('C')" id="btnC">
+        <span class="opt-tag">C</span> <span id="optC">选项 C</span>
+      </button>
+      <button class="opt-btn" onclick="handleClickAnswer('D')" id="btnD">
+        <span class="opt-tag">D</span> <span id="optD">选项 D</span>
+      </button>
+    </div>
+
+    <div class="action-bar">
+      <div style="font-size: 13px; color: #94A3B8;">
+        <span>🎮 模式：即插即用互动手柄</span>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn-action btn-secondary" onclick="simulateLocalScore()">🚀 本地模拟加速</button>
+        <button class="btn-action" onclick="handleNextQuestion()">下一题 ⏩</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 结算弹窗 -->
+  <div class="modal-overlay" id="settlementModal">
+    <div class="modal-card">
+      <div style="font-size: 54px; margin-bottom: 10px;">🏁 🏆 🏁</div>
+      <h2 style="font-size: 24px; margin-bottom: 8px;" id="modalWinnerTitle">比赛圆满结束！</h2>
+      <p style="color: #94A3B8; font-size: 14px; margin-bottom: 20px;" id="modalWinnerDesc">
+        恭喜获胜队伍冲过终点线！
+      </p>
+      <button class="btn-action" style="padding: 10px 24px; font-size: 15px;" onclick="window.location.href='/settlement-demo.html'">
+        📊 查看完整学情复盘看板
+      </button>
+    </div>
+  </div>
+
+  <!-- 引入 Socket.io 及通用 SDK -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/EducinevaGameSDK.js"></script>
+
+  <script>
+    // 赛车赛道物理引擎与渲染
+    const canvas = document.getElementById('raceCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const trackWidth = canvas.width;
+    const startX = 60;
+    const finishX = trackWidth - 80;
+
+    // 两辆赛车的当前物理位置与目标位置 (插值平滑移动)
+    const redCar = { x: startX, targetX: startX, y: 65, color: '#EF4444', emoji: '🏎️', speed: 0 };
+    const blueCar = { x: startX, targetX: startX, y: 175, color: '#3B82F6', emoji: '🚙', speed: 0 };
+
+    let redScore = 0;
+    let blueScore = 0;
+    let currentQId = null;
+
+    // 绘制赛道
+    function drawTrack() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 沥青赛道背景
+      ctx.fillStyle = '#1E293B';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 上下赛道分割虚线
+      ctx.strokeStyle = '#475569';
+      ctx.lineWidth = 4;
+      ctx.setLineDash([20, 15]);
+      ctx.beginPath();
+      ctx.moveTo(0, 120);
+      ctx.lineTo(canvas.width, 120);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // 起跑线
+      ctx.strokeStyle = '#94A3B8';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(startX, 10);
+      ctx.lineTo(startX, 230);
+      ctx.stroke();
+
+      // 终点格子旗线条
+      ctx.strokeStyle = '#F59E0B';
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.moveTo(finishX, 10);
+      ctx.lineTo(finishX, 230);
+      ctx.stroke();
+
+      // 终点文字
+      ctx.fillStyle = '#F59E0B';
+      ctx.font = 'bold 12px sans-serif';
+      ctx.fillText('FINISH 🏁', finishX - 25, 20);
+
+      // 平滑移动小车 (Lerp)
+      redCar.x += (redCar.targetX - redCar.x) * 0.1;
+      blueCar.x += (blueCar.targetX - blueCar.x) * 0.1;
+
+      // 绘制红车
+      drawCar(redCar, '红队 (RED)');
+      // 绘制蓝车
+      drawCar(blueCar, '蓝队 (BLUE)');
+
+      requestAnimationFrame(drawTrack);
+    }
+
+    function drawCar(car, label) {
+      ctx.save();
+      ctx.font = '32px sans-serif';
+      ctx.fillText(car.emoji, car.x, car.y + 10);
+
+      // 标签
+      ctx.font = 'bold 11px sans-serif';
+      ctx.fillStyle = car.color;
+      ctx.fillText(label, car.x - 5, car.y - 20);
+      ctx.restore();
+    }
+
+    // 更新赛车位移
+    function updateCars(redPts, bluePts) {
+      redScore = redPts;
+      blueScore = bluePts;
+
+      document.getElementById('redScore').textContent = `${redPts} 米 / ${redPts} 分`;
+      document.getElementById('blueScore').textContent = `${bluePts} 米 / ${bluePts} 分`;
+
+      // 换算位移百分比 (最高 500 分到终点)
+      const maxPts = 400;
+      const range = finishX - startX;
+
+      redCar.targetX = startX + Math.min(1, redPts / maxPts) * range;
+      blueCar.targetX = startX + Math.min(1, bluePts / maxPts) * range;
+    }
+
+    drawTrack();
+
+    // =========================================================================
+    // 接入 EducinevaGameSDK
+    // =========================================================================
+    const sdk = window.EducinevaGameSDK;
+
+    // 1. 订阅题目下发事件 (已由母体脱敏)
+    sdk.onQuestion((q) => {
+      currentQId = q.questionId;
+      document.getElementById('qMeta').textContent = `第 ${q.index + 1} / ${q.total} 题 (限时: ${q.timeLimit || 30}s)`;
+      document.getElementById('qText').textContent = q.questionText;
+
+      // 渲染选项
+      const opts = q.options;
+      if (opts && typeof opts === 'object') {
+        ['A', 'B', 'C', 'D'].forEach(k => {
+          const btn = document.getElementById('btn' + k);
+          const span = document.getElementById('opt' + k);
+          if (opts[k] !== undefined) {
+            btn.style.display = 'flex';
+            btn.disabled = false;
+            btn.className = 'opt-btn';
+            span.textContent = opts[k];
+          } else {
+            btn.style.display = 'none';
+          }
+        });
+      }
+    });
+
+    // 2. 订阅分数与比分推进事件 (触发赛车飞驰动画)
+    sdk.onScoreChange((scoreboard) => {
+      console.log('[SDK Event] 收到比分更新:', scoreboard);
+      let r = 0;
+      let b = 0;
+      (scoreboard.teams || []).forEach(t => {
+        if (t.teamId === 'team_red') r = t.score;
+        if (t.teamId === 'team_blue') b = t.score;
+      });
+      updateCars(r, b);
+    });
+
+    // 3. 订阅答题单人即时反馈
+    sdk.onAnswerFeedback((fb) => {
+      const selectedBtn = document.querySelector('.opt-btn.selected');
+      if (selectedBtn) {
+        if (fb.isCorrect) {
+          selectedBtn.classList.add('correct');
+        } else {
+          selectedBtn.classList.add('wrong');
+        }
+      }
+    });
+
+    // 4. 订阅终局结算颁奖事件
+    sdk.onSettlement((data) => {
+      document.getElementById('modalWinnerTitle').textContent = 
+        `🎉 ${data.winnerTeam ? data.winnerTeam.name : '参赛队伍'} 荣获冠军！`;
+      document.getElementById('modalWinnerDesc').textContent = 
+        `冠军总得分: ${data.winnerTeam ? data.winnerTeam.score : 0} 分 | 个人榜首: ${data.podium?.[0]?.name || '无'}`;
+      document.getElementById('settlementModal').classList.add('show');
+    });
+
+    // 尝试连接母体服务
+    sdk.connect().then(() => {
+      document.getElementById('statusBadge').textContent = '✔ 母体服务已连接';
+    }).catch(err => {
+      console.warn('单机未连接母体，启动离线模拟:', err.message);
+      document.getElementById('statusBadge').textContent = '🎮 离线体验模式';
+      // 载入默认展示题
+      sdk._emit('question', {
+        questionId: 'demo_01',
+        index: 0,
+        total: 3,
+        questionText: '【演示体验】8 × 7 等于多少？',
+        options: { A: '54', B: '56', C: '58', D: '60' }
+      });
+    });
+
+    // 用户点击作答
+    function handleClickAnswer(optKey) {
+      const btn = document.getElementById('btn' + optKey);
+      btn.classList.add('selected');
+
+      // 禁用所有选项防止重复点击
+      ['A', 'B', 'C', 'D'].forEach(k => {
+        document.getElementById('btn' + k).disabled = true;
+      });
+
+      if (sdk.connected) {
+        sdk.submitAnswer(currentQId, optKey).catch(e => alert(e.message));
+      } else {
+        // 单机离线模拟
+        if (optKey === 'B') {
+          btn.classList.add('correct');
+          updateCars(redScore + 100, blueScore);
+        } else {
+          btn.classList.add('wrong');
+        }
+      }
+    }
+
+    function handleNextQuestion() {
+      if (sdk.connected) {
+        sdk.nextQuestion().catch(e => alert(e.message));
+      } else {
+        alert('离线模式：在联机模式下将触发下一道赛题并广播全房');
+      }
+    }
+
+    function simulateLocalScore() {
+      updateCars(redScore + 50, blueScore + 60);
+    }
+  </script>
+</body>
+</html>
